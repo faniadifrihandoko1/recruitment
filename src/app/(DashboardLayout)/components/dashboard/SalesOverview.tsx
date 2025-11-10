@@ -111,15 +111,7 @@ const SalesOverview = () => {
           <MenuItem value={3}>May 2025</MenuItem>
         </Select>
       }
-    >
-      <Chart
-        options={optionscolumnchart}
-        series={seriescolumnchart}
-        type="bar"
-        height={370}
-        width={"100%"}
-      />
-    </DashboardCard>
+    ></DashboardCard>
   );
 };
 

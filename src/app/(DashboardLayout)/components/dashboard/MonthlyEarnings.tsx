@@ -58,15 +58,6 @@ const MonthlyEarnings = () => {
           <IconCurrencyDollar width={24} />
         </Fab>
       }
-      footer={
-        <Chart
-          options={optionscolumnchart}
-          series={seriescolumnchart}
-          type="area"
-          height={60}
-          width={"100%"}
-        />
-      }
     >
       <>
         <Typography variant="h3" fontWeight="700" mt="-20px">

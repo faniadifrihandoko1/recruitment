@@ -119,15 +119,7 @@ const YearlyBreakup = () => {
             xs: 5,
             sm: 5,
           }}
-        >
-          <Chart
-            options={optionscolumnchart}
-            series={seriescolumnchart}
-            type="donut"
-            height={150}
-            width={"100%"}
-          />
-        </Grid>
+        ></Grid>
       </Grid>
     </DashboardCard>
   );
