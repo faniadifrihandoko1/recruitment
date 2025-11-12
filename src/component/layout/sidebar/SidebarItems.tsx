@@ -1,18 +1,17 @@
 "use client";
-import React from "react";
-import Menuitems from "./MenuItems";
-import { Box, Tooltip, IconButton } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
+import { IconPoint } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Sidebar as MUI_Sidebar,
   Menu,
   MenuItem,
   Submenu,
 } from "react-mui-sidebar";
-import { IconPoint } from "@tabler/icons-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Menuitems from "./MenuItems";
 import UserFooter from "./UserFooter";
-import Image from "next/image";
 
 const renderMenuItems = (items: any, pathDirect: any, isCollapsed: boolean) => {
   return items.map((item: any) => {
@@ -23,6 +22,7 @@ const renderMenuItems = (items: any, pathDirect: any, isCollapsed: boolean) => {
     if (item.subheader) {
       // Hide subheader when collapsed
       if (isCollapsed) return null;
+
       return <Menu subHeading={item.subheader} key={item.subheader} />;
     }
 
@@ -73,6 +73,7 @@ const renderMenuItems = (items: any, pathDirect: any, isCollapsed: boolean) => {
           </Tooltip>
         );
       }
+
       return (
         <Submenu
           key={item.id}

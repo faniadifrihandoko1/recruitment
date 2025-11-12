@@ -1,4 +1,3 @@
-import ThemeRegistry from "../utils/theme/ThemeRegistry";
 import { ThemeWrapper } from "../component/layout/theme-wraper";
 import "./global.css";
 

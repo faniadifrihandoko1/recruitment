@@ -1,23 +1,20 @@
-import React from "react";
 import {
-  Box,
-  Stack,
-  IconButton,
   Badge,
-  Button,
+  Box,
+  IconButton,
+  Stack,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import Link from "next/link";
 // components
-import Profile from "../profile";
 import {
   IconBellRinging,
-  IconMenu,
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
+  IconMenu,
 } from "@tabler/icons-react";
+import Profile from "../profile";
 
 interface HeaderProps {
   toggleMobileSidebar?: () => void;

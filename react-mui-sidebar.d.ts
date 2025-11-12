@@ -8,5 +8,5 @@ declare module "react-mui-sidebar" {
   const MenuItem: ComponentType<any>;
   const Submenu: ComponentType<any>;
 
-  export { Sidebar, Logo, Menu, MenuItem, Submenu };
+  export { Logo, Menu, MenuItem, Sidebar, Submenu };
 }

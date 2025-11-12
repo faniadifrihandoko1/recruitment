@@ -1,6 +1,6 @@
 "use client";
+import { Paper } from "@mui/material";
 import React from "react";
-import { Box, Paper } from "@mui/material";
 
 interface DashboardCardProps {
   children: React.ReactNode;

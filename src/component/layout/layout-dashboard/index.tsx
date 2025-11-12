@@ -1,8 +1,8 @@
 "use client";
-import { Container, Box, useMediaQuery } from "@mui/material";
-import React from "react";
 import Header from "@/component/layout/header";
 import Sidebar from "@/component/layout/sidebar/Sidebar";
+import { Box } from "@mui/material";
+import React from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -11,15 +11,12 @@ interface Props {
 export default function LayoutDashboard({ children }: Props) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"), {
-    noSsr: true,
-  });
 
   const sidebarWidth = "270px";
   const sidebarCollapsedWidth = "80px";
 
   const toggleMobileSidebar = React.useCallback(() => {
-    setIsMobileSidebarOpen((prev) => !prev);
+    setIsMobileSidebarOpen(prev => !prev);
   }, []);
 
   const handleSidebarClose = React.useCallback(() => {
@@ -27,7 +24,7 @@ export default function LayoutDashboard({ children }: Props) {
   }, []);
 
   const toggleSidebarCollapse = React.useCallback(() => {
-    setIsSidebarCollapsed((prev) => !prev);
+    setIsSidebarCollapsed(prev => !prev);
   }, []);
 
   return (

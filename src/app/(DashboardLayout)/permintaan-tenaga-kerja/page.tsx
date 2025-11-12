@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import { Box, Button, IconButton, Tooltip } from "@mui/material";
-import { DataGrid, GridColDef, GridRowId } from "@mui/x-data-grid";
-import { IconPlus, IconEdit } from "@tabler/icons-react";
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/PageContainer";
+import { Box, Button, IconButton, Tooltip } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { IconEdit, IconPlus } from "@tabler/icons-react";
+import { useState } from "react";
 
 // Sample data untuk permintaan tenaga kerja
 const initialRows = [
@@ -65,19 +65,7 @@ const initialRows = [
 ];
 
 const PermintaanTenagaKerja = () => {
-  const [rows, setRows] = useState(initialRows);
-
-  const handleTambah = () => {
-    // Handler untuk tombol tambah
-    console.log("Tambah permintaan tenaga kerja");
-    // TODO: Implementasi modal atau navigasi ke form tambah
-  };
-
-  const handleEdit = (id: GridRowId) => {
-    // Handler untuk edit
-    console.log("Edit permintaan tenaga kerja:", id);
-    // TODO: Implementasi modal atau navigasi ke form edit
-  };
+  const [rows] = useState(initialRows);
 
   const columns: GridColDef[] = [
     {
@@ -136,12 +124,11 @@ const PermintaanTenagaKerja = () => {
       align: "center",
       sortable: false,
       filterable: false,
-      renderCell: (params) => {
+      renderCell: () => {
         return (
           <Tooltip title="Edit">
             <IconButton
               size="small"
-              onClick={() => handleEdit(params.row.id)}
               sx={{
                 color: "#539BFF",
                 "&:hover": {
@@ -172,7 +159,7 @@ const PermintaanTenagaKerja = () => {
             variant="contained"
             color="primary"
             startIcon={<IconPlus size={20} />}
-            onClick={handleTambah}
+            onClick={() => {}}
             sx={{
               textTransform: "capitalize",
               fontWeight: 500,

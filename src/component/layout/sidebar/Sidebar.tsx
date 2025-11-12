@@ -1,5 +1,5 @@
 "use client";
-import { useMediaQuery, Box, Drawer } from "@mui/material";
+import { Box, Drawer, useMediaQuery } from "@mui/material";
 import SidebarItems from "./SidebarItems";
 
 interface ItemType {
@@ -34,6 +34,7 @@ const MSidebar = ({
 
   if (lgUp) {
     const currentWidth = isCollapsed ? sidebarCollapsedWidth : sidebarWidth;
+
     return (
       <Box
         sx={{
@@ -90,7 +91,7 @@ const MSidebar = ({
       slotProps={{
         paper: {
           sx: {
-            boxShadow: (theme) => theme.shadows[8],
+            boxShadow: theme => theme.shadows[8],
             ...scrollbarStyles,
             width: sidebarWidth,
           },
