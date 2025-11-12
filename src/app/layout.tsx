@@ -1,30 +1,24 @@
-"use client";
-import { baselightTheme } from "@/utils/theme/DefaultColors";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "@/utils/createEmotionCache";
+import ThemeRegistry from "../utils/theme/ThemeRegistry";
+import { ThemeWrapper } from "../component/layout/theme-wraper";
 import "./global.css";
+
+export const metadata = {
+  title: "Modernize Next.js",
+  description: "Modernize Next.js App",
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const emotionCache = createEmotionCache();
   return (
     <html lang="en">
       <head>
         <meta name="emotion-insertion-point" content="" />
       </head>
       <body>
-        <CacheProvider value={emotionCache}>
-          <ThemeProvider theme={baselightTheme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            {children}
-          </ThemeProvider>
-        </CacheProvider>
+        <ThemeWrapper>{children}</ThemeWrapper>
       </body>
     </html>
   );

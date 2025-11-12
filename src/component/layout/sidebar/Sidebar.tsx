@@ -1,3 +1,4 @@
+"use client";
 import { useMediaQuery, Box, Drawer } from "@mui/material";
 import SidebarItems from "./SidebarItems";
 
@@ -7,8 +8,10 @@ interface ItemType {
   isSidebarOpen: boolean;
 }
 
-const MSidebar = ({ isSidebarOpen }: ItemType) => {
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
+const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"), {
+    noSsr: true,
+  });
 
   const sidebarWidth = "270px";
 
@@ -36,7 +39,7 @@ const MSidebar = ({ isSidebarOpen }: ItemType) => {
         {/* ------------------------------------------- */}
         <Drawer
           anchor="left"
-          open={isSidebarOpen}
+          // open={isSidebarOpen}
           variant="permanent"
           slotProps={{
             paper: {
@@ -71,12 +74,16 @@ const MSidebar = ({ isSidebarOpen }: ItemType) => {
   return (
     <Drawer
       anchor="left"
-      variant="permanent"
+      variant="temporary"
+      open={isMobileSidebarOpen}
+      onClose={onSidebarClose}
+      ModalProps={{ keepMounted: true }}
       slotProps={{
         paper: {
           sx: {
             boxShadow: (theme) => theme.shadows[8],
             ...scrollbarStyles,
+            width: sidebarWidth,
           },
         },
       }}
@@ -84,7 +91,11 @@ const MSidebar = ({ isSidebarOpen }: ItemType) => {
       {/* ------------------------------------------- */}
       {/* Sidebar Box */}
       {/* ------------------------------------------- */}
-      <Box>
+      <Box
+        sx={{
+          width: sidebarWidth,
+        }}
+      >
         {/* ------------------------------------------- */}
         {/* Sidebar Items */}
         {/* ------------------------------------------- */}

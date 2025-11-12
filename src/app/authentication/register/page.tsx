@@ -2,7 +2,7 @@
 import { Grid, Box, Card, Typography, Stack } from "@mui/material";
 import Link from "next/link";
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
-import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
+import Logo from "@/component/layout/logo";
 import AuthRegister from "../auth/AuthRegister";
 
 const Register2 = () => (
@@ -36,8 +36,9 @@ const Register2 = () => (
             xs: 12,
             sm: 12,
             lg: 4,
-            xl: 3
-          }}>
+            xl: 3,
+          }}
+        >
           <Card
             elevation={9}
             sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
