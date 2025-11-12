@@ -10,11 +10,13 @@ interface Props {
 
 export default function LayoutDashboard({ children }: Props) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = React.useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"), {
     noSsr: true,
   });
 
   const sidebarWidth = "270px";
+  const sidebarCollapsedWidth = "80px";
 
   const toggleMobileSidebar = React.useCallback(() => {
     setIsMobileSidebarOpen((prev) => !prev);
@@ -22,6 +24,10 @@ export default function LayoutDashboard({ children }: Props) {
 
   const handleSidebarClose = React.useCallback(() => {
     setIsMobileSidebarOpen(false);
+  }, []);
+
+  const toggleSidebarCollapse = React.useCallback(() => {
+    setIsSidebarCollapsed((prev) => !prev);
   }, []);
 
   return (
@@ -34,11 +40,12 @@ export default function LayoutDashboard({ children }: Props) {
       }}
     >
       {/* Sidebar */}
-      {/* <Sidebar
+      <Sidebar
         isSidebarOpen={true}
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={handleSidebarClose}
-      /> */}
+        isCollapsed={isSidebarCollapsed}
+      />
 
       {/* Main Content Area */}
       <Box
@@ -47,7 +54,7 @@ export default function LayoutDashboard({ children }: Props) {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          backgroundColor: "#FAFAFB",
+          //   backgroundColor: "#FAFAFB",
           minHeight: "100vh",
         }}
       >
@@ -56,18 +63,31 @@ export default function LayoutDashboard({ children }: Props) {
           sx={{
             position: "fixed",
             top: 0,
-            left: { xs: 0, lg: sidebarWidth },
+            left: {
+              xs: 0,
+              lg: isSidebarCollapsed ? sidebarCollapsedWidth : sidebarWidth,
+            },
             right: 0,
             zIndex: 1200,
-            width: { xs: "100%", lg: `calc(100% - ${sidebarWidth})` },
+            width: {
+              xs: "100%",
+              lg: isSidebarCollapsed
+                ? `calc(100% - ${sidebarCollapsedWidth})`
+                : `calc(100% - ${sidebarWidth})`,
+            },
+            transition: "left 0.3s ease, width 0.3s ease",
           }}
         >
-          <Header toggleMobileSidebar={toggleMobileSidebar} />
+          <Header
+            toggleMobileSidebar={toggleMobileSidebar}
+            toggleSidebarCollapse={toggleSidebarCollapse}
+            isSidebarCollapsed={isSidebarCollapsed}
+          />
         </Box>
 
         {/* Page Content */}
-        <Container
-          maxWidth="xl"
+        <Box
+          //   maxWidth=""
           sx={{
             flex: 1,
             width: "100%",
@@ -88,7 +108,7 @@ export default function LayoutDashboard({ children }: Props) {
           }}
         >
           {children}
-        </Container>
+        </Box>
       </Box>
     </Box>
   );

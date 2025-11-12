@@ -15,7 +15,7 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: "Dasbor",
+    title: "Dashboard",
     icon: IconLayoutDashboard,
     href: "/",
   },

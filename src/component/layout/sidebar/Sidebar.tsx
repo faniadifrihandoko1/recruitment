@@ -6,14 +6,20 @@ interface ItemType {
   isMobileSidebarOpen: boolean;
   onSidebarClose: (event: React.MouseEvent<HTMLElement>) => void;
   isSidebarOpen: boolean;
+  isCollapsed?: boolean;
 }
 
-const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
+const MSidebar = ({
+  isMobileSidebarOpen,
+  onSidebarClose,
+  isCollapsed = false,
+}: ItemType) => {
   const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"), {
     noSsr: true,
   });
 
   const sidebarWidth = "270px";
+  const sidebarCollapsedWidth = "80px";
 
   // Custom CSS for short scrollbar
   const scrollbarStyles = {
@@ -27,11 +33,13 @@ const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
   };
 
   if (lgUp) {
+    const currentWidth = isCollapsed ? sidebarCollapsedWidth : sidebarWidth;
     return (
       <Box
         sx={{
-          width: sidebarWidth,
+          width: currentWidth,
           flexShrink: 0,
+          transition: "width 0.3s ease",
         }}
       >
         {/* ------------------------------------------- */}
@@ -39,14 +47,15 @@ const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
         {/* ------------------------------------------- */}
         <Drawer
           anchor="left"
-          // open={isSidebarOpen}
           variant="permanent"
           slotProps={{
             paper: {
               sx: {
                 boxSizing: "border-box",
                 ...scrollbarStyles,
-                width: sidebarWidth,
+                width: currentWidth,
+                transition: "width 0.3s ease",
+                overflowX: "hidden",
               },
             },
           }}
@@ -63,7 +72,7 @@ const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
               {/* ------------------------------------------- */}
               {/* Sidebar Items */}
               {/* ------------------------------------------- */}
-              <SidebarItems />
+              <SidebarItems isCollapsed={isCollapsed} />
             </Box>
           </Box>
         </Drawer>
@@ -99,7 +108,7 @@ const MSidebar = ({ isMobileSidebarOpen, onSidebarClose }: ItemType) => {
         {/* ------------------------------------------- */}
         {/* Sidebar Items */}
         {/* ------------------------------------------- */}
-        <SidebarItems />
+        <SidebarItems isCollapsed={false} />
       </Box>
       {/* ------------------------------------------- */}
       {/* Sidebar For Mobile */}

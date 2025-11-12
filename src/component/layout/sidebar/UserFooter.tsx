@@ -11,17 +11,15 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  Tooltip,
 } from "@mui/material";
-import {
-  IconBadge,
-  IconBadges,
-  IconChevronDown,
-  IconChevronsDown,
-  IconLogout,
-  IconUser,
-} from "@tabler/icons-react";
+import { IconChevronsDown, IconLogout, IconUser } from "@tabler/icons-react";
 
-const UserFooter = () => {
+interface UserFooterProps {
+  isCollapsed?: boolean;
+}
+
+const UserFooter = ({ isCollapsed = false }: UserFooterProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -29,6 +27,71 @@ const UserFooter = () => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => setAnchorEl(null);
+
+  if (isCollapsed) {
+    return (
+      <>
+        <Tooltip title="amanda fitri" placement="right" arrow>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              mt: 2,
+              py: 1,
+              borderRadius: "8px",
+              ":hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
+            }}
+          >
+            <IconButton
+              size="medium"
+              onClick={handleOpen}
+              aria-label="user menu"
+              sx={{
+                width: "48px",
+                height: "48px",
+              }}
+            >
+              <Avatar
+                src="/images/profile/user-1.jpg"
+                alt="user"
+                variant="rounded"
+                sx={{ width: 36, height: 36, borderRadius: "10px" }}
+              />
+            </IconButton>
+          </Box>
+        </Tooltip>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{ horizontal: "right", vertical: "top" }}
+          transformOrigin={{ horizontal: "left", vertical: "top" }}
+        >
+          <MenuItem component={Link} href="#" onClick={handleClose}>
+            <ListItemIcon>
+              <IconUser size={18} />
+            </ListItemIcon>
+            <ListItemText>My Profile</ListItemText>
+          </MenuItem>
+          <Box px={1} pb={1}>
+            <Button
+              color="primary"
+              component={Link}
+              href="/authentication/login"
+              variant="outlined"
+              aria-label="logout"
+              size="small"
+              startIcon={<IconLogout size={14} stroke={1.5} color="black" />}
+              fullWidth
+            >
+              Logout
+            </Button>
+          </Box>
+        </Menu>
+      </>
+    );
+  }
 
   return (
     <>
@@ -60,9 +123,6 @@ const UserFooter = () => {
               amandafitri878@gmail.com
             </Typography>
           </Box>
-          {/* <IconButton size="small" onClick={handleOpen} aria-label="user menu">
-          <IconChevronDown size={18} />
-        </IconButton> */}
         </Box>
         <IconButton size="small" onClick={handleOpen} aria-label="user menu">
           <IconChevronsDown size={18} />
