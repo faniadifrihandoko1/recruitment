@@ -11,13 +11,12 @@ export const metadata = {
 
 export type PageProps = Readonly<{
   children: React.ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }>;
 
-export default function RootLayout({
-  children,
-  params: { locale },
-}: PageProps) {
+export default async function RootLayout({ children, params }: PageProps) {
+  const { locale } = await params;
+
   setRequestLocale(locale);
 
   return (
