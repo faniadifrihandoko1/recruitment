@@ -5,6 +5,21 @@ import { routing } from "./i18n/routing";
 import { FAKE_AUTH_COOKIE } from "./utils/auth/fakeAuth";
 
 const intlMiddleware = createMiddleware(routing);
+const locales = routing.locales;
+const defaultLocale = routing.defaultLocale;
+
+console.log("locale", locales);
+console.log("defaultLocale", defaultLocale);
+
+function getNormalizedPath(pathname: string): string {
+  const parts = pathname.split("/").filter(Boolean);
+
+  if (locales.includes(parts[0] as "id" | "en")) {
+    parts.shift();
+  }
+
+  return parts.length > 0 ? `/${parts.join("/")}` : `/${defaultLocale}`;
+}
 
 const isLoginPath = (pathname: string) => {
   const normalized = pathname.replace(/\/+$/, "") || "/";
@@ -25,10 +40,11 @@ const isLoginPath = (pathname: string) => {
 };
 
 export default function middleware(request: NextRequest) {
+  const locale = request.cookies.get("NEXT_LOCALE")?.value || defaultLocale;
+
   const { pathname } = request.nextUrl;
 
-  const locale = routing.locales;
-  const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
+  const normalizedPathname = getNormalizedPath(pathname);
   const dashboardPath = `/${locale}/dashboard`;
   const isLoginRoute = isLoginPath(pathname);
   const isAuthenticated = Boolean(request.cookies.get(FAKE_AUTH_COOKIE)?.value);
