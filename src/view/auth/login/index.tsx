@@ -19,11 +19,13 @@ import NextLink from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-import { FAKE_AUTH_COOKIE, fakeLogin } from "@/utils/auth/fakeAuth";
+import {
+  AUTH_USER_STORAGE_KEY,
+  FAKE_AUTH_COOKIE,
+  fakeLogin,
+} from "@/utils/auth/fakeAuth";
 
 const REMEMBER_KEY = "recruitment:rememberedEmail";
-const USER_STORAGE_KEY = "recruitment:auth-user";
-
 const normalizeLocale = (rawLocale: string | string[] | undefined) => {
   if (!rawLocale) return "id";
 
@@ -87,7 +89,10 @@ const LoginView = () => {
         }
 
         document.cookie = cookieParts.join("; ");
-        window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+        window.localStorage.setItem(
+          AUTH_USER_STORAGE_KEY,
+          JSON.stringify(user)
+        );
       }
 
       setSuccess("Login berhasil! Mengarahkan ke dashboard...");

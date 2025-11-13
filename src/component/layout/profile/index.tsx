@@ -1,25 +1,53 @@
-import React, { useState } from "react";
-import Link from "next/link";
+"use client";
+
 import {
   Avatar,
   Box,
-  Menu,
   Button,
   IconButton,
-  MenuItem,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
 } from "@mui/material";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 
+import { AUTH_USER_STORAGE_KEY, FAKE_AUTH_COOKIE } from "@/utils/auth/fakeAuth";
 import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react";
+
+const normalizeLocale = (rawLocale: string | string[] | undefined) => {
+  if (!rawLocale) return "id";
+
+  if (Array.isArray(rawLocale)) {
+    return rawLocale[0] || "id";
+  }
+
+  return rawLocale;
+};
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+  const router = useRouter();
+  const params = useParams<{ locale?: string | string[] }>();
+  const locale = normalizeLocale(params?.locale);
+
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
   const handleClose2 = () => {
     setAnchorEl2(null);
+  };
+  const handleLogout = () => {
+    handleClose2();
+
+    if (typeof window !== "undefined") {
+      document.cookie = `${FAKE_AUTH_COOKIE}=; path=/; max-age=0; sameSite=lax`;
+      document.cookie = `${FAKE_AUTH_COOKIE}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      window.localStorage.removeItem(AUTH_USER_STORAGE_KEY);
+    }
+
+    router.push(`/${locale}/authentication/login`);
   };
 
   return (
@@ -83,11 +111,10 @@ const Profile = () => {
         </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
-            href="/authentication/login"
             variant="outlined"
             color="primary"
-            component={Link}
             fullWidth
+            onClick={handleLogout}
           >
             Logout
           </Button>

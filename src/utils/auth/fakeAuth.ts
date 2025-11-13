@@ -1,4 +1,5 @@
 export const FAKE_AUTH_COOKIE = "fake-auth-token";
+export const AUTH_USER_STORAGE_KEY = "recruitment:auth-user";
 export type FakeAuthResponse = {
   token: string;
   user: {
