@@ -1,0 +1,56 @@
+{
+  "component": {
+    "layout": {
+      "sidebar": {
+        "menu": [
+          {
+            "navlabel": true,
+            "subheader": "Home"
+          },
+          {
+            "id": "dashboard",
+            "title": "Dashboard",
+            "icon": "IconLayoutDashboard",
+            "href": "/"
+          },
+          {
+            "navlabel": true,
+            "subheader": "Recruitment"
+          },
+          {
+            "id": "job-request",
+            "title": "Job Request",
+            "icon": "IconUsersPlus",
+            "href": "/permintaan-tenaga-kerja"
+          },
+          {
+            "id": "applicant-list",
+            "title": "Applicant List",
+            "icon": "IconUsers",
+            "href": "/daftar-calon-pegawai"
+          },
+          {
+            "navlabel": true,
+            "subheader": "CV Pulling Trial"
+          },
+          {
+            "id": "cv-data",
+            "title": "CV Data",
+            "icon": "IconFileText",
+            "href": "/data-cv"
+          },
+          {
+            "navlabel": true,
+            "subheader": "Assessment Test"
+          },
+          {
+            "id": "assessment-projects",
+            "title": "Assessment Projects",
+            "icon": "IconClipboardList",
+            "href": "/daftar-proyek-asesmen"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "component": {
+    "layout": {
+      "sidebar": {
+        "menu": [
+          {
+            "navlabel": true,
+            "subheader": "Home"
+          },
+          {
+            "id": "dashboard",
+            "title": "Dashboard",
+            "icon": "IconLayoutDashboard",
+            "href": "/"
+          },
+          {
+            "navlabel": true,
+            "subheader": "Recruitment"
+          },
+          {
+            "id": "job-request",
+            "title": "Job Request",
+            "icon": "IconUsersPlus",
+            "href": "/job-request"
+          },
+          {
+            "id": "applicant-list",
+            "title": "Applicant List",
+            "icon": "IconUsers",
+            "href": "/applicant-list"
+          },
+          {
+            "navlabel": true,
+            "subheader": "CV Pulling Trial"
+          },
+          {
+            "id": "cv-data",
+            "title": "CV Data",
+            "icon": "IconFileText",
+            "href": "/cv-data"
+          },
+          {
+            "navlabel": true,
+            "subheader": "Assessment Test"
+          },
+          {
+            "id": "assessment-projects",
+            "title": "Assessment Projects",
+            "icon": "IconClipboardList",
+            "href": "/assessment-projects"
+          }
+        ]
+      }
+    }
+  }
+}

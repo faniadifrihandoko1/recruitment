@@ -1,9 +1,9 @@
 import {
+  IconClipboardList,
+  IconFileText,
   IconLayoutDashboard,
   IconUsers,
   IconUsersPlus,
-  IconFileText,
-  IconClipboardList,
 } from "@tabler/icons-react";
 
 import { uniqueId } from "lodash";
@@ -17,7 +17,7 @@ const Menuitems = [
     id: uniqueId(),
     title: "Dashboard",
     icon: IconLayoutDashboard,
-    href: "/",
+    href: "/dashboard",
   },
   {
     navlabel: true,

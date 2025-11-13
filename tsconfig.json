@@ -22,7 +22,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/component/*": ["./src/component/*"],
-      "@/utils/*": ["./src/utils/*"]
+      "@/utils/*": ["./src/utils/*"],
+      "@/svg/*": ["./public/svg/*"],
+      "@/messages/*": ["./messages/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
