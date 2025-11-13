@@ -1,12 +1,12 @@
 "use client";
-import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/component/layout/logo";
+import PageContainer from "@/component/shared/PageContainer";
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import AuthRegister from "../auth/AuthRegister";
 
 const Register2 = () => (
-  <PageContainer title="Register" description="this is Register page">
+  <PageContainer title="Register">
     <Box
       sx={{
         position: "relative",

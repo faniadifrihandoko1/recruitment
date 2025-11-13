@@ -1,5 +1,6 @@
 import eslint from "@eslint/js";
 import nextVitals from "eslint-config-next/core-web-vitals";
+import importPlugin from "eslint-plugin-import";
 import { defineConfig, globalIgnores } from "eslint/config";
 // import tseslint from "typescript-eslint";
 const eslintConfig = defineConfig(
@@ -18,10 +19,21 @@ const eslintConfig = defineConfig(
 
     {
       files: ["**/*.{js,jsx,ts,tsx}"],
+      plugins: {
+        import: importPlugin,
+      },
+      settings: {
+        "import/resolver": {
+          typescript: {
+            project: "./tsconfig.json",
+          },
+        },
+      },
 
       rules: {
         semi: ["error"],
         eqeqeq: ["error", "always"],
+        "import/no-unresolved": "error",
         "react/no-unescaped-entities": "off",
         "@next/next/no-page-custom-font": "off",
         "@typescript-eslint/no-unused-vars": "error",

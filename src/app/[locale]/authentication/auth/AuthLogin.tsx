@@ -1,16 +1,15 @@
-import React from "react";
 import {
   Box,
-  Typography,
-  FormGroup,
-  FormControlLabel,
   Button,
-  Stack,
   Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
 import Link from "next/link";
-
-import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField";
+import React from "react";
 
 interface loginType {
   title?: string;
@@ -39,7 +38,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
         >
           Username
         </Typography>
-        <CustomTextField variant="outlined" fullWidth />
+        <TextField variant="outlined" fullWidth />
       </Box>
       <Box mt="25px">
         <Typography
@@ -51,7 +50,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => (
         >
           Password
         </Typography>
-        <CustomTextField type="password" variant="outlined" fullWidth />
+        <TextField type="password" variant="outlined" fullWidth />
       </Box>
       <Stack
         justifyContent="space-between"
