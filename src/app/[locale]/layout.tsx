@@ -2,6 +2,7 @@ import { ThemeWrapper } from "@/component/layout/theme-wraper";
 import "@/styles/global.css";
 import { Locale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import React from "react";
 
 export const metadata = {
   title: "Modernize Next.js",

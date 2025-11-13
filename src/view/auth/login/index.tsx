@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import NextLink from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FAKE_AUTH_COOKIE, fakeLogin } from "@/utils/auth/fakeAuth";
 

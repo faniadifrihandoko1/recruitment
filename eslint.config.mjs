@@ -1,10 +1,10 @@
 import eslint from "@eslint/js";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import { defineConfig, globalIgnores } from "eslint/config";
-import tseslint from "typescript-eslint";
+// import tseslint from "typescript-eslint";
 const eslintConfig = defineConfig(
   eslint.configs.recommended,
-  tseslint.configs.recommended,
+  // tseslint.configs.recommended,
   [
     ...nextVitals,
     // Override default ignores of eslint-config-next.

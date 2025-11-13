@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 import { Box, Tooltip } from "@mui/material";
 import { IconPoint } from "@tabler/icons-react";
@@ -36,7 +36,7 @@ const SidebarMenu = ({
     return menuItems.map(item => {
       if (item.subheader) {
         if (isCollapsed) return null;
-        
+
         return <Menu subHeading={item.subheader} key={item.subheader} />;
       }
 

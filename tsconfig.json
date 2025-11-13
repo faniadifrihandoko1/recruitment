@@ -19,8 +19,10 @@
         "name": "next"
       }
     ],
+
     "paths": {
       "@/*": ["./src/*"],
+
       "@/component/*": ["./src/component/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/svg/*": ["./public/svg/*"],

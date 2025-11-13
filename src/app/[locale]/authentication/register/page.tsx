@@ -1,8 +1,8 @@
 "use client";
-import { Grid, Box, Card, Typography, Stack } from "@mui/material";
-import Link from "next/link";
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/component/layout/logo";
+import { Box, Card, Grid, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 import AuthRegister from "../auth/AuthRegister";
 
 const Register2 = () => (

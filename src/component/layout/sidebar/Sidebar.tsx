@@ -4,7 +4,7 @@ import SidebarItems from "./SidebarItems";
 
 interface ItemType {
   isMobileSidebarOpen: boolean;
-  onSidebarClose: (event: React.MouseEvent<HTMLElement>) => void;
+  onSidebarClose: () => void;
   isSidebarOpen: boolean;
   isCollapsed?: boolean;
 }
