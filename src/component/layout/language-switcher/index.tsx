@@ -12,17 +12,7 @@ import {
 import { IconLanguage } from "@tabler/icons-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
-
-const normalizeLocale = (rawLocale: string | string[] | undefined) => {
-  if (!rawLocale) return "id";
-
-  if (Array.isArray(rawLocale)) {
-    return rawLocale[0] || "id";
-  }
-
-  return rawLocale;
-};
+import React, { useState } from "react";
 
 const LanguageSwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -68,11 +58,6 @@ const LanguageSwitcher = () => {
       pathWithoutLocale === "/"
         ? `/${newLocale}/dashboard`
         : `/${newLocale}${pathWithoutLocale}`;
-
-    // Set cookie for locale persistence
-    if (typeof window !== "undefined") {
-      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; sameSite=lax`;
-    }
 
     router.push(newPath);
   };
