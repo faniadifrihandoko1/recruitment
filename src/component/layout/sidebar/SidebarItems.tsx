@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { useParams, usePathname } from "next/navigation";
 import { Sidebar as MUI_Sidebar } from "react-mui-sidebar";
 
-import Menuitems from "./MenuItems";
+import useMenuItems from "./MenuItems";
 import SidebarLogo from "./SidebarLogo";
 import SidebarMenu from "./SidebarMenu";
 import UserFooter from "./UserFooter";
@@ -19,6 +19,7 @@ const SidebarItems = ({ isCollapsed = false }: SidebarItemsProps) => {
   const params = useParams();
   const locale = resolveLocale(params?.locale as string | string[] | undefined);
   const logoHref = buildLocalizedHref("/", locale);
+  const menuItems = useMenuItems();
 
   return (
     <MUI_Sidebar
@@ -56,7 +57,7 @@ const SidebarItems = ({ isCollapsed = false }: SidebarItemsProps) => {
           }}
         >
           <SidebarMenu
-            items={Menuitems}
+            items={menuItems}
             currentPath={pathname}
             locale={locale}
             isCollapsed={isCollapsed}

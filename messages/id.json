@@ -5,52 +5,65 @@
         "menu": [
           {
             "navlabel": true,
-            "subheader": "Home"
+            "subheader": "Beranda"
           },
           {
             "id": "dashboard",
             "title": "Dashboard",
             "icon": "IconLayoutDashboard",
-            "href": "/"
+            "href": "/dashboard"
           },
           {
             "navlabel": true,
-            "subheader": "Recruitment"
+            "subheader": "Rekrutmen"
           },
           {
             "id": "job-request",
-            "title": "Job Request",
+            "title": "Permintaan Tenaga Kerja",
             "icon": "IconUsersPlus",
             "href": "/permintaan-tenaga-kerja"
           },
           {
             "id": "applicant-list",
-            "title": "Applicant List",
+            "title": "Daftar Calon Pegawai",
             "icon": "IconUsers",
             "href": "/daftar-calon-pegawai"
           },
           {
             "navlabel": true,
-            "subheader": "CV Pulling Trial"
+            "subheader": "Pulling CV Trial"
           },
           {
             "id": "cv-data",
-            "title": "CV Data",
+            "title": "Data CV",
             "icon": "IconFileText",
             "href": "/data-cv"
           },
           {
             "navlabel": true,
-            "subheader": "Assessment Test"
+            "subheader": "Asesmen Tes"
           },
           {
             "id": "assessment-projects",
-            "title": "Assessment Projects",
+            "title": "Daftar Proyek Asesmen",
             "icon": "IconClipboardList",
             "href": "/daftar-proyek-asesmen"
           }
         ]
+      },
+      "header": {
+        "language": {
+          "id": "Bahasa Indonesia",
+          "en": "English",
+          "switch": "Ganti Bahasa"
+        }
       }
+    }
+  },
+  "page": {
+    "dashboard": {
+      "title": "Beranda",
+      "description": "Selamat datang di halaman beranda"
     }
   }
 }

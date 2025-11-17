@@ -14,6 +14,7 @@ import {
   IconLayoutSidebarLeftExpand,
   IconMenu,
 } from "@tabler/icons-react";
+import LanguageSwitcher from "../language-switcher";
 import Profile from "../profile";
 
 interface HeaderProps {
@@ -125,6 +126,7 @@ const Header = ({
             overflow: "hidden",
           }}
         >
+          <LanguageSwitcher />
           <Profile />
         </Stack>
       </Box>

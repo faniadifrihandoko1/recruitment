@@ -11,7 +11,7 @@
             "id": "dashboard",
             "title": "Dashboard",
             "icon": "IconLayoutDashboard",
-            "href": "/"
+            "href": "/dashboard"
           },
           {
             "navlabel": true,
@@ -50,7 +50,20 @@
             "href": "/assessment-projects"
           }
         ]
+      },
+      "header": {
+        "language": {
+          "id": "Indonesian",
+          "en": "English",
+          "switch": "Switch Language"
+        }
       }
+    }
+  },
+  "page": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Welcome to the dashboard"
     }
   }
 }

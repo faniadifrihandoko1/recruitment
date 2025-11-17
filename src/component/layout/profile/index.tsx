@@ -59,7 +59,7 @@ const Profile = () => {
         aria-controls="msgs-menu"
         aria-haspopup="true"
         sx={{
-          ...(typeof anchorEl2 === "object" && {
+          ...(typeof anchorEl2 === "object" && {  
             color: "primary.main",
           }),
         }}
