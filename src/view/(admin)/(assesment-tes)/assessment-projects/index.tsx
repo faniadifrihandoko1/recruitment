@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 
 export default function AssessmentProjectsView() {
   return (
-    <PageContainer title="Assessment Projects">
+    <PageContainer title="Assessment Project">
       <Stack spacing={3}></Stack>
     </PageContainer>
   );
