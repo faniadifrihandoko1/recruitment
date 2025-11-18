@@ -5,7 +5,8 @@
         "menu": [
           {
             "navlabel": true,
-            "subheader": "Beranda"
+            "subheader": "Beranda",
+            "href": "/"
           },
           {
             "id": "dashboard",
@@ -15,19 +16,29 @@
           },
           {
             "navlabel": true,
+            "subheader": "Asesmen Tes"
+          },
+          {
+            "id": "assessment-projects",
+            "title": "Daftar Proyek Asesmen",
+            "icon": "IconClipboardList",
+            "href": "/assessment-projects"
+          },
+          {
+            "navlabel": true,
             "subheader": "Rekrutmen"
           },
           {
             "id": "job-request",
             "title": "Permintaan Tenaga Kerja",
             "icon": "IconUsersPlus",
-            "href": "/permintaan-tenaga-kerja"
+            "href": "/job-request"
           },
           {
             "id": "applicant-list",
             "title": "Daftar Calon Pegawai",
             "icon": "IconUsers",
-            "href": "/daftar-calon-pegawai"
+            "href": "/applicant-list"
           },
           {
             "navlabel": true,
@@ -37,17 +48,7 @@
             "id": "cv-data",
             "title": "Data CV",
             "icon": "IconFileText",
-            "href": "/data-cv"
-          },
-          {
-            "navlabel": true,
-            "subheader": "Asesmen Tes"
-          },
-          {
-            "id": "assessment-projects",
-            "title": "Daftar Proyek Asesmen",
-            "icon": "IconClipboardList",
-            "href": "/daftar-proyek-asesmen"
+            "href": "/cv-data"
           }
         ]
       },
@@ -63,7 +64,10 @@
   "page": {
     "dashboard": {
       "title": "Beranda",
-      "description": "Selamat datang di halaman beranda"
+      "description": "Selamat datang di halaman beranda",
+      "breadcrumb": {
+        "home": "Dashboard"
+      }
     }
   }
 }

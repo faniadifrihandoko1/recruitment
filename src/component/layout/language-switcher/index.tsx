@@ -2,14 +2,15 @@
 
 import {
   Box,
-  IconButton,
+  Button,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
   useTheme,
 } from "@mui/material";
-import { IconLanguage } from "@tabler/icons-react";
+import { alpha } from "@mui/material/styles";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -21,6 +22,7 @@ const LanguageSwitcher = () => {
   const locale = useLocale();
   const theme = useTheme();
   const t = useTranslations("component.layout.header.language");
+  const isMenuOpen = Boolean(anchorEl);
 
   const languages = [
     { code: "id", name: t("id") },
@@ -64,30 +66,59 @@ const LanguageSwitcher = () => {
 
   return (
     <Box>
-      <IconButton
-        size="large"
+      <Button
+        variant="outlined"
         aria-label={t("switch")}
-        color="inherit"
         aria-controls="language-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        endIcon={
+          <IconChevronDown
+            size="16"
+            stroke="1.5"
+            style={{
+              transition: "transform 0.2s ease",
+              transform: isMenuOpen ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+          />
+        }
+        // startIcon={<IconLanguage size="18" stroke="1.6" />}
         sx={{
-          ...(Boolean(anchorEl) && {
-            color: "primary.main",
-          }),
+          borderRadius: 999,
+          textTransform: "none",
+          fontWeight: 600,
+          fontSize: "0.85rem",
+          px: 1.5,
+          py: 0.75,
           flexShrink: 0,
+          color: isMenuOpen
+            ? theme.palette.primary.main
+            : theme.palette.text.primary,
+          borderColor: isMenuOpen
+            ? theme.palette.primary.main
+            : theme.palette.divider,
+          backgroundColor: isMenuOpen
+            ? alpha(theme.palette.primary.light, 0.15)
+            : alpha(theme.palette.background.paper, 0.8),
+          boxShadow: isMenuOpen
+            ? `0 4px 14px ${alpha(theme.palette.primary.main, 0.25)}`
+            : "none",
+          display: "flex",
+          alignItems: "center",
+          gap: 0.5,
           "&:hover": {
-            backgroundColor: theme.palette.action.hover,
+            borderColor: theme.palette.primary.main,
+            backgroundColor: alpha(theme.palette.primary.light, 0.25),
           },
         }}
       >
-        <IconLanguage size="21" stroke="1.5" />
-      </IconButton>
+        {locale.toUpperCase()}
+      </Button>
       <Menu
         id="language-menu"
         anchorEl={anchorEl}
         keepMounted
-        open={Boolean(anchorEl)}
+        open={isMenuOpen}
         onClose={handleClose}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
@@ -102,11 +133,18 @@ const LanguageSwitcher = () => {
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
             selected={language.code === locale}
+            disabled={language.code === locale}
             sx={{
               "&.Mui-selected": {
-                backgroundColor: theme.palette.primary.light + "20",
+                backgroundColor:
+                  language.code === locale
+                    ? theme.palette.primary.light + "20"
+                    : "transparent",
                 "&:hover": {
-                  backgroundColor: theme.palette.primary.light + "30",
+                  backgroundColor:
+                    language.code === locale
+                      ? theme.palette.primary.light + "30"
+                      : "transparent",
                 },
               },
             }}

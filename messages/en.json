@@ -15,6 +15,16 @@
           },
           {
             "navlabel": true,
+            "subheader": "Assessment Test"
+          },
+          {
+            "id": "assessment-projects",
+            "title": "Assessment Projects",
+            "icon": "IconClipboardList",
+            "href": "/assessment-projects"
+          },
+          {
+            "navlabel": true,
             "subheader": "Recruitment"
           },
           {
@@ -38,16 +48,6 @@
             "title": "CV Data",
             "icon": "IconFileText",
             "href": "/cv-data"
-          },
-          {
-            "navlabel": true,
-            "subheader": "Assessment Test"
-          },
-          {
-            "id": "assessment-projects",
-            "title": "Assessment Projects",
-            "icon": "IconClipboardList",
-            "href": "/assessment-projects"
           }
         ]
       },
@@ -63,7 +63,10 @@
   "page": {
     "dashboard": {
       "title": "Dashboard",
-      "description": "Welcome to the dashboard"
+      "description": "Welcome to the dashboard",
+      "breadcrumb": {
+        "home": "Home"
+      }
     }
   }
 }

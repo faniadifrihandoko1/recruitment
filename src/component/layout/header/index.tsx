@@ -36,17 +36,17 @@ const Header = ({
   return (
     <Box
       sx={{
-        boxShadow: "none",
+        // boxShadow: "0 0 12px rgba(15, 23, 42, 0.12)",
         background: theme.palette.background.paper,
-        borderBottom: "1px solid #e0e0e0",
+        borderBottom: `1px solid ${theme.palette.divider}`,
         justifyContent: "center",
-        backdropFilter: "blur(4px)",
+        backdropFilter: "blur(6px)",
         minHeight: "71px",
         zIndex: theme.zIndex.drawer + 1,
         position: "relative",
         width: "100%",
         maxWidth: "100%",
-        // boxSizing: "border-box",
+        boxSizing: "border-box",
         overflow: "hidden",
       }}
     >

@@ -84,9 +84,7 @@ export default function LayoutDashboard({ children }: Props) {
 
         {/* Page Content */}
         <Box
-          //   maxWidth=""
           sx={{
-            flex: 1,
             width: "100%",
             maxWidth: {
               xs: "100%",
@@ -95,6 +93,9 @@ export default function LayoutDashboard({ children }: Props) {
               lg: "1200px",
               xl: "1400px",
             },
+            mx: "auto",
+            boxSizing: "border-box",
+            height: "auto",
             px: {
               xs: 2,
               sm: 3,
@@ -102,6 +103,7 @@ export default function LayoutDashboard({ children }: Props) {
             },
             paddingTop: "90px",
             paddingBottom: "20px",
+            bgcolor: "#F1F5F9",
           }}
         >
           {children}
