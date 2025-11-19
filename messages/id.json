@@ -94,6 +94,23 @@
         "rejected": "Ditolak",
         "open": "Terbuka",
         "closed": "Ditutup"
+      },
+      "modal": {
+        "title": "Tambah Permintaan Tenaga Kerja",
+        "jobTitle": "Judul Pekerjaan",
+        "jobTitlePlaceholder": "Masukkan judul pekerjaan",
+        "department": "Departemen",
+        "departmentPlaceholder": "Pilih departemen",
+        "requestedBy": "Diminta Oleh",
+        "requestedByPlaceholder": "Masukkan nama pemohon",
+        "deadline": "Deadline",
+        "description": "Deskripsi",
+        "descriptionPlaceholder": "Masukkan deskripsi pekerjaan",
+        "requirements": "Persyaratan",
+        "requirementsPlaceholder": "Masukkan persyaratan pekerjaan",
+        "cancel": "Batal",
+        "submit": "Simpan",
+        "required": "Wajib diisi"
       }
     }
   }

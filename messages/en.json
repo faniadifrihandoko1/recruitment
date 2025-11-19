@@ -93,6 +93,23 @@
         "rejected": "Rejected",
         "open": "Open",
         "closed": "Closed"
+      },
+      "modal": {
+        "title": "Create Job Request",
+        "jobTitle": "Job Title",
+        "jobTitlePlaceholder": "Enter job title",
+        "department": "Department",
+        "departmentPlaceholder": "Select department",
+        "requestedBy": "Requested By",
+        "requestedByPlaceholder": "Enter requester name",
+        "deadline": "Deadline",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter job description",
+        "requirements": "Requirements",
+        "requirementsPlaceholder": "Enter job requirements",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "required": "Required"
       }
     }
   }

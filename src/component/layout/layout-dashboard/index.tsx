@@ -86,20 +86,11 @@ export default function LayoutDashboard({ children }: Props) {
         <Box
           sx={{
             width: "100%",
-            maxWidth: {
-              xs: "100%",
-              sm: "100%",
-              md: "100%",
-              lg: "1200px",
-              xl: "1400px",
-            },
+            maxWidth: "100%",
             mx: "auto",
             boxSizing: "border-box",
             height: "auto",
-            px: {
-              xs: 2,
-              sm: isSidebarCollapsed ? 0 : 2,
-            },
+            px: 3,
             paddingTop: "90px",
             paddingBottom: "20px",
             bgcolor: "#F1F5F9",
