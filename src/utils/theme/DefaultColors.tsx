@@ -1,6 +1,16 @@
 import { createTheme } from "@mui/material/styles";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
+declare module "@mui/material/styles" {
+  interface Components {
+    MuiDataGrid?: {
+      styleOverrides?: {
+        root?: Record<string, any>;
+      };
+    };
+  }
+}
+
 export const plus = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -141,6 +151,50 @@ const baselightTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: "7px",
+        },
+      },
+    },
+
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          // "& .MuiDataGrid-columnHeader": {
+          //   // backgroundColor: "#f3f4f6", // Warna header
+          //   fontWeight: 700,
+          //   fontSize: 12.5,
+          //   borderBottom: "1px solid #e5eaef",
+          // },
+          "& .MuiDataGrid-columnHeaders": {
+            borderBottom: "1px solid #e5eaef",
+            fontWeight: 700,
+            "& .MuiDataGrid-columnHeader": {
+              fontWeight: 700,
+              fontSize: 12.5,
+            },
+          },
+          "& .MuiDataGrid-columnHeader:hover": {
+            backgroundColor: "transparent",
+          },
+          "& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell": {
+            padding: "0px 15px",
+          },
+          "& .MuiDataGrid-cell": {
+            fontSize: 12,
+            fontWeight: 400,
+          },
+          // "& .MuiDataGrid-row:nth-of-type(even)": {
+          //   backgroundColor: "#f9fafb",
+          //   "&:hover": {
+          //     backgroundColor: "#e5e7eb",
+          //   },
+          // },
+
+          // "& .MuiDataGrid-row:nth-of-type(odd)": {
+          //   backgroundColor: "#ffffff",
+          //   "&:hover": {
+          //     backgroundColor: "#e5e7eb",
+          //   },
+          // },
         },
       },
     },
