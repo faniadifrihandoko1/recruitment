@@ -98,8 +98,7 @@ export default function LayoutDashboard({ children }: Props) {
             height: "auto",
             px: {
               xs: 2,
-              sm: 3,
-              md: 4,
+              sm: isSidebarCollapsed ? 0 : 2,
             },
             paddingTop: "90px",
             paddingBottom: "20px",
