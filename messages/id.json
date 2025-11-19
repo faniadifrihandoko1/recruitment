@@ -68,6 +68,33 @@
       "breadcrumb": {
         "home": "Dashboard"
       }
+    },
+    "jobRequest": {
+      "title": "Permintaan Tenaga Kerja",
+      "description": "Kelola dan pantau semua permintaan lowongan kerja",
+      "create": "Buat Permintaan",
+      "export": "Ekspor Data",
+      "search": "Cari permintaan...",
+      "filter": "Filter",
+      "table": {
+        "no": "No",
+        "jobTitle": "Judul Pekerjaan",
+        "department": "Departemen",
+        "requestedBy": "Diminta Oleh",
+        "requestDate": "Tanggal Permintaan",
+        "deadline": "Deadline",
+        "applicants": "Pelamar",
+        "status": "Status",
+        "actions": "Aksi"
+      },
+      "status": {
+        "draft": "Draft",
+        "pending": "Menunggu",
+        "approved": "Disetujui",
+        "rejected": "Ditolak",
+        "open": "Terbuka",
+        "closed": "Ditutup"
+      }
     }
   }
 }
