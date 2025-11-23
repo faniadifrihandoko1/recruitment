@@ -87,7 +87,6 @@ export default function AddAssessmentProjectModal({
 
   const handleSubmit = () => {
     if (validateForm()) {
-      // TODO: Handle form submission
       console.log("Form submitted:", formData);
       handleCloseModal();
     }
