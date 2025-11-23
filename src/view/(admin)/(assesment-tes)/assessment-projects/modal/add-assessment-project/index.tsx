@@ -90,7 +90,6 @@ export default function AddAssessmentProjectModal({
       // TODO: Handle form submission
       console.log("Form submitted:", formData);
       handleCloseModal();
-      // You can add API call here to save the assessment project
     }
   };
 
