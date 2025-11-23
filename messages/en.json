@@ -111,6 +111,46 @@
         "submit": "Submit",
         "required": "Required"
       }
+    },
+    "assessmentProjects": {
+      "title": "Assessment Projects",
+      "description": "Manage and monitor all assessment projects",
+      "subtitle": "Manage all assessment projects, monitor status, and manage participants in one place.",
+      "create": "Create Project",
+      "export": "Export Data",
+      "search": "Search projects...",
+      "filter": "Filter",
+      "table": {
+        "no": "No",
+        "projectName": "Project Name",
+        "projectType": "Project Type",
+        "createdBy": "Created By",
+        "createdDate": "Created Date",
+        "participants": "Participants",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "status": {
+        "draft": "Draft",
+        "active": "Active",
+        "completed": "Completed",
+        "archived": "Archived"
+      },
+      "modal": {
+        "title": "Create Assessment Project",
+        "projectName": "Project Name",
+        "projectNamePlaceholder": "Enter project name",
+        "projectType": "Project Type",
+        "createdBy": "Created By",
+        "createdByPlaceholder": "Enter creator name",
+        "description": "Description",
+        "descriptionPlaceholder": "Enter project description",
+        "instructions": "Instructions",
+        "instructionsPlaceholder": "Enter assessment instructions",
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "required": "Required"
+      }
     }
   }
 }

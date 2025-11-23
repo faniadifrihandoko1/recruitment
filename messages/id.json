@@ -112,6 +112,46 @@
         "submit": "Simpan",
         "required": "Wajib diisi"
       }
+    },
+    "assessmentProjects": {
+      "title": "Daftar Proyek Asesmen",
+      "description": "Kelola dan pantau semua proyek asesmen",
+      "subtitle": "Kelola semua proyek asesmen, pantau status, dan kelola peserta dalam satu tempat.",
+      "create": "Buat Proyek",
+      "export": "Ekspor Data",
+      "search": "Cari proyek...",
+      "filter": "Filter",
+      "table": {
+        "no": "No",
+        "projectName": "Nama Proyek",
+        "projectType": "Jenis Proyek",
+        "createdBy": "Dibuat Oleh",
+        "createdDate": "Tanggal Dibuat",
+        "participants": "Peserta",
+        "status": "Status",
+        "actions": "Aksi"
+      },
+      "status": {
+        "draft": "Draft",
+        "active": "Aktif",
+        "completed": "Selesai",
+        "archived": "Diarsipkan"
+      },
+      "modal": {
+        "title": "Tambah Proyek Asesmen",
+        "projectName": "Nama Proyek",
+        "projectNamePlaceholder": "Masukkan nama proyek",
+        "projectType": "Jenis Proyek",
+        "createdBy": "Dibuat Oleh",
+        "createdByPlaceholder": "Masukkan nama pembuat",
+        "description": "Deskripsi",
+        "descriptionPlaceholder": "Masukkan deskripsi proyek",
+        "instructions": "Instruksi",
+        "instructionsPlaceholder": "Masukkan instruksi asesmen",
+        "cancel": "Batal",
+        "submit": "Simpan",
+        "required": "Wajib diisi"
+      }
     }
   }
 }

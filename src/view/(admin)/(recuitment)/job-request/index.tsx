@@ -58,7 +58,7 @@ export default function JobRequestView() {
               gap: 2,
             }}
           >
-            <Box sx={{ maxWidth: "520px" }}>
+            <Box sx={{ maxWidth: "560px" }}>
               <Typography variant="h4" fontWeight={600} color="#2A3547" mb={1}>
                 {t("description")}
               </Typography>
@@ -83,7 +83,6 @@ export default function JobRequestView() {
           </Box>
         </DashboardCard>
 
-        {/* Search and Filter Section */}
         <DashboardCard>
           <Stack
             direction={{ xs: "column", sm: "row" }}
