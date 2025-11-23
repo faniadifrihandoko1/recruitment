@@ -81,7 +81,6 @@ export default function AssessmentProjectsView() {
           </Box>
         </DashboardCard>
 
-        {/* Search and Filter Section */}
         <DashboardCard>
           <Stack
             direction={{ xs: "column", sm: "row" }}
@@ -114,7 +113,6 @@ export default function AssessmentProjectsView() {
           </Stack>
         </DashboardCard>
 
-        {/* Table Section */}
         <ListAssessmentProject data={filteredProjects} />
 
         {/* Action Menu */}
