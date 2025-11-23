@@ -118,7 +118,6 @@ export default function JobRequestView() {
         {/* Table Section */}
         <ListJobRequest data={filteredRequests} />
 
-        {/* Action Menu */}
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
