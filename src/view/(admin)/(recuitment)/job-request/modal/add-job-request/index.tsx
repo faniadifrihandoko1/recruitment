@@ -93,10 +93,8 @@ export default function AddJobRequestModal({
 
   const handleSubmit = () => {
     if (validateForm()) {
-      // TODO: Handle form submission
       console.log("Form submitted:", formData);
       handleCloseModal();
-      // You can add API call here to save the job request
     }
   };
 
