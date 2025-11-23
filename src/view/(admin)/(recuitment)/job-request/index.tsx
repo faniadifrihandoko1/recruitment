@@ -115,7 +115,6 @@ export default function JobRequestView() {
           </Stack>
         </DashboardCard>
 
-        {/* Table Section */}
         <ListJobRequest data={filteredRequests} />
 
         <Menu
@@ -153,7 +152,6 @@ export default function JobRequestView() {
           </MenuItem>
         </Menu>
 
-        {/* Create Job Request Modal */}
         {openModal && (
           <AddJobRequestModal
             openModal={openModal}
