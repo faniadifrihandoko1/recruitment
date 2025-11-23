@@ -49,7 +49,6 @@ export default function AssessmentProjectsView() {
   return (
     <PageContainer title={t("title")}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-        {/* Header Section */}
         <DashboardCard>
           <Box
             sx={{
