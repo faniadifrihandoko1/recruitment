@@ -115,7 +115,6 @@ export default function AssessmentProjectsView() {
 
         <ListAssessmentProject data={filteredProjects} />
 
-        {/* Action Menu */}
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -151,7 +150,6 @@ export default function AssessmentProjectsView() {
           </MenuItem>
         </Menu>
 
-        {/* Create Assessment Project Modal */}
         {openModal && (
           <AddAssessmentProjectModal
             openModal={openModal}
