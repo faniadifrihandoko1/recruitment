@@ -1,12 +1,7 @@
 "use client";
 import LoadingSVG from "@/svg/loading.svg";
-import {
-  Backdrop,
-  Box,
-  CircularProgress,
-  Typography,
-  keyframes,
-} from "@mui/material";
+import { Backdrop, Box, CircularProgress, Typography } from "@mui/material";
+import { keyframes } from "@mui/system";
 import Image from "next/image";
 
 const spin = keyframes`
