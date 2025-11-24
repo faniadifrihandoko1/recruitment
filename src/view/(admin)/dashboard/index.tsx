@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   Chip,
-  ChipProps,
   Divider,
   Grid,
   LinearProgress,
@@ -19,93 +18,149 @@ import { useTranslations } from "next-intl";
 // import { usePathname } from "next/navigation";
 // import { usePathname as useI8nPathname } from "@/i18n/navigation";
 
+const moduleCatalog = [
+  {
+    name: "Tes Kompetensi 1",
+    description: "Tes dasar kemampuan logika & numerik.",
+    type: "Tes 1",
+    owner: "Assessment Center",
+    duration: "45 menit",
+  },
+  {
+    name: "Tes Kompetensi 2",
+    description: "Tes teknis sesuai job family.",
+    type: "Tes 2",
+    owner: "Hiring Manager",
+    duration: "60 menit",
+  },
+  {
+    name: "Assessment Project",
+    description: "Studi kasus berbasis proyek nyata.",
+    type: "Assessment",
+    owner: "Divisi Rekrutmen",
+    duration: "3 hari",
+  },
+  {
+    name: "Final Interview",
+    description: "Wawancara panel user & HR.",
+    type: "Interview",
+    owner: "Panel Interview",
+    duration: "90 menit",
+  },
+];
+
+const recruitmentProjects = [
+  {
+    name: "Project Transformasi Digital",
+    owner: "Divisi TI",
+    timeline: "Jan - Apr 2025",
+    status: "Berjalan",
+    positions: [
+      {
+        title: "Frontend Lead",
+        headcount: 3,
+        applicants: 42,
+        modules: ["Tes Kompetensi 1", "Tes Kompetensi 2", "Final Interview"],
+      },
+      {
+        title: "Product Owner",
+        headcount: 2,
+        applicants: 28,
+        modules: ["Tes Kompetensi 1", "Assessment Project", "Final Interview"],
+      },
+      {
+        title: "QA Automation",
+        headcount: 2,
+        applicants: 33,
+        modules: ["Tes Kompetensi 2", "Assessment Project"],
+      },
+    ],
+  },
+  {
+    name: "Project Ekspansi Regional",
+    owner: "Divisi Operasional",
+    timeline: "Feb - Jun 2025",
+    status: "Perencanaan",
+    positions: [
+      {
+        title: "Area Manager",
+        headcount: 4,
+        applicants: 51,
+        modules: ["Tes Kompetensi 1", "Final Interview"],
+      },
+      {
+        title: "Business Analyst",
+        headcount: 3,
+        applicants: 37,
+        modules: ["Tes Kompetensi 1", "Tes Kompetensi 2", "Assessment Project"],
+      },
+    ],
+  },
+  {
+    name: "Project Modernisasi Operasional",
+    owner: "Divisi Support",
+    timeline: "Mar - Jul 2025",
+    status: "Onboarding",
+    positions: [
+      {
+        title: "HRIS Specialist",
+        headcount: 2,
+        applicants: 19,
+        modules: ["Tes Kompetensi 1", "Assessment Project", "Final Interview"],
+      },
+      {
+        title: "Training Coordinator",
+        headcount: 1,
+        applicants: 14,
+        modules: ["Tes Kompetensi 1", "Final Interview"],
+      },
+    ],
+  },
+];
+
+const totalProjects = recruitmentProjects.length;
+const totalPositions = recruitmentProjects.reduce(
+  (acc, project) => acc + project.positions.length,
+  0
+);
+const moduleUsageCount = recruitmentProjects.reduce<Record<string, number>>(
+  (acc, project) => {
+    project.positions.forEach(position => {
+      position.modules.forEach(module => {
+        acc[module] = (acc[module] ?? 0) + 1;
+      });
+    });
+
+    return acc;
+  },
+  {}
+);
+const totalModulesUsed = Object.keys(moduleUsageCount).length;
+
 const stats = [
   {
-    label: "Total pelamar",
-    value: "1.248",
-    change: "+18%",
+    label: "Total project",
+    value: totalProjects,
+    helper: "Aktif & perencanaan",
     color: "#ECE5FF",
   },
   {
-    label: "Lowongan aktif",
-    value: "32",
-    change: "+4",
+    label: "Total posisi",
+    value: totalPositions,
+    helper: "Butuh alokasi modul",
     color: "#DDF2FF",
   },
   {
-    label: "Tahap interview",
-    value: "67",
-    change: "+9",
+    label: "Master modul",
+    value: moduleCatalog.length,
+    helper: "Siap dipakai posisi",
     color: "#FFE7D7",
   },
   {
-    label: "Diterima bulan ini",
-    value: "14",
-    change: "+2",
+    label: "Modul terpasang",
+    value: totalModulesUsed,
+    helper: "Digunakan posisi aktif",
     color: "#DFF6EC",
-  },
-];
-
-const pipeline = [
-  { stage: "Screening CV", count: 324, percent: 72 },
-  { stage: "HR Interview", count: 124, percent: 48 },
-  { stage: "User Interview", count: 67, percent: 28 },
-  { stage: "Offer", count: 21, percent: 12 },
-];
-
-const openings: Array<{
-  role: string;
-  applicants: number;
-  status: string;
-  color: ChipProps["color"];
-}> = [
-  {
-    role: "Frontend Engineer",
-    applicants: 82,
-    status: "Urgent",
-    color: "error",
-  },
-  {
-    role: "Product Manager",
-    applicants: 45,
-    status: "Open",
-    color: "warning",
-  },
-  {
-    role: "QA Specialist",
-    applicants: 38,
-    status: "Interview",
-    color: "info",
-  },
-  {
-    role: "Data Analyst",
-    applicants: 24,
-    status: "Screening",
-    color: "default",
-  },
-];
-
-const latestApplicants = [
-  {
-    name: "Safira Amanda",
-    role: "UX Researcher",
-    score: "92/100",
-    status: "Interview",
-    avatar: "SA",
-  },
-  {
-    name: "Farhan Pratama",
-    role: "Backend Engineer",
-    score: "88/100",
-    status: "Screening",
-    avatar: "FP",
-  },
-  {
-    name: "Mila Rosita",
-    role: "HR Generalist",
-    score: "85/100",
-    status: "Offer",
-    avatar: "MR",
   },
 ];
 
@@ -160,32 +215,188 @@ export default function DashboardAdminView() {
                 <Typography variant="body2" color="text.secondary" mb={1}>
                   {item.label}
                 </Typography>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  <Typography variant="h4" fontWeight={600}>
-                    {item.value}
-                  </Typography>
-                  <Chip
-                    label={item.change}
-                    color="success"
-                    size="small"
-                    sx={{ fontWeight: 600 }}
-                  />
-                </Stack>
+                <Typography variant="h4" fontWeight={600}>
+                  {item.value}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {item.helper}
+                </Typography>
               </DashboardCard>
             </Grid>
           ))}
         </Grid>
 
         <Grid container spacing={2.5}>
-          <Grid size={{ xs: 12, lg: 8 }} sx={{ height: "100%" }}>
-            <DashboardCard>
-              <Stack direction="row" justifyContent="space-between">
+          <Grid size={{ xs: 12, lg: 8 }}>
+            <DashboardCard sx={{ pb: 4 }}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                justifyContent="space-between"
+                alignItems={{ xs: "flex-start", sm: "center" }}
+                gap={2}
+              >
                 <Box>
-                  <Typography variant="h6" fontWeight={600} mb={0.5}>
-                    Funnel rekrutmen
+                  <Typography variant="h6" fontWeight={600}>
+                    Project & posisi
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Update terakhir 5 menit lalu
+                    Pantau keterhubungan project, posisi, dan modul.
+                  </Typography>
+                </Box>
+                <Button size="small" color="inherit">
+                  Kelola project
+                </Button>
+              </Stack>
+
+              <Divider sx={{ my: 3 }} />
+
+              <Stack spacing={3}>
+                {recruitmentProjects.map(project => (
+                  <Box key={project.name}>
+                    <Stack
+                      direction={{ xs: "column", md: "row" }}
+                      justifyContent="space-between"
+                      alignItems={{ xs: "flex-start", md: "center" }}
+                      gap={1}
+                    >
+                      <Box>
+                        <Typography fontWeight={600}>{project.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {project.owner} · {project.timeline}
+                        </Typography>
+                      </Box>
+                      <Chip
+                        label={project.status}
+                        color="primary"
+                        variant="outlined"
+                      />
+                    </Stack>
+
+                    <Stack spacing={1.5} mt={2}>
+                      {project.positions.map(position => (
+                        <Box
+                          key={position.title}
+                          sx={{
+                            border: "1px solid",
+                            borderColor: "divider",
+                            borderRadius: 2,
+                            p: 1.5,
+                          }}
+                        >
+                          <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            justifyContent="space-between"
+                            gap={1}
+                          >
+                            <Box>
+                              <Typography fontWeight={600}>
+                                {position.title}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Target {position.headcount} orang ·{" "}
+                                {position.applicants} pelamar
+                              </Typography>
+                            </Box>
+                            <Chip
+                              label={`${position.modules.length} modul`}
+                              color="success"
+                              size="small"
+                            />
+                          </Stack>
+                          <Stack
+                            direction="row"
+                            flexWrap="wrap"
+                            gap={1}
+                            mt={1.5}
+                          >
+                            {position.modules.map(module => (
+                              <Chip
+                                key={module}
+                                label={module}
+                                size="small"
+                                variant="outlined"
+                              />
+                            ))}
+                          </Stack>
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Box>
+                ))}
+              </Stack>
+            </DashboardCard>
+          </Grid>
+
+          <Grid size={{ xs: 12, lg: 4 }}>
+            <DashboardCard sx={{ pb: 4 }}>
+              <Typography variant="h6" fontWeight={600} mb={1}>
+                Master modul
+              </Typography>
+              <Typography variant="body2" color="text.secondary" mb={3}>
+                Atur modul tes, assessment, dan interview sekali, lalu hubungkan
+                ke posisi.
+              </Typography>
+
+              <Stack spacing={2.5}>
+                {moduleCatalog.map(module => (
+                  <Box
+                    key={module.name}
+                    sx={{
+                      border: "1px solid",
+                      borderColor: "divider",
+                      borderRadius: 2,
+                      p: 1.5,
+                    }}
+                  >
+                    <Stack
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      gap={1}
+                    >
+                      <Typography fontWeight={600}>{module.name}</Typography>
+                      <Chip label={module.type} size="small" color="info" />
+                    </Stack>
+                    <Typography variant="body2" color="text.secondary" mt={0.5}>
+                      {module.description}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {module.owner} · {module.duration}
+                    </Typography>
+                    <Divider sx={{ my: 1.5 }} />
+                    <Stack direction="row" justifyContent="space-between">
+                      <Typography variant="body2" color="text.secondary">
+                        Digunakan di{" "}
+                        <strong>{moduleUsageCount[module.name] ?? 0}</strong>{" "}
+                        posisi
+                      </Typography>
+                      <Button size="small">Pengaturan</Button>
+                    </Stack>
+                  </Box>
+                ))}
+              </Stack>
+            </DashboardCard>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={2.5}>
+          <Grid size={{ xs: 12, md: 7 }}>
+            <DashboardCard sx={{ pb: 4 }}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                justifyContent="space-between"
+                alignItems={{ xs: "flex-start", sm: "center" }}
+                gap={2}
+              >
+                <Box>
+                  <Typography variant="h6" fontWeight={600}>
+                    Adopsi modul
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Seberapa banyak modul digunakan di posisi aktif.
                   </Typography>
                 </Box>
                 <Button size="small" color="inherit">
@@ -195,156 +406,96 @@ export default function DashboardAdminView() {
 
               <Divider sx={{ my: 3 }} />
 
-              <Stack spacing={3}>
-                {pipeline.map(item => (
-                  <Box key={item.stage}>
-                    <Stack
-                      direction="row"
-                      alignItems="baseline"
-                      justifyContent="space-between"
-                      mb={0.5}
-                    >
-                      <Typography fontWeight={500}>{item.stage}</Typography>
-                      <Typography color="text.secondary">
-                        {item.count} kandidat
-                      </Typography>
-                    </Stack>
-                    <LinearProgress
-                      variant="determinate"
-                      value={item.percent}
-                      sx={{
-                        height: 10,
-                        borderRadius: 999,
-                        "& .MuiLinearProgress-bar": {
-                          borderRadius: 999,
-                        },
-                      }}
-                    />
-                  </Box>
-                ))}
-              </Stack>
-            </DashboardCard>
-          </Grid>
-
-          <Grid size={{ xs: 12, lg: 4 }} sx={{ height: "100%" }}>
-            <DashboardCard sx={{ pb: 6.5 }}>
-              <Typography variant="h6" fontWeight={600} mb={1}>
-                Aktivitas hari ini
-              </Typography>
-              <Typography variant="body2" color="text.secondary" mb={3}>
-                6 interview terjadwal · 2 offer menunggu approval
-              </Typography>
-
               <Stack spacing={2.5}>
-                <Box>
-                  <Typography fontWeight={600}>Panel interview</Typography>
-                  <AvatarGroup max={4} sx={{ mt: 1 }}>
-                    <Avatar>SJ</Avatar>
-                    <Avatar>AP</Avatar>
-                    <Avatar>MR</Avatar>
-                    <Avatar>LS</Avatar>
-                    <Avatar>HZ</Avatar>
-                  </AvatarGroup>
-                </Box>
+                {moduleCatalog.map(module => {
+                  const usage = moduleUsageCount[module.name] ?? 0;
+                  const percent = totalPositions
+                    ? Math.round((usage / totalPositions) * 100)
+                    : 0;
 
-                <Box>
-                  <Typography fontWeight={600}>Agenda terdekat</Typography>
-                  <Typography variant="body2" color="text.secondary" mt={0.5}>
-                    10:30 · Final interview Product Manager
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    13:00 · Offer call Frontend Engineer
-                  </Typography>
-                </Box>
-
-                <Button variant="contained" fullWidth>
-                  Lihat kalender
-                </Button>
-              </Stack>
-            </DashboardCard>
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={2.5}>
-          <Grid size={{ xs: 12, md: 7 }}>
-            <DashboardCard>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                mb={2}
-              >
-                <Typography variant="h6" fontWeight={600}>
-                  Lowongan aktif
-                </Typography>
-                <Button size="small" color="inherit">
-                  Kelola lowongan
-                </Button>
-              </Stack>
-
-              <Stack spacing={2}>
-                {openings.map(role => (
-                  <Box
-                    key={role.role}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Box>
-                      <Typography fontWeight={600}>{role.role}</Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {role.applicants} pelamar aktif
-                      </Typography>
+                  return (
+                    <Box key={`${module.name}-usage`}>
+                      <Stack
+                        direction="row"
+                        alignItems="baseline"
+                        justifyContent="space-between"
+                        mb={0.5}
+                      >
+                        <Typography fontWeight={500}>{module.name}</Typography>
+                        <Typography color="text.secondary">
+                          {usage} posisi · {percent}%
+                        </Typography>
+                      </Stack>
+                      <LinearProgress
+                        variant="determinate"
+                        value={percent}
+                        sx={{
+                          height: 10,
+                          borderRadius: 999,
+                          "& .MuiLinearProgress-bar": {
+                            borderRadius: 999,
+                          },
+                        }}
+                      />
                     </Box>
-                    <Chip
-                      label={role.status}
-                      color={role.color}
-                      variant="outlined"
-                    />
-                  </Box>
-                ))}
+                  );
+                })}
               </Stack>
             </DashboardCard>
           </Grid>
 
           <Grid size={{ xs: 12, md: 5 }}>
             <DashboardCard sx={{ pb: 5 }}>
-              <Typography variant="h6" fontWeight={600} mb={2}>
-                Pelamar terbaru
+              <Typography variant="h6" fontWeight={600} mb={1}>
+                Konfigurasi terbaru
               </Typography>
-              <Stack spacing={3}>
-                {latestApplicants.map(candidate => (
-                  <Box
-                    key={candidate.name}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Stack direction="row" spacing={1.5} alignItems="center">
-                      <Avatar sx={{ bgcolor: "#EEF2FF", color: "#5563DD" }}>
-                        {candidate.avatar}
-                      </Avatar>
-                      <Box>
+              <Typography variant="body2" color="text.secondary" mb={3}>
+                Posisi yang baru ditambahkan modulnya minggu ini.
+              </Typography>
+
+              <Stack spacing={2.5}>
+                {recruitmentProjects
+                  .flatMap(project =>
+                    project.positions.map(position => ({
+                      project: project.name,
+                      title: position.title,
+                      modules: position.modules,
+                    }))
+                  )
+                  .slice(0, 4)
+                  .map(position => (
+                    <Box
+                      key={`${position.project}-${position.title}`}
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Stack spacing={0.5}>
                         <Typography fontWeight={600}>
-                          {candidate.name}
+                          {position.title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                          {candidate.role}
+                          {position.project}
                         </Typography>
-                      </Box>
-                    </Stack>
-                    <Stack alignItems="flex-end">
-                      <Chip label={candidate.status} size="small" />
-                      <Typography variant="caption" mt={0.5}>
-                        {candidate.score}
-                      </Typography>
-                    </Stack>
-                  </Box>
-                ))}
+                      </Stack>
+                      <AvatarGroup
+                        max={3}
+                        sx={{ "& .MuiAvatar-root": { width: 28, height: 28 } }}
+                      >
+                        {position.modules.map(module => (
+                          <Avatar key={module}>
+                            {module
+                              .split(" ")
+                              .map(word => word[0])
+                              .join("")
+                              .slice(0, 2)}
+                          </Avatar>
+                        ))}
+                      </AvatarGroup>
+                    </Box>
+                  ))}
               </Stack>
             </DashboardCard>
           </Grid>
