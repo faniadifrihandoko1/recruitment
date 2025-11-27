@@ -41,6 +41,17 @@
           "switch": "Switch Language"
         }
       }
+    },
+    "shared": {
+      "textField": {
+        "placeholder": "Enter {label}"
+      },
+      "modal": {
+        "button": {
+          "no": "Cancel",
+          "yes": "Save"
+        }
+      }
     }
   },
   "page": {
@@ -49,6 +60,29 @@
       "description": "Welcome to the dashboard",
       "breadcrumb": {
         "home": "Home"
+      }
+    },
+    "project": {
+      "page": {
+        "title": "Projects"
+      },
+      "modal": {
+        "modal-add": {
+          "title": "Create Project"
+        },
+        "modal-edit": {
+          "title": "Edit Project"
+        }
+      },
+      "form": {
+        "projectName": "Project Name",
+        "projectDescription": "Project Description"
+      },
+      "validation": {
+        "projectNameRequired": "Project name is required",
+        "projectNameMinLength": "Project name must be at least 3 characters",
+        "projectDescriptionRequired": "Project description is required",
+        "projectDescriptionMinLength": "Project description must be at least 10 characters"
       }
     },
     "jobRequest": {
@@ -98,7 +132,7 @@
     "assessmentProjects": {
       "title": "Assessment Projects",
       "description": "Manage and monitor all assessment projects",
-      "subtitle": "Manage all assessment projects, monitor status, and manage participants in one place.",
+      "subtitle": "Organize each project, view its status, and manage participants in one place.",
       "create": "Create Project",
       "export": "Export Data",
       "search": "Search projects...",
@@ -124,6 +158,12 @@
         "cancel": "Cancel",
         "submit": "Submit",
         "required": "Required"
+      },
+      "validation": {
+        "projectNameRequired": "Project name is required",
+        "projectNameMinLength": "Project name must be at least 3 characters",
+        "projectDescriptionRequired": "Project description is required",
+        "projectDescriptionMinLength": "Project description must be at least 10 characters"
       }
     }
   }

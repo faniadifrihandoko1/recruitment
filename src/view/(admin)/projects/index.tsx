@@ -1,6 +1,6 @@
 "use client";
 import DashboardCard from "@/component/shared/DashboardCard";
-import PageContainer from "@/component/shared/PageContainer";
+import PageContainer from "@/component/shared/page-container";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -23,7 +23,7 @@ import AddAssessmentProjectModal from "./modal/add-assessment-project";
 import ListAssessmentProject, { AssessmentProject } from "./table/list";
 import { RowAssessmentProjects } from "./table/list-column";
 
-export default function AssessmentProjectsView() {
+export default function ProjectsView() {
   const t = useTranslations("page.assessmentProjects");
   const [searchQuery, setSearchQuery] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -48,7 +48,7 @@ export default function AssessmentProjectsView() {
   );
 
   return (
-    <PageContainer title={t("title")}>
+    <PageContainer title={t("title")} hideBreadcrumbs>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
         <DashboardCard>
           <Box
@@ -154,7 +154,7 @@ export default function AssessmentProjectsView() {
         {openModal && (
           <AddAssessmentProjectModal
             openModal={openModal}
-            handleCloseModal={toggleAddModal}
+            toggle={toggleAddModal}
           />
         )}
       </Box>

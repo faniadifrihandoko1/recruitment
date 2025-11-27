@@ -12,7 +12,7 @@
 
           {
             "id": "projects",
-            "title": "Proyek",
+            "title": "Project",
             "icon": "IconClipboardList",
             "href": "/projects"
           },
@@ -41,6 +41,17 @@
           "switch": "Ganti Bahasa"
         }
       }
+    },
+    "shared": {
+      "textField": {
+        "placeholder": "Masukkan {label}"
+      },
+      "modal": {
+        "button": {
+          "no": "Batal",
+          "yes": "Simpan"
+        }
+      }
     }
   },
   "page": {
@@ -49,6 +60,29 @@
       "description": "Selamat datang di halaman beranda",
       "breadcrumb": {
         "home": "Dashboard"
+      }
+    },
+    "project": {
+      "page": {
+        "title": "Project"
+      },
+      "modal": {
+        "modal-add": {
+          "title": "Buat Project"
+        },
+        "modal-edit": {
+          "title": "Edit Project"
+        }
+      },
+      "form": {
+        "projectName": "Nama Project",
+        "projectDescription": "Deskripsi Project"
+      },
+      "validation": {
+        "projectNameRequired": "Nama project wajib diisi",
+        "projectNameMinLength": "Nama project minimal 3 karakter",
+        "projectDescriptionRequired": "Deskripsi project wajib diisi",
+        "projectDescriptionMinLength": "Deskripsi project minimal 10 karakter"
       }
     },
     "jobRequest": {
@@ -96,17 +130,17 @@
       }
     },
     "assessmentProjects": {
-      "title": "Daftar Proyek Asesmen",
-      "description": "Kelola dan pantau semua proyek asesmen",
-      "subtitle": "Kelola semua proyek asesmen, pantau status, dan kelola peserta dalam satu tempat.",
-      "create": "Buat Proyek",
+      "title": "Project",
+      "description": "Kelola dan pantau semua project",
+      "subtitle": "Atur setiap project, lihat statusnya, dan kelola peserta dalam satu tempat.",
+      "create": "Buat Project",
       "export": "Ekspor Data",
-      "search": "Cari proyek...",
+      "search": "Cari project...",
       "filter": "Filter",
       "table": {
         "no": "No",
-        "projectName": "Nama Proyek",
-        "projectDescription": "Deskripsi Proyek",
+        "projectName": "Nama Project",
+        "projectDescription": "Deskripsi Project",
         "actions": "Aksi"
       },
       "status": {
@@ -124,6 +158,12 @@
         "cancel": "Batal",
         "submit": "Simpan",
         "required": "Wajib diisi"
+      },
+      "validation": {
+        "projectNameRequired": "Nama project wajib diisi",
+        "projectNameMinLength": "Nama project minimal 3 karakter",
+        "projectDescriptionRequired": "Deskripsi project wajib diisi",
+        "projectDescriptionMinLength": "Deskripsi project minimal 10 karakter"
       }
     }
   }

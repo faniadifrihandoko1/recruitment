@@ -1,6 +1,6 @@
 "use client";
 import DashboardCard from "@/component/shared/DashboardCard";
-import PageContainer from "@/component/shared/PageContainer";
+import PageContainer from "@/component/shared/page-container";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";

@@ -13,9 +13,16 @@ type BreadcrumbItem = {
 interface PageContainerProps {
   title: string;
   children: React.ReactNode;
+  hideBreadcrumbs?: boolean;
+  hideTitle?: boolean;
 }
 
-const PageContainer = ({ title, children }: PageContainerProps) => {
+const PageContainer = ({
+  title,
+  children,
+  hideBreadcrumbs = false,
+  hideTitle = false,
+}: PageContainerProps) => {
   const pathname = usePathname();
   const locale = useLocale();
   const sidebarTranslations = useTranslations("component.layout.sidebar");
@@ -58,6 +65,10 @@ const PageContainer = ({ title, children }: PageContainerProps) => {
   );
 
   const breadcrumbItems = useMemo(() => {
+    if (hideBreadcrumbs) {
+      return [];
+    }
+
     if (!menuData || !pathname) {
       return title ? [{ label: title }] : [];
     }
@@ -89,7 +100,7 @@ const PageContainer = ({ title, children }: PageContainerProps) => {
     }
 
     return title ? [{ label: title }] : [];
-  }, [menuData, pathname, title, stripLocaleFromPath]);
+  }, [hideBreadcrumbs, menuData, pathname, title, stripLocaleFromPath]);
 
   return (
     <Box>
@@ -103,18 +114,20 @@ const PageContainer = ({ title, children }: PageContainerProps) => {
           gap: 1.5,
         }}
       >
-        <Typography
-          sx={{
-            fontWeight: 600,
-            color: "#2A3547",
-            fontSize: "1.375rem",
-            lineHeight: 1.4,
-          }}
-        >
-          {title}
-        </Typography>
+        {!hideTitle && (
+          <Typography
+            sx={{
+              fontWeight: 600,
+              color: "#2A3547",
+              fontSize: "1.375rem",
+              lineHeight: 1.4,
+            }}
+          >
+            {title}
+          </Typography>
+        )}
 
-        {breadcrumbItems.length > 0 && (
+        {!hideBreadcrumbs && breadcrumbItems.length > 0 && (
           <Breadcrumbs
             aria-label="breadcrumb"
             separator="•"

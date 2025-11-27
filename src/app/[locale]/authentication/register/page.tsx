@@ -1,12 +1,12 @@
 "use client";
 import Logo from "@/component/layout/logo";
-import PageContainer from "@/component/shared/PageContainer";
+import PageContainer from "@/component/shared/page-container";
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import AuthRegister from "../auth/AuthRegister";
 
 const Register2 = () => (
-  <PageContainer title="Register">
+  <PageContainer title="Register" hideBreadcrumbs>
     <Box
       sx={{
         position: "relative",
