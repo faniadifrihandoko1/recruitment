@@ -43,6 +43,7 @@ const SidebarItems = ({ isCollapsed = false }: SidebarItemsProps) => {
             minHeight: 0,
             overflowY: "auto",
             overflowX: "hidden",
+            marginTop: "20px",
             px: isCollapsed ? 0 : 1.5,
             pt: isCollapsed ? 1 : 0,
             pb: isCollapsed ? 1 : 0,

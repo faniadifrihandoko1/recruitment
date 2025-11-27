@@ -4,51 +4,33 @@
       "sidebar": {
         "menu": [
           {
-            "navlabel": true,
-            "subheader": "Beranda",
-            "href": "/"
-          },
-          {
             "id": "dashboard",
             "title": "Dashboard",
             "icon": "IconLayoutDashboard",
             "href": "/dashboard"
           },
+
           {
-            "navlabel": true,
-            "subheader": "Asesmen Tes"
-          },
-          {
-            "id": "assessment-projects",
-            "title": "Daftar Proyek Asesmen",
+            "id": "projects",
+            "title": "Proyek",
             "icon": "IconClipboardList",
-            "href": "/assessment-projects"
+            "href": "/projects"
           },
           {
             "navlabel": true,
-            "subheader": "Rekrutmen"
+            "subheader": "Master"
           },
           {
-            "id": "job-request",
-            "title": "Permintaan Tenaga Kerja",
-            "icon": "IconUsersPlus",
-            "href": "/job-request"
-          },
-          {
-            "id": "applicant-list",
-            "title": "Daftar Calon Pegawai",
-            "icon": "IconUsers",
-            "href": "/applicant-list"
-          },
-          {
-            "navlabel": true,
-            "subheader": "Pulling CV Trial"
-          },
-          {
-            "id": "cv-data",
-            "title": "Data CV",
+            "id": "modules",
+            "title": "Modul",
             "icon": "IconFileText",
-            "href": "/cv-data"
+            "href": "/modules"
+          },
+          {
+            "id": "online-tes",
+            "title": "Tes Online",
+            "icon": "IconTestPipe",
+            "href": "/online-test"
           }
         ]
       },
@@ -124,11 +106,7 @@
       "table": {
         "no": "No",
         "projectName": "Nama Proyek",
-        "projectType": "Jenis Proyek",
-        "createdBy": "Dibuat Oleh",
-        "createdDate": "Tanggal Dibuat",
-        "participants": "Peserta",
-        "status": "Status",
+        "projectDescription": "Deskripsi Proyek",
         "actions": "Aksi"
       },
       "status": {
@@ -138,16 +116,11 @@
         "archived": "Diarsipkan"
       },
       "modal": {
-        "title": "Tambah Proyek Asesmen",
+        "title": "Buat Proyek",
         "projectName": "Nama Proyek",
         "projectNamePlaceholder": "Masukkan nama proyek",
-        "projectType": "Jenis Proyek",
-        "createdBy": "Dibuat Oleh",
-        "createdByPlaceholder": "Masukkan nama pembuat",
-        "description": "Deskripsi",
-        "descriptionPlaceholder": "Masukkan deskripsi proyek",
-        "instructions": "Instruksi",
-        "instructionsPlaceholder": "Masukkan instruksi asesmen",
+        "projectDescription": "Deskripsi Proyek",
+        "projectDescriptionPlaceholder": "Masukkan deskripsi proyek",
         "cancel": "Batal",
         "submit": "Simpan",
         "required": "Wajib diisi"

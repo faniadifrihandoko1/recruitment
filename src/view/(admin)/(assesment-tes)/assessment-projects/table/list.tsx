@@ -6,11 +6,7 @@ import { useListColumn } from "./list-column";
 export interface AssessmentProject {
   id: number;
   projectName: string;
-  projectType: string;
-  createdBy: string;
-  createdDate: string;
-  participants: number;
-  status: "draft" | "active" | "completed" | "archived";
+  projectDescription: string;
 }
 
 interface ListAssessmentProjectProps {

@@ -6,10 +6,6 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Typography,
@@ -19,21 +15,8 @@ import { useState } from "react";
 
 interface FormData {
   projectName: string;
-  projectType: string;
-  createdBy: string;
-  description: string;
-  instructions: string;
+  projectDescription: string;
 }
-
-const projectTypes = [
-  "Technical Test",
-  "Behavioral Test",
-  "Leadership Test",
-  "Skills Test",
-  "Cultural Test",
-  "Aptitude Test",
-  "Personality Test",
-];
 
 interface AddAssessmentProjectModalProps {
   openModal: boolean;
@@ -51,10 +34,7 @@ export default function AddAssessmentProjectModal({
 
   const [formData, setFormData] = useState<FormData>({
     projectName: "",
-    projectType: "",
-    createdBy: "",
-    description: "",
-    instructions: "",
+    projectDescription: "",
   });
 
   const handleInputChange = (field: keyof FormData, value: string) => {
@@ -70,14 +50,8 @@ export default function AddAssessmentProjectModal({
     if (!formData.projectName.trim()) {
       newErrors.projectName = t("modal.required");
     }
-    if (!formData.projectType) {
-      newErrors.projectType = t("modal.required");
-    }
-    if (!formData.createdBy.trim()) {
-      newErrors.createdBy = t("modal.required");
-    }
-    if (!formData.description.trim()) {
-      newErrors.description = t("modal.required");
+    if (!formData.projectDescription.trim()) {
+      newErrors.projectDescription = t("modal.required");
     }
 
     setErrors(newErrors);
@@ -123,58 +97,19 @@ export default function AddAssessmentProjectModal({
             required
           />
 
-          <FormControl fullWidth error={!!errors.projectType} required>
-            <InputLabel>{t("modal.projectType")}</InputLabel>
-            <Select
-              value={formData.projectType}
-              onChange={e => handleInputChange("projectType", e.target.value)}
-              label={t("modal.projectType")}
-            >
-              {projectTypes.map(type => (
-                <MenuItem key={type} value={type}>
-                  {type}
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.projectType && (
-              <Typography variant="caption" color="error" sx={{ mt: 0.5 }}>
-                {errors.projectType}
-              </Typography>
-            )}
-          </FormControl>
-
           <TextField
             fullWidth
-            label={t("modal.createdBy")}
-            placeholder={t("modal.createdByPlaceholder")}
-            value={formData.createdBy}
-            onChange={e => handleInputChange("createdBy", e.target.value)}
-            error={!!errors.createdBy}
-            helperText={errors.createdBy}
-            required
-          />
-
-          <TextField
-            fullWidth
-            label={t("modal.description")}
-            placeholder={t("modal.descriptionPlaceholder")}
-            value={formData.description}
-            onChange={e => handleInputChange("description", e.target.value)}
-            error={!!errors.description}
-            helperText={errors.description}
+            label={t("modal.projectDescription")}
+            placeholder={t("modal.projectDescriptionPlaceholder")}
+            value={formData.projectDescription}
+            onChange={e =>
+              handleInputChange("projectDescription", e.target.value)
+            }
+            error={!!errors.projectDescription}
+            helperText={errors.projectDescription}
             multiline
             rows={4}
             required
-          />
-
-          <TextField
-            fullWidth
-            label={t("modal.instructions")}
-            placeholder={t("modal.instructionsPlaceholder")}
-            value={formData.instructions}
-            onChange={e => handleInputChange("instructions", e.target.value)}
-            multiline
-            rows={4}
           />
         </Stack>
       </DialogContent>

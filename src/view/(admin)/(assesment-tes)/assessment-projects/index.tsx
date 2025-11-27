@@ -42,8 +42,9 @@ export default function AssessmentProjectsView() {
   const filteredProjects = RowAssessmentProjects.filter(
     project =>
       project.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.projectType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.createdBy.toLowerCase().includes(searchQuery.toLowerCase())
+      project.projectDescription
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
   );
 
   return (

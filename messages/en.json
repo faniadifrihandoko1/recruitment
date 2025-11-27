@@ -4,50 +4,33 @@
       "sidebar": {
         "menu": [
           {
-            "navlabel": true,
-            "subheader": "Home"
-          },
-          {
             "id": "dashboard",
             "title": "Dashboard",
             "icon": "IconLayoutDashboard",
             "href": "/dashboard"
           },
+
           {
-            "navlabel": true,
-            "subheader": "Assessment Test"
-          },
-          {
-            "id": "assessment-projects",
-            "title": "Assessment Projects",
+            "id": "projects",
+            "title": "Projects",
             "icon": "IconClipboardList",
-            "href": "/assessment-projects"
+            "href": "/projects"
           },
           {
             "navlabel": true,
-            "subheader": "Recruitment"
+            "subheader": "Master"
           },
           {
-            "id": "job-request",
-            "title": "Job Request",
-            "icon": "IconUsersPlus",
-            "href": "/job-request"
-          },
-          {
-            "id": "applicant-list",
-            "title": "Applicant List",
-            "icon": "IconUsers",
-            "href": "/applicant-list"
-          },
-          {
-            "navlabel": true,
-            "subheader": "CV Pulling Trial"
-          },
-          {
-            "id": "cv-data",
-            "title": "CV Data",
+            "id": "modules",
+            "title": "Modules",
             "icon": "IconFileText",
-            "href": "/cv-data"
+            "href": "/modules"
+          },
+          {
+            "id": "online-tes",
+            "title": "Online Test",
+            "icon": "IconTestPipe",
+            "href": "/online-test"
           }
         ]
       },
@@ -123,11 +106,7 @@
       "table": {
         "no": "No",
         "projectName": "Project Name",
-        "projectType": "Project Type",
-        "createdBy": "Created By",
-        "createdDate": "Created Date",
-        "participants": "Participants",
-        "status": "Status",
+        "projectDescription": "Project Description",
         "actions": "Actions"
       },
       "status": {
@@ -137,16 +116,11 @@
         "archived": "Archived"
       },
       "modal": {
-        "title": "Create Assessment Project",
+        "title": "Create Project",
         "projectName": "Project Name",
         "projectNamePlaceholder": "Enter project name",
-        "projectType": "Project Type",
-        "createdBy": "Created By",
-        "createdByPlaceholder": "Enter creator name",
-        "description": "Description",
-        "descriptionPlaceholder": "Enter project description",
-        "instructions": "Instructions",
-        "instructionsPlaceholder": "Enter assessment instructions",
+        "projectDescription": "Project Description",
+        "projectDescriptionPlaceholder": "Enter project description",
         "cancel": "Cancel",
         "submit": "Submit",
         "required": "Required"
