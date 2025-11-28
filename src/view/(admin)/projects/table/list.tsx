@@ -3,6 +3,7 @@ import PaginationSectionTableCustom from "@/component/shared/custom-pagination";
 import DashboardCard from "@/component/shared/DashboardCard";
 import { Box, SelectChangeEvent } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useListColumn } from "./list-column";
 
@@ -23,6 +24,11 @@ export default function ListAssessmentProject({
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleRowClick = (row: AssessmentProject) => {
+    router.push(`/projects/${row.id}`);
+  };
 
   const totalRecords = data.length; // Ambil jumlah total data
   const handleLimitChange = (event: SelectChangeEvent) => {
@@ -50,9 +56,8 @@ export default function ListAssessmentProject({
         <DataGrid
           rows={paginatedRows}
           columns={columns}
-          disableRowSelectionOnClick
           rowHeight={55}
-          autoHeight
+          onRowClick={params => handleRowClick(params.row as AssessmentProject)}
           hideFooterSelectedRowCount
           loading={isLoading}
           slots={{
