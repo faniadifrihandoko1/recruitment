@@ -4,15 +4,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
-import { AssessmentProject } from "./list";
+import EditAssessmentProjectModal from "../modal/edit-assessment-project";
+import { ProjectInterface } from "../type";
 
 interface ListOptionsProps {
-  row: AssessmentProject;
+  row: ProjectInterface;
 }
 
 export function ListOptions({ row }: ListOptionsProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const toggleEdit = () => {
+    setOpenEdit(!openEdit);
+  };
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -50,10 +56,7 @@ export function ListOptions({ row }: ListOptionsProps) {
       >
         <MenuItem
           divider
-          onClick={() => {
-            console.log("Edit", row);
-            handleClose();
-          }}
+          onClick={toggleEdit}
           sx={{
             gap: 1.5,
             px: 2,
@@ -74,6 +77,13 @@ export function ListOptions({ row }: ListOptionsProps) {
           <DeleteIcon sx={{ fontSize: 16 }} />
           <Typography fontSize={14}>{"Delete"}</Typography>
         </MenuItem>
+        {openEdit && (
+          <EditAssessmentProjectModal
+            openModal={openEdit}
+            toggle={toggleEdit}
+            data={row}
+          />
+        )}
       </Menu>
     </>
   );
