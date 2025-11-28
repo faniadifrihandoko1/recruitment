@@ -19,9 +19,9 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import AddAssessmentProjectModal from "./modal/add-assessment-project";
 import ListAssessmentProject, { AssessmentProject } from "./table/list";
 import { RowAssessmentProjects } from "./table/list-column";
+import { AddAssessmentProjectModal } from "./modal/add-assessment-project";
 
 export default function ProjectsView() {
   const t = useTranslations("page.assessmentProjects");

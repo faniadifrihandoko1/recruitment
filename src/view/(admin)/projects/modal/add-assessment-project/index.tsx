@@ -17,17 +17,16 @@ interface AddAssessmentProjectModalProps {
   toggle: () => void;
 }
 
-export default function AddAssessmentProjectModal({
+export const AddAssessmentProjectModal = ({
   openModal,
   toggle,
-}: AddAssessmentProjectModalProps) {
+}: AddAssessmentProjectModalProps) => {
   const t = useTranslations("page.project");
   const tValidation = useTranslations("page.project.validation");
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
       projectName: "",
-      projectDescription:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      projectDescription: "",
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
@@ -68,4 +67,4 @@ export default function AddAssessmentProjectModal({
       </Grid>
     </ModalCustom>
   );
-}
+};

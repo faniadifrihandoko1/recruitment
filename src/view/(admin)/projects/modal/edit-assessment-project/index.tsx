@@ -19,11 +19,11 @@ interface EditAssessmentProjectModalProps {
   data: ProjectInterface;
 }
 
-export default function EditAssessmentProjectModal({
+export const EditAssessmentProjectModal = ({
   openModal,
   toggle,
   data,
-}: EditAssessmentProjectModalProps) {
+}: EditAssessmentProjectModalProps) => {
   const t = useTranslations("page.project");
   const tValidation = useTranslations("page.project.validation");
   const form = useForm<ProjectFormSchema>({
@@ -70,4 +70,4 @@ export default function EditAssessmentProjectModal({
       </Grid>
     </ModalCustom>
   );
-}
+};

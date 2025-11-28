@@ -71,8 +71,8 @@ export default function CustomTextAreaAutoSize<T extends FieldValues>({
                     border: error
                       ? "1px solid #d32f2f"
                       : "1px solid rgba(0, 0, 0, 0.23)",
-                    paddingTop: "8.5px",
-                    paddingBottom: "8.5px",
+                    paddingTop: "13px",
+                    paddingBottom: "11px",
                     paddingLeft: "14px",
                     paddingRight: "14px",
                     fontFamily: "inherit",
@@ -96,6 +96,10 @@ export default function CustomTextAreaAutoSize<T extends FieldValues>({
                     "&::placeholder": {
                       color: "rgba(0, 0, 0, 0.6)",
                       opacity: 1,
+                      lineHeight: 1.4375,
+                    },
+                    "&:placeholder-shown": {
+                      lineHeight: 1.4375,
                     },
                   },
                 }}
