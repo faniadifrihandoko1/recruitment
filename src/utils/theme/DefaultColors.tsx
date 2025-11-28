@@ -182,6 +182,16 @@ const baselightTheme = createTheme({
             fontSize: 12,
             fontWeight: 400,
           },
+          MuiTextField: {
+            styleOverrides: {
+              root: {
+                fontWeight: 500,
+              },
+            },
+            defaultProps: {
+              fullWidth: true,
+            },
+          },
           // "& .MuiDataGrid-row:nth-of-type(even)": {
           //   backgroundColor: "#f9fafb",
           //   "&:hover": {

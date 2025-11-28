@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import CustomTextAreaAutoSize from "@/component/shared/input/custom-text-area-autosize";
 import { CustomTextField } from "@/component/shared/input/custom-textfield";
 import ModalCustom from "@/component/shared/modal/modal-custom";
 import { Grid } from "@mui/material";
@@ -25,7 +26,8 @@ export default function AddAssessmentProjectModal({
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
       projectName: "",
-      projectDescription: "",
+      projectDescription:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
@@ -46,7 +48,7 @@ export default function AddAssessmentProjectModal({
         onClick: handleSubmit(onSubmit),
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ bgColor: "red" }}>
         <Grid size={12}>
           <CustomTextField
             control={control}
@@ -55,8 +57,8 @@ export default function AddAssessmentProjectModal({
             required
           />
         </Grid>
-        <Grid size={12}>
-          <CustomTextField
+        <Grid size={12} sx={{ bgColor: "blue" }}>
+          <CustomTextAreaAutoSize
             control={control}
             name="projectDescription"
             label={t("form.projectDescription")}

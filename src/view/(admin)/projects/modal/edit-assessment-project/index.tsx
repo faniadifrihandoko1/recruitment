@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import CustomTextAreaAutoSize from "@/component/shared/input/custom-text-area-autosize";
 import { CustomTextField } from "@/component/shared/input/custom-textfield";
 import ModalCustom from "@/component/shared/modal/modal-custom";
 import { Grid } from "@mui/material";
@@ -59,7 +60,7 @@ export default function EditAssessmentProjectModal({
           />
         </Grid>
         <Grid size={12}>
-          <CustomTextField
+          <CustomTextAreaAutoSize
             control={control}
             name="projectDescription"
             label={t("form.projectDescription")}
