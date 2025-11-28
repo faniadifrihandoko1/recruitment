@@ -48,7 +48,7 @@ export default function ProjectsView() {
   );
 
   return (
-    <PageContainer title={t("title")} hideBreadcrumbs>
+    <PageContainer title={t("title")} hideTitle>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
         <DashboardCard>
           <Box

@@ -46,6 +46,11 @@
       "textField": {
         "placeholder": "Enter {label}"
       },
+      "pagination": {
+        "entriesText": "Showing {startEntry} - {endEntry} of {totalEntries} entries",
+        "limit": "Limit"
+      },
+
       "modal": {
         "button": {
           "no": "Cancel",

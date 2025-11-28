@@ -46,6 +46,10 @@
       "textField": {
         "placeholder": "Masukkan {label}"
       },
+      "pagination": {
+        "entriesText": "Menampilkan {startEntry} - {endEntry} dari {totalEntries} entri",
+        "limit": "Limit"
+      },
       "modal": {
         "button": {
           "no": "Batal",

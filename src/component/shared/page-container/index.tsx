@@ -114,18 +114,20 @@ const PageContainer = ({
           gap: 1.5,
         }}
       >
-        {!hideTitle && (
-          <Typography
-            sx={{
-              fontWeight: 600,
-              color: "#2A3547",
-              fontSize: "1.375rem",
-              lineHeight: 1.4,
-            }}
-          >
-            {title}
-          </Typography>
-        )}
+        <Box>
+          {!hideTitle && (
+            <Typography
+              sx={{
+                fontWeight: 600,
+                color: "#2A3547",
+                fontSize: "1.375rem",
+                lineHeight: 1.4,
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+        </Box>
 
         {!hideBreadcrumbs && breadcrumbItems.length > 0 && (
           <Breadcrumbs
