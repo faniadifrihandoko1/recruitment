@@ -14,7 +14,8 @@
             "id": "projects",
             "title": "Projects",
             "icon": "IconClipboardList",
-            "href": "/projects"
+            "href": "/projects",
+            "children": ["edit/{id}"]
           },
           {
             "navlabel": true,
@@ -56,6 +57,9 @@
           "no": "Cancel",
           "yes": "Save"
         }
+      },
+      "backButton": {
+        "label": "Back"
       }
     }
   },
@@ -169,6 +173,36 @@
         "projectNameMinLength": "Project name must be at least 3 characters",
         "projectDescriptionRequired": "Project description is required",
         "projectDescriptionMinLength": "Project description must be at least 10 characters"
+      },
+      "detail": {
+        "title": "Project Detail",
+        "breadcrumb": {
+          "project": "Project",
+          "projectName": "Project {name}"
+        },
+        "tabs": {
+          "overview": "Overview",
+          "jobVacancies": "Job Vacancies"
+        },
+        "stats": {
+          "totalParticipants": "Total Participants",
+          "activeParticipants": "Active Participants",
+          "completedTests": "Completed Tests",
+          "pendingTests": "Pending Tests"
+        },
+        "overview": {
+          "projectInfo": "Project Information",
+          "description": "Description",
+          "status": "Status",
+          "createdDate": "Created Date",
+          "lastUpdated": "Last Updated",
+          "participants": "Participants",
+          "recentActivity": "Recent Activity"
+        },
+        "jobVacancies": {
+          "title": "Job Vacancies",
+          "noVacancies": "No job vacancies for this project yet"
+        }
       }
     }
   }

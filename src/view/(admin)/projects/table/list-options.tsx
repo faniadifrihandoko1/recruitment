@@ -21,6 +21,7 @@ export function ListOptions({ row }: ListOptionsProps) {
   };
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -28,7 +29,8 @@ export function ListOptions({ row }: ListOptionsProps) {
     setAnchorEl(null);
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     handleClose();
     toggleEdit();
   };
@@ -73,7 +75,8 @@ export function ListOptions({ row }: ListOptionsProps) {
           <Typography fontSize={14}>{"Edit"}</Typography>
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={event => {
+            event.stopPropagation();
             console.log("Delete", row);
             handleClose();
           }}

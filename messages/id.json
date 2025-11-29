@@ -14,7 +14,8 @@
             "id": "projects",
             "title": "Project",
             "icon": "IconClipboardList",
-            "href": "/projects"
+            "href": "/projects",
+            "children": ["detail/{id}"]
           },
           {
             "navlabel": true,
@@ -55,6 +56,9 @@
           "no": "Batal",
           "yes": "Simpan"
         }
+      },
+      "backButton": {
+        "label": "Kembali"
       }
     }
   },
@@ -168,6 +172,36 @@
         "projectNameMinLength": "Nama project minimal 3 karakter",
         "projectDescriptionRequired": "Deskripsi project wajib diisi",
         "projectDescriptionMinLength": "Deskripsi project minimal 10 karakter"
+      },
+      "detail": {
+        "title": "Detail Project",
+        "breadcrumb": {
+          "project": "Project",
+          "projectName": "Project {name}"
+        },
+        "tabs": {
+          "overview": "Overview",
+          "jobVacancies": "Job Vacancies"
+        },
+        "stats": {
+          "totalParticipants": "Total Peserta",
+          "activeParticipants": "Peserta Aktif",
+          "completedTests": "Tes Selesai",
+          "pendingTests": "Tes Pending"
+        },
+        "overview": {
+          "projectInfo": "Informasi Project",
+          "description": "Deskripsi",
+          "status": "Status",
+          "createdDate": "Tanggal Dibuat",
+          "lastUpdated": "Terakhir Diupdate",
+          "participants": "Peserta",
+          "recentActivity": "Aktivitas Terkini"
+        },
+        "jobVacancies": {
+          "title": "Lowongan Pekerjaan",
+          "noVacancies": "Belum ada lowongan pekerjaan untuk project ini"
+        }
       }
     }
   }

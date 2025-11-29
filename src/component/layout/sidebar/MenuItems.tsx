@@ -28,6 +28,14 @@ export interface MenuItem {
   title?: string;
   icon?: React.ElementType;
   href?: string;
+  /**
+   * Daftar pola path child yang masih dianggap bagian dari menu ini,
+   * misalnya: ["edit/{id}"].
+   *
+   * Path ini TIDAK akan ditampilkan di sidebar, tapi dipakai untuk
+   * menentukan state "active" parent menu.
+   */
+  childPaths?: string[];
 }
 
 const useMenuItems = (): MenuItem[] => {
@@ -56,6 +64,10 @@ const useMenuItems = (): MenuItem[] => {
       title: item.title,
       icon: Icon,
       href: item.href,
+      // Ambil konfigurasi children dari messages dan simpan sebagai childPaths.
+      // Contoh di JSON: "children": ["edit/{id}"]
+      // Tidak akan dirender sebagai submenu, hanya untuk logika active state.
+      childPaths: Array.isArray(item.children) ? item.children : undefined,
     };
   });
 };

@@ -27,7 +27,7 @@ export default function ListAssessmentProject({
   const router = useRouter();
 
   const handleRowClick = (row: AssessmentProject) => {
-    router.push(`/projects/${row.id}`);
+    router.push(`/projects/detail/${row.id}`);
   };
 
   const totalRecords = data.length; // Ambil jumlah total data

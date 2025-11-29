@@ -15,6 +15,12 @@ export interface SidebarNavItem {
   subheader?: string;
   navlabel?: boolean;
   children?: SidebarNavItem[];
+  /**
+   * Path child (misalnya "edit/{id}") yang masih dianggap bagian
+   * dari menu ini untuk penentuan active state, meskipun tidak
+   * ditampilkan di sidebar.
+   */
+  childPaths?: string[];
 }
 
 interface SidebarMenuProps {
@@ -44,10 +50,32 @@ const SidebarMenu = ({
       const itemIcon = <Icon stroke={1.5} size="1.3rem" />;
       const localizedHref = buildLocalizedHref(item.href, locale);
       const normalizedTargetPath = normalizePath(localizedHref);
-      const isSelected = isActivePath(
+
+      // Cek active berdasarkan href utama menu
+      let isSelected = isActivePath(
         normalizedCurrentPath,
         normalizedTargetPath
       );
+
+      // Jika belum active, cek juga berdasarkan daftar childPaths,
+      // misalnya child "edit/{id}" akan dianggap bagian dari "/projects".
+      if (!isSelected && item.childPaths && item.childPaths.length > 0) {
+        isSelected = item.childPaths.some(childPattern => {
+          if (!item.href) return false;
+
+          // Ambil bagian path sebelum placeholder {id}, dll.
+          const baseChild = childPattern.split("{")[0].replace(/\/+$/, "");
+
+          if (!baseChild) return false;
+
+          const parentBase = item.href.replace(/\/+$/, "");
+          const fullChildHref = `${parentBase}/${baseChild}`;
+          const localizedChildHref = buildLocalizedHref(fullChildHref, locale);
+          const normalizedChildTarget = normalizePath(localizedChildHref);
+
+          return isActivePath(normalizedCurrentPath, normalizedChildTarget);
+        });
+      }
 
       if (item.children && item.children.length > 0) {
         if (isCollapsed) {

@@ -94,7 +94,6 @@ export default function CustomTextAreaAutoSize<T extends FieldValues>({
                       cursor: "not-allowed",
                     },
                     "&::placeholder": {
-                      color: "rgba(0, 0, 0, 0.6)",
                       opacity: 1,
                       lineHeight: 1.4375,
                     },

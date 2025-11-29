@@ -1,4 +1,5 @@
 "use client";
+import { Box } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
@@ -44,10 +45,21 @@ export function useListColumn() {
         width: 100,
         align: "center",
         headerAlign: "center",
+
         sortable: false,
         filterable: false,
         renderCell: (params: GridRenderCellParams<AssessmentProject>) => (
-          <ListOptions row={params.row} />
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+            onClick={event => event.stopPropagation()}
+          >
+            <ListOptions row={params.row} />
+          </Box>
         ),
       },
     ];
