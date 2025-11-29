@@ -2,13 +2,19 @@
 
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
+  Button,
   Chip,
   Divider,
+  InputAdornment,
   Stack,
   Tab,
   Tabs,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
@@ -16,6 +22,8 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { AssessmentProject } from "../table/list";
 import { RowAssessmentProjects } from "../table/list-column";
+import { MockJobVacancies } from "./table/job-vacancies-column";
+import JobVacanciesList from "./table/job-vacancies-list";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -44,6 +52,7 @@ export const DetailProjectView = () => {
   const projectId = params?.id as string;
   const t = useTranslations("page.assessmentProjects");
   const [activeTab, setActiveTab] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Find project data (in real app, this would be from API)
   const project: AssessmentProject | undefined = RowAssessmentProjects.find(
@@ -364,28 +373,87 @@ export const DetailProjectView = () => {
 
           {/* Job Vacancies Tab Content */}
           <TabPanel value={activeTab} index={1}>
-            <DashboardCard>
-              <Typography
-                variant="h6"
-                sx={{ fontWeight: 600, color: "#2A3547", mb: 2 }}
-              >
-                {t("detail.jobVacancies.title")}
-              </Typography>
-              <Divider sx={{ mb: 2.5 }} />
-              <Box
-                sx={{
-                  minHeight: 400,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "text.secondary",
-                }}
-              >
-                <Typography variant="body2">
-                  {t("detail.jobVacancies.noVacancies")}
-                </Typography>
-              </Box>
-            </DashboardCard>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              {/* Search and Filter */}
+              <DashboardCard>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  alignItems={{ xs: "stretch", sm: "center" }}
+                  justifyContent={{ xs: "stretch", sm: "flex-end" }}
+                >
+                  <TextField
+                    fullWidth
+                    placeholder={t("detail.jobVacancies.search")}
+                    value={searchQuery}
+                    size="small"
+                    onChange={e => setSearchQuery(e.target.value)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon color="action" />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{ maxWidth: { sm: "400px" } }}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="inherit"
+                    startIcon={<FilterListIcon />}
+                    sx={{ whiteSpace: "nowrap" }}
+                  >
+                    {t("detail.jobVacancies.filter")}
+                  </Button>
+                  <Button
+                    variant="contained"
+                    endIcon={<ArrowOutwardIcon fontSize="small" />}
+                    sx={{
+                      whiteSpace: "nowrap",
+                      color: "white",
+                      fontWeight: 600,
+                    }}
+                    onClick={() => {
+                      // TODO: Implement add job vacancy modal
+                      console.log("Add job vacancy");
+                    }}
+                  >
+                    {t("detail.jobVacancies.add")}
+                  </Button>
+                </Stack>
+              </DashboardCard>
+
+              {/* Table */}
+              {MockJobVacancies.length > 0 ? (
+                <JobVacanciesList
+                  data={MockJobVacancies.filter(
+                    vacancy =>
+                      vacancy.jobTitle
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase()) ||
+                      vacancy.department
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                  )}
+                />
+              ) : (
+                <DashboardCard>
+                  <Box
+                    sx={{
+                      minHeight: 400,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "text.secondary",
+                    }}
+                  >
+                    <Typography variant="body2">
+                      {t("detail.jobVacancies.noVacancies")}
+                    </Typography>
+                  </Box>
+                </DashboardCard>
+              )}
+            </Box>
           </TabPanel>
         </Box>
       </Box>

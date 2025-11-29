@@ -201,7 +201,18 @@
         },
         "jobVacancies": {
           "title": "Job Vacancies",
-          "noVacancies": "No job vacancies for this project yet"
+          "noVacancies": "No job vacancies for this project yet",
+          "search": "Search vacancies...",
+          "filter": "Filter",
+          "add": "Add Vacancy",
+          "table": {
+            "no": "No",
+            "jobTitle": "Job Title",
+            "department": "Department",
+            "status": "Status",
+            "applicants": "Applicants",
+            "actions": "Actions"
+          }
         }
       }
     }

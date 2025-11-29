@@ -200,7 +200,18 @@
         },
         "jobVacancies": {
           "title": "Lowongan Pekerjaan",
-          "noVacancies": "Belum ada lowongan pekerjaan untuk project ini"
+          "noVacancies": "Belum ada lowongan pekerjaan untuk project ini",
+          "search": "Cari lowongan...",
+          "filter": "Filter",
+          "add": "Tambah Lowongan",
+          "table": {
+            "no": "No",
+            "jobTitle": "Judul Pekerjaan",
+            "department": "Departemen",
+            "status": "Status",
+            "applicants": "Pelamar",
+            "actions": "Aksi"
+          }
         }
       }
     }
