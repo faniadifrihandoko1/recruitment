@@ -208,10 +208,17 @@
           "table": {
             "no": "No",
             "jobTitle": "Job Title",
-            "department": "Department",
+            "openDate": "Open Date",
+            "closeDate": "Close Date",
             "status": "Status",
-            "applicants": "Applicants",
             "actions": "Actions"
+          },
+          "status": {
+            "cvScreening": "CV Screening",
+            "onlineTest": "Online Test",
+            "interview": "Interview",
+            "psikotest": "Psikotest",
+            "others": "Others"
           }
         }
       }

@@ -112,7 +112,7 @@
         "actions": "Aksi"
       },
       "status": {
-        "draft": "Draft",
+        "draft": "Draf",
         "pending": "Menunggu",
         "approved": "Disetujui",
         "rejected": "Ditolak",
@@ -152,7 +152,7 @@
         "actions": "Aksi"
       },
       "status": {
-        "draft": "Draft",
+        "draft": "Draf",
         "active": "Aktif",
         "completed": "Selesai",
         "archived": "Diarsipkan"
@@ -180,14 +180,14 @@
           "projectName": "Project {name}"
         },
         "tabs": {
-          "overview": "Overview",
-          "jobVacancies": "Job Vacancies"
+          "overview": "Ringkasan",
+          "jobVacancies": "Lowongan Pekerjaan"
         },
         "stats": {
           "totalParticipants": "Total Peserta",
           "activeParticipants": "Peserta Aktif",
           "completedTests": "Tes Selesai",
-          "pendingTests": "Tes Pending"
+          "pendingTests": "Tes Tertunda"
         },
         "overview": {
           "projectInfo": "Informasi Project",
@@ -207,10 +207,17 @@
           "table": {
             "no": "No",
             "jobTitle": "Judul Pekerjaan",
-            "department": "Departemen",
+            "openDate": "Tanggal Mulai",
+            "closeDate": "Tanggal Selesai",
             "status": "Status",
-            "applicants": "Pelamar",
             "actions": "Aksi"
+          },
+          "status": {
+            "cvScreening": "CV Screening",
+            "onlineTest": "Online Test",
+            "interview": "Interview",
+            "psikotest": "Psikotest",
+            "others": "Others"
           }
         }
       }

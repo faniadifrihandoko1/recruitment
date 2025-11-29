@@ -5,7 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
-import { JobVacancy } from "./job-vacancies-list";
+import { JobVacancy } from "./list";
 
 interface JobVacancyOptionsProps {
   row: JobVacancy;

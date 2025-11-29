@@ -41,7 +41,6 @@ const MSidebar = ({
           width: currentWidth,
           flexShrink: 0,
           transition: "width 0.3s ease",
-          bgcolor: "red",
         }}
       >
         {/* ------------------------------------------- */}

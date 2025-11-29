@@ -2,28 +2,15 @@
 
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  Box,
-  Button,
-  Chip,
-  Divider,
-  InputAdornment,
-  Stack,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { AssessmentProject } from "../table/list";
 import { RowAssessmentProjects } from "../table/list-column";
-import { MockJobVacancies } from "./table/job-vacancies-column";
-import JobVacanciesList from "./table/job-vacancies-list";
+import { TabJobVacancies } from "./tab/tab-job-vacancies";
+import { TabOverview } from "./tab/tab-overview";
+import { stats } from "./utils/data";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,9 +39,7 @@ export const DetailProjectView = () => {
   const projectId = params?.id as string;
   const t = useTranslations("page.assessmentProjects");
   const [activeTab, setActiveTab] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
 
-  // Find project data (in real app, this would be from API)
   const project: AssessmentProject | undefined = RowAssessmentProjects.find(
     p => p.id === Number(projectId)
   );
@@ -71,14 +56,6 @@ export const DetailProjectView = () => {
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
-  };
-
-  // Mock data for stats
-  const stats = {
-    totalParticipants: 125,
-    activeParticipants: 98,
-    completedTests: 87,
-    pendingTests: 11,
   };
 
   return (
@@ -134,326 +111,12 @@ export const DetailProjectView = () => {
             </Tabs>
           </DashboardCard>
 
-          {/* Tab Content */}
           <TabPanel value={activeTab} index={0}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-              {/* Statistics Cards */}
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "repeat(2, 1fr)",
-                    md: "repeat(4, 1fr)",
-                  },
-                  gap: 2,
-                }}
-              >
-                <DashboardCard
-                  sx={{
-                    p: 2.5,
-                    background:
-                      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                    color: "white",
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{ opacity: 0.9, mb: 1, fontSize: "0.875rem" }}
-                  >
-                    {t("detail.stats.totalParticipants")}
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 700, fontSize: "1.75rem" }}
-                  >
-                    {stats.totalParticipants}
-                  </Typography>
-                </DashboardCard>
-                <DashboardCard
-                  sx={{
-                    p: 2.5,
-                    background:
-                      "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                    color: "white",
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{ opacity: 0.9, mb: 1, fontSize: "0.875rem" }}
-                  >
-                    {t("detail.stats.activeParticipants")}
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 700, fontSize: "1.75rem" }}
-                  >
-                    {stats.activeParticipants}
-                  </Typography>
-                </DashboardCard>
-                <DashboardCard
-                  sx={{
-                    p: 2.5,
-                    background:
-                      "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                    color: "white",
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{ opacity: 0.9, mb: 1, fontSize: "0.875rem" }}
-                  >
-                    {t("detail.stats.completedTests")}
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 700, fontSize: "1.75rem" }}
-                  >
-                    {stats.completedTests}
-                  </Typography>
-                </DashboardCard>
-                <DashboardCard
-                  sx={{
-                    p: 2.5,
-                    background:
-                      "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-                    color: "white",
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{ opacity: 0.9, mb: 1, fontSize: "0.875rem" }}
-                  >
-                    {t("detail.stats.pendingTests")}
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{ fontWeight: 700, fontSize: "1.75rem" }}
-                  >
-                    {stats.pendingTests}
-                  </Typography>
-                </DashboardCard>
-              </Box>
-
-              {/* Two Column Layout */}
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: { xs: "1fr", md: "2fr 1fr" },
-                  gap: 3,
-                }}
-              >
-                {/* Left Column */}
-                <Box>
-                  <DashboardCard>
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 600, color: "#2A3547", mb: 2 }}
-                    >
-                      {t("detail.overview.projectInfo")}
-                    </Typography>
-                    <Divider sx={{ mb: 2.5 }} />
-                    <Stack spacing={2.5}>
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 0.5, fontWeight: 500 }}
-                        >
-                          {t("detail.overview.description")}
-                        </Typography>
-                        <Typography variant="body1" color="text.primary">
-                          {project.projectDescription}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 0.5, fontWeight: 500 }}
-                        >
-                          {t("detail.overview.status")}
-                        </Typography>
-                        <Chip
-                          label={t("status.active")}
-                          sx={{
-                            backgroundColor: "#e8f5e9",
-                            color: "#2e7d32",
-                            fontWeight: 600,
-                          }}
-                        />
-                      </Box>
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 0.5, fontWeight: 500 }}
-                        >
-                          {t("detail.overview.createdDate")}
-                        </Typography>
-                        <Typography variant="body1" color="text.primary">
-                          {new Date().toLocaleDateString("id-ID", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 0.5, fontWeight: 500 }}
-                        >
-                          {t("detail.overview.lastUpdated")}
-                        </Typography>
-                        <Typography variant="body1" color="text.primary">
-                          {new Date().toLocaleDateString("id-ID", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          })}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </DashboardCard>
-
-                  <DashboardCard sx={{ mt: 3 }}>
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 600, color: "#2A3547", mb: 2 }}
-                    >
-                      {t("detail.overview.participants")}
-                    </Typography>
-                    <Divider sx={{ mb: 2.5 }} />
-                    <Box
-                      sx={{
-                        minHeight: 200,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "text.secondary",
-                      }}
-                    >
-                      <Typography variant="body2">
-                        Participant list will be displayed here
-                      </Typography>
-                    </Box>
-                  </DashboardCard>
-                </Box>
-
-                {/* Right Column */}
-                <Box>
-                  <DashboardCard>
-                    <Typography
-                      variant="h6"
-                      sx={{ fontWeight: 600, color: "#2A3547", mb: 2 }}
-                    >
-                      {t("detail.overview.recentActivity")}
-                    </Typography>
-                    <Divider sx={{ mb: 2.5 }} />
-                    <Box
-                      sx={{
-                        minHeight: 400,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "text.secondary",
-                      }}
-                    >
-                      <Typography variant="body2">
-                        Recent activity will be displayed here
-                      </Typography>
-                    </Box>
-                  </DashboardCard>
-                </Box>
-              </Box>
-            </Box>
+            <TabOverview stats={stats} project={project} />
           </TabPanel>
 
-          {/* Job Vacancies Tab Content */}
           <TabPanel value={activeTab} index={1}>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-              {/* Search and Filter */}
-              <DashboardCard>
-                <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={2}
-                  alignItems={{ xs: "stretch", sm: "center" }}
-                  justifyContent={{ xs: "stretch", sm: "flex-end" }}
-                >
-                  <TextField
-                    fullWidth
-                    placeholder={t("detail.jobVacancies.search")}
-                    value={searchQuery}
-                    size="small"
-                    onChange={e => setSearchQuery(e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon color="action" />
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{ maxWidth: { sm: "400px" } }}
-                  />
-                  <Button
-                    variant="outlined"
-                    color="inherit"
-                    startIcon={<FilterListIcon />}
-                    sx={{ whiteSpace: "nowrap" }}
-                  >
-                    {t("detail.jobVacancies.filter")}
-                  </Button>
-                  <Button
-                    variant="contained"
-                    endIcon={<ArrowOutwardIcon fontSize="small" />}
-                    sx={{
-                      whiteSpace: "nowrap",
-                      color: "white",
-                      fontWeight: 600,
-                    }}
-                    onClick={() => {
-                      // TODO: Implement add job vacancy modal
-                      console.log("Add job vacancy");
-                    }}
-                  >
-                    {t("detail.jobVacancies.add")}
-                  </Button>
-                </Stack>
-              </DashboardCard>
-
-              {/* Table */}
-              {MockJobVacancies.length > 0 ? (
-                <JobVacanciesList
-                  data={MockJobVacancies.filter(
-                    vacancy =>
-                      vacancy.jobTitle
-                        .toLowerCase()
-                        .includes(searchQuery.toLowerCase()) ||
-                      vacancy.department
-                        .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                  )}
-                />
-              ) : (
-                <DashboardCard>
-                  <Box
-                    sx={{
-                      minHeight: 400,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "text.secondary",
-                    }}
-                  >
-                    <Typography variant="body2">
-                      {t("detail.jobVacancies.noVacancies")}
-                    </Typography>
-                  </Box>
-                </DashboardCard>
-              )}
-            </Box>
+            <TabJobVacancies />
           </TabPanel>
         </Box>
       </Box>

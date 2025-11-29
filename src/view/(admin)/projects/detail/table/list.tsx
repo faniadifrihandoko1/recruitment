@@ -4,7 +4,7 @@ import DashboardCard from "@/component/shared/DashboardCard";
 import { Box, SelectChangeEvent } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import { useJobVacanciesColumn } from "./job-vacancies-column";
+import { useJobVacanciesColumn } from "./list-column";
 
 export interface JobVacancy {
   id: number;
@@ -12,6 +12,8 @@ export interface JobVacancy {
   department: string;
   status: string;
   applicants: number;
+  openDate: string;
+  closeDate: string;
 }
 
 interface JobVacanciesListProps {
