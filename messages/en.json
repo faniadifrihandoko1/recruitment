@@ -47,6 +47,9 @@
       "textField": {
         "placeholder": "Enter {label}"
       },
+      "staticAutoComplete": {
+        "placeholder": "Select {label}"
+      },
       "pagination": {
         "entriesText": "Showing {startEntry} - {endEntry} of {totalEntries} entries",
         "limit": "Limit"
@@ -83,6 +86,12 @@
           "title": "Edit Project"
         }
       },
+      "status": {
+        "draft": "Draft",
+        "active": "Active",
+        "completed": "Completed",
+        "archived": "Archived"
+      },
       "form": {
         "projectName": "Project Name",
         "projectDescription": "Project Description"
@@ -92,6 +101,95 @@
         "projectNameMinLength": "Project name must be at least 3 characters",
         "projectDescriptionRequired": "Project description is required",
         "projectDescriptionMinLength": "Project description must be at least 10 characters"
+      },
+      "detail": {
+        "title": "Project Detail",
+        "breadcrumb": {
+          "project": "Project",
+          "projectName": "Project {name}"
+        },
+        "tabs": {
+          "overview": "Overview",
+          "jobVacancies": "Job Vacancies"
+        },
+        "stats": {
+          "totalParticipants": "Total Participants",
+          "activeParticipants": "Active Participants",
+          "completedTests": "Completed Tests",
+          "pendingTests": "Pending Tests"
+        },
+        "overview": {
+          "projectInfo": "Project Information",
+          "description": "Description",
+          "status": "Status",
+          "createdDate": "Created Date",
+          "lastUpdated": "Last Updated",
+          "participants": "Participants",
+          "recentActivity": "Recent Activity"
+        },
+        "jobVacancies": {
+          "title": "Job Vacancies",
+          "noVacancies": "No job vacancies for this project yet",
+          "search": "Search vacancies...",
+          "filter": "Filter",
+          "add": "Add Vacancy",
+          "table": {
+            "no": "No",
+            "jobTitle": "Job Title",
+            "openDate": "Open Date",
+            "closeDate": "Close Date",
+            "status": "Status",
+            "actions": "Actions"
+          },
+          "status": {
+            "cvScreening": "CV Screening",
+            "onlineTest": "Online Test",
+            "interview": "Interview",
+            "psikotest": "Psikotest",
+            "others": "Others"
+          },
+          "form": {
+            "positionTitle": "Position Title",
+            "employeeType": "Employee Type",
+            "location": "Location",
+            "jobDescriptions": "Job Descriptions",
+            "jobRequirements": "Job Requirements",
+            "requirementType": "Requirement Type",
+            "openings": "Openings",
+            "openDate": "Open Date",
+            "closeDate": "Close Date",
+            "showSalary": "Show Salary",
+            "minSalary": "Minimum Salary",
+            "maxSalary": "Maximum Salary",
+            "add": "Add",
+            "remove": "Remove",
+            "requirementTypes": {
+              "mustHave": "Must Have",
+              "niceToHave": "Nice to Have"
+            }
+          },
+          "validation": {
+            "positionTitleRequired": "Position title is required",
+            "jobDescriptionMinLength": "Description must be at least 3 characters",
+            "jobDescriptionMinItems": "At least 1 job description is required",
+            "jobRequirementMinLength": "Requirement must be at least 3 characters",
+            "jobRequirementMinItems": "At least 1 job requirement is required",
+            "employeeTypeRequired": "Employee type is required",
+            "openingsRequired": "Openings must be filled",
+            "locationRequired": "Location is required",
+            "openDateRequired": "Open date is required",
+            "closeDateRequired": "Close date is required",
+            "maxSalaryLessThanMin": "Maximum salary cannot be less than minimum salary"
+          },
+          "modal": {
+            "modal-add-job-vacancies": {
+              "title": "Add Job Vacancies"
+            },
+            "modal-edit-job-vacancies": {
+              "title": "Edit Job Vacancies"
+            }
+          }
+        }
       }
     },
     "jobRequest": {
@@ -167,60 +265,6 @@
         "cancel": "Cancel",
         "submit": "Submit",
         "required": "Required"
-      },
-      "validation": {
-        "projectNameRequired": "Project name is required",
-        "projectNameMinLength": "Project name must be at least 3 characters",
-        "projectDescriptionRequired": "Project description is required",
-        "projectDescriptionMinLength": "Project description must be at least 10 characters"
-      },
-      "detail": {
-        "title": "Project Detail",
-        "breadcrumb": {
-          "project": "Project",
-          "projectName": "Project {name}"
-        },
-        "tabs": {
-          "overview": "Overview",
-          "jobVacancies": "Job Vacancies"
-        },
-        "stats": {
-          "totalParticipants": "Total Participants",
-          "activeParticipants": "Active Participants",
-          "completedTests": "Completed Tests",
-          "pendingTests": "Pending Tests"
-        },
-        "overview": {
-          "projectInfo": "Project Information",
-          "description": "Description",
-          "status": "Status",
-          "createdDate": "Created Date",
-          "lastUpdated": "Last Updated",
-          "participants": "Participants",
-          "recentActivity": "Recent Activity"
-        },
-        "jobVacancies": {
-          "title": "Job Vacancies",
-          "noVacancies": "No job vacancies for this project yet",
-          "search": "Search vacancies...",
-          "filter": "Filter",
-          "add": "Add Vacancy",
-          "table": {
-            "no": "No",
-            "jobTitle": "Job Title",
-            "openDate": "Open Date",
-            "closeDate": "Close Date",
-            "status": "Status",
-            "actions": "Actions"
-          },
-          "status": {
-            "cvScreening": "CV Screening",
-            "onlineTest": "Online Test",
-            "interview": "Interview",
-            "psikotest": "Psikotest",
-            "others": "Others"
-          }
-        }
       }
     }
   }

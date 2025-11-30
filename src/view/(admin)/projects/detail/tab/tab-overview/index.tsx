@@ -15,7 +15,7 @@ interface TabOverviewProps {
 }
 
 export const TabOverview = ({ stats, project }: TabOverviewProps) => {
-  const t = useTranslations("page.assessmentProjects");
+  const t = useTranslations("page.project");
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>

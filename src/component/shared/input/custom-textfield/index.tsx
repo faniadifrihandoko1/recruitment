@@ -31,6 +31,9 @@ interface CustomTextFieldProps<T extends FieldValues> {
   disablePlaceholder?: boolean; //
   min?: number;
   max?: number;
+  InputLabelProps?: {
+    shrink?: boolean;
+  };
 }
 
 export function CustomTextField<T extends FieldValues>({
@@ -48,6 +51,7 @@ export function CustomTextField<T extends FieldValues>({
   disablePlaceholder,
   min,
   max,
+  InputLabelProps,
 }: CustomTextFieldProps<T>) {
   const t = useTranslations("component.shared.textField");
 
@@ -84,6 +88,7 @@ export function CustomTextField<T extends FieldValues>({
               }
               multiline={multiline}
               rows={multiline ? rows : undefined}
+              InputLabelProps={InputLabelProps}
               InputProps={{
                 readOnly,
                 inputProps: {

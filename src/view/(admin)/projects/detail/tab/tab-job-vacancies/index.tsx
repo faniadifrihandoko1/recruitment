@@ -13,13 +13,16 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { AddJobVacanciesModal } from "../../modal/add-job-vacancies";
 import JobVacanciesList from "../../table/list";
 import { MockJobVacancies } from "../../table/list-column";
 
 export const TabJobVacancies = () => {
-  const t = useTranslations("page.assessmentProjects");
-
+  const t = useTranslations("page.project");
+  const [openAdd, setOpenAdd] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const toggleAddModal = () => setOpenAdd(!openAdd);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -62,10 +65,7 @@ export const TabJobVacancies = () => {
               color: "white",
               fontWeight: 600,
             }}
-            onClick={() => {
-              // TODO: Implement add job vacancy modal
-              console.log("Add job vacancy");
-            }}
+            onClick={toggleAddModal}
           >
             {t("detail.jobVacancies.add")}
           </Button>
@@ -101,6 +101,9 @@ export const TabJobVacancies = () => {
             </Typography>
           </Box>
         </DashboardCard>
+      )}
+      {openAdd && (
+        <AddJobVacanciesModal openModal={openAdd} toggle={toggleAddModal} />
       )}
     </Box>
   );

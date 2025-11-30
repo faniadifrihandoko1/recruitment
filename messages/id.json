@@ -47,6 +47,9 @@
       "textField": {
         "placeholder": "Masukkan {label}"
       },
+      "staticAutoComplete": {
+        "placeholder": "Pilih {label}"
+      },
       "pagination": {
         "entriesText": "Menampilkan {startEntry} - {endEntry} dari {totalEntries} entri",
         "limit": "Limit"
@@ -86,11 +89,107 @@
         "projectName": "Nama Project",
         "projectDescription": "Deskripsi Project"
       },
+      "status": {
+        "draft": "Draf",
+        "active": "Aktif",
+        "completed": "Selesai",
+        "archived": "Diarsipkan"
+      },
       "validation": {
         "projectNameRequired": "Nama project wajib diisi",
         "projectNameMinLength": "Nama project minimal 3 karakter",
         "projectDescriptionRequired": "Deskripsi project wajib diisi",
         "projectDescriptionMinLength": "Deskripsi project minimal 10 karakter"
+      },
+      "detail": {
+        "title": "Detail Project",
+        "breadcrumb": {
+          "project": "Project",
+          "projectName": "Project {name}"
+        },
+        "tabs": {
+          "overview": "Ringkasan",
+          "jobVacancies": "Lowongan Pekerjaan"
+        },
+        "stats": {
+          "totalParticipants": "Total Peserta",
+          "activeParticipants": "Peserta Aktif",
+          "completedTests": "Tes Selesai",
+          "pendingTests": "Tes Tertunda"
+        },
+        "overview": {
+          "projectInfo": "Informasi Project",
+          "description": "Deskripsi",
+          "status": "Status",
+          "createdDate": "Tanggal Dibuat",
+          "lastUpdated": "Terakhir Diupdate",
+          "participants": "Peserta",
+          "recentActivity": "Aktivitas Terkini"
+        },
+        "jobVacancies": {
+          "title": "Lowongan Pekerjaan",
+          "noVacancies": "Belum ada lowongan pekerjaan untuk project ini",
+          "search": "Cari lowongan...",
+          "filter": "Filter",
+          "add": "Tambah Lowongan",
+          "table": {
+            "no": "No",
+            "jobTitle": "Judul Pekerjaan",
+            "openDate": "Tanggal Mulai",
+            "closeDate": "Tanggal Selesai",
+            "status": "Status",
+            "actions": "Aksi"
+          },
+          "status": {
+            "cvScreening": "CV Screening",
+            "onlineTest": "Online Test",
+            "interview": "Interview",
+            "psikotest": "Psikotest",
+            "others": "Others"
+          },
+          "form": {
+            "positionTitle": "Judul Posisi",
+            "employeeType": "Tipe Karyawan",
+            "location": "Lokasi",
+            "jobDescriptions": "Deskripsi Pekerjaan",
+            "jobRequirements": "Persyaratan Pekerjaan",
+            "requirementType": "Tipe Persyaratan",
+            "openings": "Jumlah Posisi",
+            "openDate": "Tanggal Dibuka",
+            "closeDate": "Tanggal Ditutup",
+            "showSalary": "Tampilkan Gaji",
+            "minSalary": "Gaji Minimum",
+            "maxSalary": "Gaji Maksimum",
+            "add": "Tambah",
+            "remove": "Hapus",
+            "requirementTypes": {
+              "mustHave": "Harus Ada",
+              "niceToHave": "Lebih Baik Ada"
+            }
+          },
+
+          "validation": {
+            "positionTitleRequired": "Position title wajib diisi",
+            "jobDescriptionMinLength": "Deskripsi minimal 3 karakter",
+            "jobDescriptionMinItems": "Minimal ada 1 job description",
+            "jobRequirementMinLength": "Requirement minimal 3 karakter",
+            "jobRequirementMinItems": "Minimal ada 1 job requirement",
+            "employeeTypeRequired": "Employee type wajib diisi",
+            "openingsRequired": "Openings harus diisi",
+            "locationRequired": "Location wajib diisi",
+            "openDateRequired": "Open date wajib diisi",
+            "closeDateRequired": "Close date wajib diisi",
+            "maxSalaryLessThanMin": "Maximum salary tidak boleh lebih kecil dari minimum salary"
+          },
+          "modal": {
+            "modal-add-job-vacancies": {
+              "title": "Tambah Lowongan Pekerjaan"
+            },
+            "modal-edit-job-vacancies": {
+              "title": "Edit Lowongan Pekerjaan"
+            }
+          }
+        }
       }
     },
     "jobRequest": {
@@ -151,12 +250,7 @@
         "projectDescription": "Deskripsi Project",
         "actions": "Aksi"
       },
-      "status": {
-        "draft": "Draf",
-        "active": "Aktif",
-        "completed": "Selesai",
-        "archived": "Diarsipkan"
-      },
+
       "modal": {
         "title": "Buat Proyek",
         "projectName": "Nama Proyek",
@@ -172,54 +266,6 @@
         "projectNameMinLength": "Nama project minimal 3 karakter",
         "projectDescriptionRequired": "Deskripsi project wajib diisi",
         "projectDescriptionMinLength": "Deskripsi project minimal 10 karakter"
-      },
-      "detail": {
-        "title": "Detail Project",
-        "breadcrumb": {
-          "project": "Project",
-          "projectName": "Project {name}"
-        },
-        "tabs": {
-          "overview": "Ringkasan",
-          "jobVacancies": "Lowongan Pekerjaan"
-        },
-        "stats": {
-          "totalParticipants": "Total Peserta",
-          "activeParticipants": "Peserta Aktif",
-          "completedTests": "Tes Selesai",
-          "pendingTests": "Tes Tertunda"
-        },
-        "overview": {
-          "projectInfo": "Informasi Project",
-          "description": "Deskripsi",
-          "status": "Status",
-          "createdDate": "Tanggal Dibuat",
-          "lastUpdated": "Terakhir Diupdate",
-          "participants": "Peserta",
-          "recentActivity": "Aktivitas Terkini"
-        },
-        "jobVacancies": {
-          "title": "Lowongan Pekerjaan",
-          "noVacancies": "Belum ada lowongan pekerjaan untuk project ini",
-          "search": "Cari lowongan...",
-          "filter": "Filter",
-          "add": "Tambah Lowongan",
-          "table": {
-            "no": "No",
-            "jobTitle": "Judul Pekerjaan",
-            "openDate": "Tanggal Mulai",
-            "closeDate": "Tanggal Selesai",
-            "status": "Status",
-            "actions": "Aksi"
-          },
-          "status": {
-            "cvScreening": "CV Screening",
-            "onlineTest": "Online Test",
-            "interview": "Interview",
-            "psikotest": "Psikotest",
-            "others": "Others"
-          }
-        }
       }
     }
   }

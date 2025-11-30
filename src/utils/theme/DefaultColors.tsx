@@ -182,6 +182,10 @@ const baselightTheme = createTheme({
             fontSize: 12,
             fontWeight: 400,
           },
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.04)",
+            cursor: "pointer",
+          },
           MuiTextField: {
             styleOverrides: {
               root: {

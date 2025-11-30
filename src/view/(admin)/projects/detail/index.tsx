@@ -37,7 +37,7 @@ function TabPanel(props: TabPanelProps) {
 export const DetailProjectView = () => {
   const params = useParams();
   const projectId = params?.id as string;
-  const t = useTranslations("page.assessmentProjects");
+  const t = useTranslations("page.project");
   const [activeTab, setActiveTab] = useState(0);
 
   const project: AssessmentProject | undefined = RowAssessmentProjects.find(

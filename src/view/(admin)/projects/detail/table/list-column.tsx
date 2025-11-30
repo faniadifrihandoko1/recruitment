@@ -8,7 +8,7 @@ import { JobVacancy } from "./list";
 import { JobVacancyOptions } from "./list-options";
 
 export function useJobVacanciesColumn() {
-  const t = useTranslations("page.assessmentProjects.detail.jobVacancies");
+  const t = useTranslations("page.project.detail.jobVacancies");
 
   return useMemo(() => {
     const columns: GridColDef[] = [

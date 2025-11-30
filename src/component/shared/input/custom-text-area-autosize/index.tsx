@@ -71,8 +71,8 @@ export default function CustomTextAreaAutoSize<T extends FieldValues>({
                     border: error
                       ? "1px solid #d32f2f"
                       : "1px solid rgba(0, 0, 0, 0.23)",
-                    paddingTop: "13px",
-                    paddingBottom: "11px",
+                    paddingTop: "9px",
+                    paddingBottom: "9px",
                     paddingLeft: "14px",
                     paddingRight: "14px",
                     fontFamily: "inherit",
@@ -88,7 +88,7 @@ export default function CustomTextAreaAutoSize<T extends FieldValues>({
                     "&:focus:not(:disabled)": {
                       borderColor: theme =>
                         error ? "#d32f2f" : theme.palette.primary.main,
-                      borderWidth: "2px",
+                      borderWidth: "1px",
                     },
                     "&:disabled": {
                       cursor: "not-allowed",
