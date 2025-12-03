@@ -28,8 +28,8 @@ export const EditAssessmentProjectModal = ({
   const tValidation = useTranslations("page.project.validation");
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
-      projectName: data.projectName,
-      projectDescription: data.projectDescription,
+      project_name: data.projectName,
+      project_description: data.projectDescription,
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
@@ -54,7 +54,7 @@ export const EditAssessmentProjectModal = ({
         <Grid size={12}>
           <CustomTextField
             control={control}
-            name="projectName"
+            name="project_name"
             label={t("form.projectName")}
             required
           />
@@ -62,7 +62,7 @@ export const EditAssessmentProjectModal = ({
         <Grid size={12}>
           <CustomTextAreaAutoSize
             control={control}
-            name="projectDescription"
+            name="project_description"
             label={t("form.projectDescription")}
             required
           />
