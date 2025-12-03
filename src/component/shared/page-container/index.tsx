@@ -235,43 +235,11 @@ const PageContainer = ({
             flexWrap: "wrap",
           }}
         >
-          {/* Back Button - Left */}
-          {shouldShowBackButton && (
-            <Button
-              startIcon={<ArrowBackIcon sx={{ fontSize: "1.125rem" }} />}
-              onClick={handleBack}
-              variant="outlined"
-              sx={{
-                textTransform: "none",
-                color: "text.secondary",
-                borderColor: "#e5eaef",
-                fontWeight: 500,
-                fontSize: "0.875rem",
-                px: 2,
-                py: 0.75,
-                borderRadius: "8px",
-                minWidth: "auto",
-                backgroundColor: "white",
-                boxShadow: "none",
-                transition: "all 0.2s ease",
-                "&:hover": {
-                  backgroundColor: "#f8f9fa",
-                  borderColor: "#13DEB9",
-                  color: "#13DEB9",
-                  boxShadow: "0 2px 4px rgba(19, 222, 185, 0.1)",
-                },
-              }}
-            >
-              {t("label")}
-            </Button>
-          )}
-
-          {/* Breadcrumb - Right (always aligned to right) */}
           {!hideBreadcrumbs && breadcrumbItems.length > 0 && (
-            <Box sx={{ marginLeft: "auto" }}>
+            <Box>
               <Breadcrumbs
                 aria-label="breadcrumb"
-                separator="•"
+                separator="/"
                 sx={{
                   fontSize: "0.875rem",
                   "& .MuiBreadcrumbs-separator": {
@@ -318,6 +286,37 @@ const PageContainer = ({
                   );
                 })}
               </Breadcrumbs>
+            </Box>
+          )}
+          {shouldShowBackButton && (
+            <Box sx={{ marginLeft: "auto" }}>
+              <Button
+                startIcon={<ArrowBackIcon sx={{ fontSize: "1.125rem" }} />}
+                onClick={handleBack}
+                variant="outlined"
+                sx={{
+                  textTransform: "none",
+                  color: "text.secondary",
+                  borderColor: "#e5eaef",
+                  fontWeight: 500,
+                  fontSize: "0.875rem",
+                  px: 2,
+                  py: 0.75,
+                  borderRadius: "8px",
+                  minWidth: "auto",
+                  backgroundColor: "white",
+                  boxShadow: "none",
+                  transition: "all 0.2s ease",
+                  "&:hover": {
+                    backgroundColor: "#f8f9fa",
+                    borderColor: "#13DEB9",
+                    color: "#13DEB9",
+                    boxShadow: "0 2px 4px rgba(19, 222, 185, 0.1)",
+                  },
+                }}
+              >
+                {t("label")}
+              </Button>
             </Box>
           )}
         </Box>

@@ -1,19 +1,22 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
+import { removeSession } from "@/lib/session";
 import {
   Avatar,
   Box,
   Button,
   IconButton,
-  Menu,
-  MenuItem,
   ListItemIcon,
   ListItemText,
-  Typography,
+  Menu,
+  MenuItem,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { IconChevronsDown, IconLogout, IconUser } from "@tabler/icons-react";
+import { useLocale } from "next-intl";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 interface UserFooterProps {
   isCollapsed?: boolean;
@@ -21,12 +24,20 @@ interface UserFooterProps {
 
 const UserFooter = ({ isCollapsed = false }: UserFooterProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const router = useRouter();
+  const locale = useLocale();
   const open = Boolean(anchorEl);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+    handleClose();
+    removeSession();
+    router.push(`/${locale}/authentication/login`);
+  };
 
   if (isCollapsed) {
     return (
@@ -77,8 +88,7 @@ const UserFooter = ({ isCollapsed = false }: UserFooterProps) => {
           <Box px={1} pb={1}>
             <Button
               color="primary"
-              component={Link}
-              href="/authentication/login"
+              onClick={handleLogout}
               variant="outlined"
               aria-label="logout"
               size="small"

@@ -187,7 +187,26 @@
             },
             "modal-edit-job-vacancies": {
               "title": "Edit Job Vacancies"
+            },
+            "modal-modules": {
+              "title": "Modules List"
+            },
+            "modal-add-modules": {
+              "title": "Add Modules"
+            },
+            "modal-edit-modules": {
+              "title": "Edit Modules"
             }
+          }
+        },
+        "table": {
+          "table-modules": {
+            "no": "No",
+            "moduleName": "Module Name",
+            "planStartDate": "Plan Start Date",
+            "planEndDate": "Plan End Date",
+            "description": "Description",
+            "actions": "Actions"
           }
         }
       }

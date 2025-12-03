@@ -187,7 +187,26 @@
             },
             "modal-edit-job-vacancies": {
               "title": "Edit Lowongan Pekerjaan"
+            },
+            "modal-modules": {
+              "title": "Daftar Modul"
+            },
+            "modal-add-modules": {
+              "title": "Tambah Modul"
+            },
+            "modal-edit-modules": {
+              "title": "Edit Modul"
             }
+          }
+        },
+        "table": {
+          "table-modules": {
+            "no": "No",
+            "moduleName": "Nama Modul",
+            "planStartDate": "Tanggal Mulai",
+            "planEndDate": "Tanggal Selesai",
+            "description": "Deskripsi",
+            "actions": "Aksi"
           }
         }
       }

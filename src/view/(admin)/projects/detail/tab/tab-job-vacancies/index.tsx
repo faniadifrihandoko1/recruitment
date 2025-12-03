@@ -14,8 +14,8 @@ import {
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { AddJobVacanciesModal } from "../../modal/add-job-vacancies";
-import JobVacanciesList from "../../table/list";
-import { MockJobVacancies } from "../../table/list-column";
+import JobVacanciesList from "../../table/table-detail-job-vacanies/list";
+import { MockJobVacancies } from "../../table/table-detail-job-vacanies/list-column";
 
 export const TabJobVacancies = () => {
   const t = useTranslations("page.project");

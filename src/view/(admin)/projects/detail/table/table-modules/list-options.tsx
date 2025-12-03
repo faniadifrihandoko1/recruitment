@@ -2,24 +2,25 @@
 import { MoreVert } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
-import { EditAssessmentProjectModal } from "../modal/edit-assessment-project";
-import { ProjectInterface } from "../type";
 
-interface ListOptionsProps {
-  row: ProjectInterface;
+import { ModalModules } from "../../modal/modal-modules";
+import { Module } from "./list";
+
+interface ModulesOptionsProps {
+  row: Module;
 }
 
-export function ListOptions({ row }: ListOptionsProps) {
+export function ModulesOptions({ row }: ModulesOptionsProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openModules, setOpenModules] = useState(false);
   const open = Boolean(anchorEl);
-  const [openEdit, setOpenEdit] = useState(false);
 
-  const toggleEdit = () => {
-    setOpenEdit(!openEdit);
-  };
-
+  const toggleModules = () => setOpenModules(!openModules);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
@@ -27,12 +28,6 @@ export function ListOptions({ row }: ListOptionsProps) {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleEditClick = (event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    handleClose();
-    toggleEdit();
   };
 
   return (
@@ -63,7 +58,40 @@ export function ListOptions({ row }: ListOptionsProps) {
       >
         <MenuItem
           divider
-          onClick={handleEditClick}
+          onClick={event => {
+            event.stopPropagation();
+            console.log("View", row);
+            handleClose();
+          }}
+          sx={{
+            gap: 1.5,
+            px: 2,
+            py: 1,
+            "&:hover": { bgcolor: "grey.100" },
+          }}
+        >
+          <VisibilityIcon sx={{ fontSize: 16 }} />
+          <Typography fontSize={14}>View</Typography>
+        </MenuItem>
+        <MenuItem
+          divider
+          onClick={event => {
+            event.stopPropagation();
+            console.log("Module", row);
+            toggleModules();
+          }}
+          sx={{ gap: 1.5, px: 2, py: 1, "&:hover": { bgcolor: "grey.100" } }}
+        >
+          <ViewModuleIcon sx={{ fontSize: 16 }} />
+          <Typography fontSize={14}>{"Module"}</Typography>
+        </MenuItem>
+        <MenuItem
+          divider
+          onClick={event => {
+            event.stopPropagation();
+            console.log("Edit", row);
+            handleClose();
+          }}
           sx={{
             gap: 1.5,
             px: 2,
@@ -72,9 +100,8 @@ export function ListOptions({ row }: ListOptionsProps) {
           }}
         >
           <EditIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>{"Edit"}</Typography>
+          <Typography fontSize={14}>Edit</Typography>
         </MenuItem>
-
         <MenuItem
           onClick={event => {
             event.stopPropagation();
@@ -84,15 +111,11 @@ export function ListOptions({ row }: ListOptionsProps) {
           sx={{ gap: 1.5, px: 2, py: 1, "&:hover": { bgcolor: "grey.100" } }}
         >
           <DeleteIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>{"Delete"}</Typography>
+          <Typography fontSize={14}>Delete</Typography>
         </MenuItem>
       </Menu>
-      {openEdit && (
-        <EditAssessmentProjectModal
-          openModal={openEdit}
-          toggle={toggleEdit}
-          data={row}
-        />
+      {openModules && (
+        <ModalModules openModal={openModules} toggle={toggleModules} />
       )}
     </>
   );

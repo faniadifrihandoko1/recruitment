@@ -1,11 +1,24 @@
 "use client";
 import { baselightTheme } from "@/utils/theme/DefaultColors";
 import { ThemeProvider } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, useEffect, useState } from "react";
 
 interface ThemeWrapperProps {
   children: ReactNode;
 }
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      retryDelay: 1000 * 5,
+
+      refetchOnWindowFocus: false, // Prevent refetch when window regains focus
+      refetchOnReconnect: true, // Still refetch when reconnecting to network
+    },
+  },
+});
 
 export const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
   const [mounted, setMounted] = useState(false);
@@ -20,5 +33,9 @@ export const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
     return null;
   }
 
-  return <ThemeProvider theme={baselightTheme}>{children}</ThemeProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={baselightTheme}>{children}</ThemeProvider>
+    </QueryClientProvider>
+  );
 };

@@ -1,5 +1,8 @@
 "use client";
 
+import { useLogin } from "@/hooks/mutation/auth/use-login";
+import { setSession } from "@/lib/session";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Alert,
@@ -10,124 +13,120 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
-  Link as MuiLink,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import NextLink from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-
-import {
-  AUTH_USER_STORAGE_KEY,
-  FAKE_AUTH_COOKIE,
-  fakeLogin,
-} from "@/utils/auth/fakeAuth";
-
-const REMEMBER_KEY = "recruitment:rememberedEmail";
-const normalizeLocale = (rawLocale: string | string[] | undefined) => {
-  if (!rawLocale) return "id";
-
-  if (Array.isArray(rawLocale)) {
-    return rawLocale[0] || "id";
-  }
-
-  return rawLocale;
-};
+import { AxiosError } from "axios";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { LoginSchema, LoginSchemaType } from "./schema/login.schema";
 
 const LoginView = () => {
+  const locale = useLocale();
   const router = useRouter();
-  const params = useParams();
-  const locale = normalizeLocale(params?.locale);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const storedEmail = window.localStorage.getItem(REMEMBER_KEY);
-    if (storedEmail) {
-      setEmail(storedEmail);
-      setRemember(true);
-    }
-  }, []);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginSchemaType>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (remember && email) {
-      window.localStorage.setItem(REMEMBER_KEY, email);
-    } else {
-      window.localStorage.removeItem(REMEMBER_KEY);
-    }
-  }, [remember, email]);
+  const { mutateAsync, isPending } = useLogin();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
+  const onSubmit = async (values: LoginSchemaType) => {
     setError(null);
     setSuccess(null);
 
     try {
-      const { token, user } = await fakeLogin(email, password);
+      const response = await mutateAsync({
+        username: values.username,
+        password: values.password,
+      });
 
-      if (typeof window !== "undefined") {
-        const cookieParts = [
-          `${FAKE_AUTH_COOKIE}=${token}`,
-          "path=/",
-          `max-age=${60 * 60 * 6}`,
-          "sameSite=lax",
-        ];
+      setSession(response.data.token);
+      router.push(`/${locale}/dashboard`);
 
-        if (window.location.protocol === "https:") {
-          cookieParts.push("secure");
-        }
-
-        document.cookie = cookieParts.join("; ");
-        window.localStorage.setItem(
-          AUTH_USER_STORAGE_KEY,
-          JSON.stringify(user)
-        );
-      }
-
-      setSuccess("Login berhasil! Mengarahkan ke dashboard...");
-      setPassword("");
-
-      setTimeout(() => {
-        router.push(`/${locale}/dashboard`);
-      }, 900);
+      setSuccess("Login berhasil");
     } catch (err) {
+      const axiosError = err as AxiosError<{ message?: string }>;
       const message =
-        err instanceof Error
-          ? err.message
-          : "Gagal melakukan login. Coba lagi.";
+        axiosError.response?.data?.message ?? "Login gagal, silakan coba lagi.";
       setError(message);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+      {error ? (
+        <Alert
+          severity="error"
+          onClose={() => setError(null)}
+          sx={{
+            mb: 2,
+            backgroundColor: "#ffebee",
+            color: "#c62828",
+            border: "1px solid #ef5350",
+            borderRadius: "8px",
+            "& .MuiAlert-icon": {
+              color: "#c62828",
+            },
+            "& .MuiAlert-closeButton": {
+              color: "#c62828",
+            },
+          }}
+        >
+          {error}
+        </Alert>
+      ) : null}
+
+      {success ? (
+        <Alert
+          severity="success"
+          onClose={() => setSuccess(null)}
+          sx={{
+            mb: 2,
+            backgroundColor: "#e8f5e9",
+            color: "#2e7d32",
+            border: "1px solid #4caf50",
+            borderRadius: "8px",
+            "& .MuiAlert-icon": {
+              color: "#2e7d32",
+            },
+            "& .MuiAlert-closeButton": {
+              color: "#2e7d32",
+            },
+          }}
+        >
+          {success}
+        </Alert>
+      ) : null}
       <Stack spacing={3}>
         <Box>
           <Typography variant="subtitle1" fontWeight={600} mb={1}>
-            Email
+            Username
           </Typography>
           <TextField
-            name="email"
-            type="email"
-            placeholder="admin@example.com"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
+            {...register("username")}
+            placeholder="Masukkan username"
             required
             fullWidth
-            autoComplete="email"
+            autoComplete="username"
+            error={!!errors.username}
+            helperText={errors.username?.message}
           />
         </Box>
         <Box>
@@ -139,19 +138,16 @@ const LoginView = () => {
             <Typography variant="subtitle1" fontWeight={600} mb={1}>
               Password
             </Typography>
-            <Typography variant="body2" color="primary">
-              Hint: password123
-            </Typography>
           </Stack>
           <TextField
-            name="password"
+            {...register("password")}
             placeholder="Masukkan password"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
             required
             fullWidth
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
+            error={!!errors.password}
+            helperText={errors.password?.message}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -187,27 +183,15 @@ const LoginView = () => {
             }
             label="Ingat saya"
           />
-          <MuiLink
+          {/* <MuiLink
             component={NextLink}
             href="/"
             underline="hover"
             fontWeight={600}
           >
             Lupa password?
-          </MuiLink>
+          </MuiLink> */}
         </Stack>
-
-        {error ? (
-          <Alert severity="error" onClose={() => setError(null)}>
-            {error}
-          </Alert>
-        ) : null}
-
-        {success ? (
-          <Alert severity="success" onClose={() => setSuccess(null)}>
-            {success}
-          </Alert>
-        ) : null}
 
         <Button
           type="submit"
@@ -215,15 +199,15 @@ const LoginView = () => {
           color="primary"
           size="large"
           fullWidth
-          disabled={loading}
+          disabled={isPending}
           startIcon={
-            loading ? <CircularProgress color="inherit" size={20} /> : null
+            isPending ? <CircularProgress color="inherit" size={20} /> : null
           }
         >
-          {loading ? "Memproses..." : "Masuk"}
+          {isPending ? "Memproses..." : "Masuk"}
         </Button>
 
-        <Stack direction="row" justifyContent="center" spacing={1}>
+        {/* <Stack direction="row" justifyContent="center" spacing={1}>
           <Typography variant="body2" color="textSecondary">
             Belum punya akun?
           </Typography>
@@ -235,12 +219,7 @@ const LoginView = () => {
           >
             Daftar sekarang
           </MuiLink>
-        </Stack>
-
-        <Alert severity="info" icon={false}>
-          Gunakan `admin@example.com` / `password123` atau
-          `recruiter@example.com` / `recruitme` untuk demo.
-        </Alert>
+        </Stack> */}
       </Stack>
     </Box>
   );

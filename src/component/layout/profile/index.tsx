@@ -13,7 +13,7 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { AUTH_USER_STORAGE_KEY, FAKE_AUTH_COOKIE } from "@/utils/auth/fakeAuth";
+import { removeSession } from "@/lib/session";
 import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react";
 
 const normalizeLocale = (rawLocale: string | string[] | undefined) => {
@@ -41,11 +41,7 @@ const Profile = () => {
   const handleLogout = () => {
     handleClose2();
 
-    if (typeof window !== "undefined") {
-      document.cookie = `${FAKE_AUTH_COOKIE}=; path=/; max-age=0; sameSite=lax`;
-      document.cookie = `${FAKE_AUTH_COOKIE}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-      window.localStorage.removeItem(AUTH_USER_STORAGE_KEY);
-    }
+    removeSession();
 
     router.push(`/${locale}/authentication/login`);
   };
@@ -59,7 +55,7 @@ const Profile = () => {
         aria-controls="msgs-menu"
         aria-haspopup="true"
         sx={{
-          ...(typeof anchorEl2 === "object" && {  
+          ...(typeof anchorEl2 === "object" && {
             color: "primary.main",
           }),
         }}

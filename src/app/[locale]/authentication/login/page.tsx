@@ -40,7 +40,7 @@ const Login2 = () => {
         >
           <Card
             elevation={9}
-            sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
+            sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "600px" }}
           >
             <Box
               display="flex"

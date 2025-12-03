@@ -2,7 +2,6 @@ import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
 import { routing } from "./i18n/routing";
-import { FAKE_AUTH_COOKIE } from "./utils/auth/fakeAuth";
 
 const intlMiddleware = createMiddleware(routing);
 const locales = routing.locales;
@@ -47,7 +46,7 @@ export default function middleware(request: NextRequest) {
   const normalizedPathname = getNormalizedPath(pathname);
   const dashboardPath = `/${locale}/dashboard`;
   const isLoginRoute = isLoginPath(pathname);
-  const isAuthenticated = Boolean(request.cookies.get(FAKE_AUTH_COOKIE)?.value);
+  const isAuthenticated = Boolean(request.cookies.get("session")?.value);
 
   if (!isAuthenticated && !isLoginRoute) {
     const redirectURL = request.nextUrl.clone();

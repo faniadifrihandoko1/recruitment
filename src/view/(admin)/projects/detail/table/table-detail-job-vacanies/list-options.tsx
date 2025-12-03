@@ -2,9 +2,13 @@
 import { MoreVert } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
+
+import { ModalModules } from "../../modal/modal-modules";
 import { JobVacancy } from "./list";
 
 interface JobVacancyOptionsProps {
@@ -13,8 +17,10 @@ interface JobVacancyOptionsProps {
 
 export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openModules, setOpenModules] = useState(false);
   const open = Boolean(anchorEl);
 
+  const toggleModules = () => setOpenModules(!openModules);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
@@ -71,6 +77,18 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
           divider
           onClick={event => {
             event.stopPropagation();
+            console.log("Module", row);
+            toggleModules();
+          }}
+          sx={{ gap: 1.5, px: 2, py: 1, "&:hover": { bgcolor: "grey.100" } }}
+        >
+          <ViewModuleIcon sx={{ fontSize: 16 }} />
+          <Typography fontSize={14}>{"Module"}</Typography>
+        </MenuItem>
+        <MenuItem
+          divider
+          onClick={event => {
+            event.stopPropagation();
             console.log("Edit", row);
             handleClose();
           }}
@@ -96,6 +114,9 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
           <Typography fontSize={14}>Delete</Typography>
         </MenuItem>
       </Menu>
+      {openModules && (
+        <ModalModules openModal={openModules} toggle={toggleModules} />
+      )}
     </>
   );
 }
