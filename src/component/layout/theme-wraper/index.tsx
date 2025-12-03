@@ -2,6 +2,7 @@
 import { baselightTheme } from "@/utils/theme/DefaultColors";
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SnackbarProvider } from "notistack";
 import { ReactNode, useEffect, useState } from "react";
 
 interface ThemeWrapperProps {
@@ -35,7 +36,15 @@ export const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={baselightTheme}>{children}</ThemeProvider>
+      <ThemeProvider theme={baselightTheme}>
+        <SnackbarProvider
+          maxSnack={3}
+          autoHideDuration={2000}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          {children}
+        </SnackbarProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

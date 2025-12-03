@@ -79,10 +79,14 @@
       },
       "modal": {
         "modal-add": {
-          "title": "Buat Project"
+          "title": "Buat Project",
+          "success": "Project berhasil dibuat",
+          "error": "Project gagal dibuat"
         },
         "modal-edit": {
-          "title": "Edit Project"
+          "title": "Edit Project",
+          "success": "Project berhasil diupdate",
+          "error": "Project gagal diupdate"
         }
       },
       "form": {

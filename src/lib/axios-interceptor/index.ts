@@ -1,18 +1,12 @@
-import { getSession } from "@/lib/session";
 import axios from "axios";
 
 export const axiosInterceptor = axios.create();
 
-axiosInterceptor.interceptors.request.use(config => {
-  const session = getSession() as { token?: string } | null;
-  const token = session?.token;
+axiosInterceptor.interceptors.request.use(async config => {
+  const session = localStorage.getItem("token");
 
-  if (token) {
-    if (!config.headers) {
-      (config as any).headers = {};
-    }
-
-    (config.headers as any).Authorization = `Bearer ${token}`;
+  if (session) {
+    config.headers.Authorization = `Bearer ${session}`;
   }
 
   return config;

@@ -7,12 +7,12 @@ type ValidationTranslator = ReturnType<
 
 export const createProjectSchema = (t: ValidationTranslator) =>
   z.object({
-    projectName: z
+    project_name: z
       .string()
       .trim()
       .min(1, t("projectNameRequired"))
       .min(3, t("projectNameMinLength")),
-    projectDescription: z
+    project_description: z
       .string()
       .trim()
       .min(1, t("projectDescriptionRequired"))

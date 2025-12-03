@@ -36,7 +36,10 @@ export const useLogin = () => {
         data
       );
 
-      await setSession(res.data.data);
+      if (res.data.status && res.data.code === 200) {
+        await setSession(res.data.data.token);
+        localStorage.setItem("token", res.data.data.token);
+      }
 
       return res.data;
     },

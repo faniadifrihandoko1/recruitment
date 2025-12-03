@@ -4,8 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomTextAreaAutoSize from "@/component/shared/input/custom-text-area-autosize";
 import { CustomTextField } from "@/component/shared/input/custom-textfield";
 import ModalCustom from "@/component/shared/modal/modal-custom";
+import { useCreateProject } from "@/hooks/mutation/project/use-project";
 import { Grid } from "@mui/material";
+import { AxiosError } from "axios";
 import { useTranslations } from "next-intl";
+import { enqueueSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
 import {
   createProjectSchema,
@@ -23,18 +26,37 @@ export const AddAssessmentProjectModal = ({
 }: AddAssessmentProjectModalProps) => {
   const t = useTranslations("page.project");
   const tValidation = useTranslations("page.project.validation");
+  const { mutateAsync: createProject, isPending } = useCreateProject();
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
-      projectName: "",
-      projectDescription: "",
+      project_name: "",
+      project_description: "",
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
 
   const { handleSubmit, control } = form;
 
-  const onSubmit = (data: ProjectFormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: ProjectFormSchema) => {
+    try {
+      const res = await createProject(data);
+
+      if (res.status && res.code === 201) {
+        enqueueSnackbar(t("modal.modal-add.success"), {
+          variant: "success",
+        });
+        toggle();
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message?: string }>;
+      const message =
+        axiosError.response?.data?.message ?? t("modal.modal-add.error");
+      enqueueSnackbar(message, {
+        variant: "error",
+      });
+    }
   };
 
   return (
@@ -45,13 +67,14 @@ export const AddAssessmentProjectModal = ({
       maxWidth="sm"
       buttonOkProps={{
         onClick: handleSubmit(onSubmit),
+        loading: isPending,
       }}
     >
       <Grid container spacing={2} sx={{ bgColor: "red" }}>
         <Grid size={12}>
           <CustomTextField
             control={control}
-            name="projectName"
+            name="project_name"
             label={t("form.projectName")}
             required
           />
@@ -59,7 +82,7 @@ export const AddAssessmentProjectModal = ({
         <Grid size={12} sx={{ bgColor: "blue" }}>
           <CustomTextAreaAutoSize
             control={control}
-            name="projectDescription"
+            name="project_description"
             label={t("form.projectDescription")}
             required
           />

@@ -80,10 +80,14 @@
       },
       "modal": {
         "modal-add": {
-          "title": "Create Project"
+          "title": "Create Project",
+          "success": "Project created successfully",
+          "error": "Project creation failed"
         },
         "modal-edit": {
-          "title": "Edit Project"
+          "title": "Edit Project",
+          "success": "Project updated successfully",
+          "error": "Project update failed"
         }
       },
       "status": {

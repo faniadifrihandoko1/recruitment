@@ -1,7 +1,6 @@
 "use client";
 
 import { useLogin } from "@/hooks/mutation/auth/use-login";
-import { setSession } from "@/lib/session";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
@@ -57,7 +56,8 @@ const LoginView = () => {
         password: values.password,
       });
 
-      setSession(response.data.token);
+      console.log("response", response.data.token);
+
       router.push(`/${locale}/dashboard`);
 
       setSuccess("Login berhasil");

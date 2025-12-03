@@ -1,6 +1,9 @@
 export const endpoints = {
   login: "/auth/login",
   register: "signup",
+
+  // Project
+  project: "/project",
 } as const;
 
 export type ApiEndpoint = keyof typeof endpoints;

@@ -13,13 +13,14 @@ export const setSession = async (token: any) => {
 
 export const getSession = async (): Promise<string | null> => {
   const session = (await cookies()).get("session")?.value;
+  console.log("session", session);
   if (!session) return null;
-  const user = JSON.parse(session);
 
-  return user;
+  return session;
 };
 
 export const removeSession = async () => {
   const cookiesStore = await cookies();
   cookiesStore.delete("session");
+  localStorage.removeItem("token");
 };
