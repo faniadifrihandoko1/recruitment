@@ -1,5 +1,5 @@
 import { getApi } from "@/lib/api/endpoint";
-import { axiosInterceptor } from "@/lib/axios-interceptor";
+import { axiosClient } from "@/lib/axios-interceptor/axios-client";
 import { setSession } from "@/lib/session";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -31,7 +31,7 @@ export type PayloadLogin = {
 export const useLogin = () => {
   return useMutation<ResponseLogin, AxiosError<ResponseLogin>, PayloadLogin>({
     mutationFn: async data => {
-      const res = await axiosInterceptor.post<ResponseLogin>(
+      const res = await axiosClient.post<ResponseLogin>(
         enpointLogin,
         data
       );

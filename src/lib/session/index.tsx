@@ -22,5 +22,4 @@ export const getSession = async (): Promise<string | null> => {
 export const removeSession = async () => {
   const cookiesStore = await cookies();
   cookiesStore.delete("session");
-  localStorage.removeItem("token");
 };

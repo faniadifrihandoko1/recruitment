@@ -38,10 +38,14 @@ const Profile = () => {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-  const handleLogout = () => {
+  const handleLogout = async () => {
     handleClose2();
 
-    removeSession();
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+    }
+
+    await removeSession();
 
     router.push(`/${locale}/authentication/login`);
   };

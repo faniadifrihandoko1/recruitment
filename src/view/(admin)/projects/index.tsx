@@ -1,35 +1,23 @@
 "use client";
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
+import { ProjectInterface } from "@/types/project";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import SearchIcon from "@mui/icons-material/Search";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {
-  Box,
-  Button,
-  InputAdornment,
-  Menu,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import ListAssessmentProject, { AssessmentProject } from "./table/list";
-import { RowAssessmentProjects } from "./table/list-column";
 import { AddAssessmentProjectModal } from "./modal/add-assessment-project";
+import ListAssessmentProject from "./table/list";
 
 export default function ProjectsView() {
   const t = useTranslations("page.assessmentProjects");
-  const [searchQuery, setSearchQuery] = useState("");
+
+  // const [searchQuery, setSearchQuery] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedRow, setSelectedRow] = useState<AssessmentProject | null>(
-    null
-  );
+  const [selectedRow, setSelectedRow] = useState<ProjectInterface | null>(null);
   const [openModal, setOpenModal] = useState(false);
 
   const handleMenuClose = () => {
@@ -39,13 +27,13 @@ export default function ProjectsView() {
 
   const toggleAddModal = () => setOpenModal(!openModal);
 
-  const filteredProjects = RowAssessmentProjects.filter(
-    project =>
-      project.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.projectDescription
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-  );
+  // const filteredProjects = RowAssessmentProjects.filter(
+  //   project =>
+  //     project.projectName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     project.projectDescription
+  //       .toLowerCase()
+  //       .includes(searchQuery.toLowerCase())
+  // );
 
   return (
     <PageContainer title={t("title")} hideTitle>
@@ -82,7 +70,7 @@ export default function ProjectsView() {
           </Box>
         </DashboardCard>
 
-        <DashboardCard>
+        {/* <DashboardCard>
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
@@ -112,9 +100,9 @@ export default function ProjectsView() {
               {t("filter")}
             </Button>
           </Stack>
-        </DashboardCard>
+        </DashboardCard> */}
 
-        <ListAssessmentProject data={filteredProjects} />
+        <ListAssessmentProject />
 
         <Menu
           anchorEl={anchorEl}

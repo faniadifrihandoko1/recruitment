@@ -29,8 +29,8 @@ export const AddAssessmentProjectModal = ({
   const { mutateAsync: createProject, isPending } = useCreateProject();
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
-      project_name: "",
-      project_description: "",
+      name: "",
+      description: "",
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
@@ -41,7 +41,7 @@ export const AddAssessmentProjectModal = ({
     try {
       const res = await createProject(data);
 
-      if (res.status && res.code === 201) {
+      if (res.status && res.code === 200) {
         enqueueSnackbar(t("modal.modal-add.success"), {
           variant: "success",
         });
@@ -74,7 +74,7 @@ export const AddAssessmentProjectModal = ({
         <Grid size={12}>
           <CustomTextField
             control={control}
-            name="project_name"
+            name="name"
             label={t("form.projectName")}
             required
           />
@@ -82,7 +82,7 @@ export const AddAssessmentProjectModal = ({
         <Grid size={12} sx={{ bgColor: "blue" }}>
           <CustomTextAreaAutoSize
             control={control}
-            name="project_description"
+            name="description"
             label={t("form.projectDescription")}
             required
           />

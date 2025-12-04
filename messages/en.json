@@ -56,6 +56,14 @@
       },
 
       "modal": {
+        "modal-delete": {
+          "title": "Delete Data",
+          "message": "Are you sure you want to delete <strong>{name}</strong>?",
+          "button": {
+            "yes": "Delete",
+            "no": "Cancel"
+          }
+        },
         "button": {
           "no": "Cancel",
           "yes": "Save"
@@ -88,6 +96,11 @@
           "title": "Edit Project",
           "success": "Project updated successfully",
           "error": "Project update failed"
+        },
+        "modal-delete": {
+          "title": "Delete Project",
+          "success": "Project deleted successfully",
+          "error": "Project deletion failed"
         }
       },
       "status": {

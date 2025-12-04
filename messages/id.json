@@ -55,6 +55,14 @@
         "limit": "Limit"
       },
       "modal": {
+        "modal-delete": {
+          "title": "Hapus Data",
+          "message": "Apakah Anda yakin ingin menghapus <strong>{name}</strong>?",
+          "button": {
+            "yes": "Hapus",
+            "no": "Batal"
+          }
+        },
         "button": {
           "no": "Batal",
           "yes": "Simpan"
@@ -87,6 +95,11 @@
           "title": "Edit Project",
           "success": "Project berhasil diupdate",
           "error": "Project gagal diupdate"
+        },
+        "modal-delete": {
+          "title": "Hapus Project",
+          "success": "Project berhasil dihapus",
+          "error": "Project gagal dihapus"
         }
       },
       "form": {

@@ -2,12 +2,12 @@
 
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
+import { ProjectInterface } from "@/types/project";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { AssessmentProject } from "../table/list";
-import { RowAssessmentProjects } from "../table/list-column";
+import { RowProjects } from "../table/list-column";
 import { TabJobVacancies } from "./tab/tab-job-vacancies";
 import { TabOverview } from "./tab/tab-overview";
 import { stats } from "./utils/data";
@@ -40,7 +40,7 @@ export const DetailProjectView = () => {
   const t = useTranslations("page.project");
   const [activeTab, setActiveTab] = useState(0);
 
-  const project: AssessmentProject | undefined = RowAssessmentProjects.find(
+  const project: ProjectInterface | undefined = RowProjects.find(
     p => p.id === Number(projectId)
   );
 
@@ -62,7 +62,7 @@ export const DetailProjectView = () => {
     <PageContainer
       title={t("detail.title")}
       hideTitle
-      breadcrumbData={{ name: project.projectName }}
+      breadcrumbData={{ name: project.project_name }}
       showBackButton
       backHref="/projects"
     >

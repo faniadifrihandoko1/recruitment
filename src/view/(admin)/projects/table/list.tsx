@@ -1,79 +1,66 @@
 "use client";
 import PaginationSectionTableCustom from "@/component/shared/custom-pagination";
 import DashboardCard from "@/component/shared/DashboardCard";
+import { useGetProjects } from "@/hooks/query/project/use-project";
+import { ProjectInterface } from "@/types/project";
 import { Box, SelectChangeEvent } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useListColumn } from "./list-column";
 
-export interface AssessmentProject {
-  id: number;
-  projectName: string;
-  projectDescription: string;
-}
-
-interface ListAssessmentProjectProps {
-  data: AssessmentProject[];
-}
-
-export default function ListAssessmentProject({
-  data,
-}: ListAssessmentProjectProps) {
-  const columns = useListColumn();
+export default function ListAssessmentProject() {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { data: dataProjects, isLoading: isLoadingProjects } = useGetProjects({
+    page,
+    limit: pageSize,
+  });
+  
+  const columns = useListColumn();
 
-  const handleRowClick = (row: AssessmentProject) => {
+  const handleRowClick = (row: ProjectInterface) => {
     router.push(`/projects/detail/${row.id}`);
   };
 
-  const totalRecords = data.length; // Ambil jumlah total data
   const handleLimitChange = (event: SelectChangeEvent) => {
-    setIsLoading(true);
     setPageSize(Number(event.target.value));
     setPage(1); // Reset ke halaman pertama
-
-    // Simulasi delay loading (gantilah ini dengan API call jika data dari backend)
-    setTimeout(() => setIsLoading(false), 500);
   };
 
   const handlePageChange = (_event: unknown, newPage: number) => {
-    setIsLoading(true);
     setPage(newPage);
-
-    // Simulasi delay loading
-    setTimeout(() => setIsLoading(false), 500);
   };
 
-  const paginatedRows = data.slice((page - 1) * pageSize, page * pageSize);
-
   return (
-    <DashboardCard sx={{ paddingY: 1 }}>
-      <Box bgcolor={"red"} width="100%">
+    <DashboardCard sx={{ paddingY: 1, paddingX: 0, overflow: "hidden" }}>
+      <Box width="100%">
         <DataGrid
-          rows={paginatedRows}
+          rows={dataProjects?.data || []}
           columns={columns}
-          rowHeight={55}
-          onRowClick={params => handleRowClick(params.row as AssessmentProject)}
+          rowHeight={64}
+          onRowClick={params => handleRowClick(params.row as ProjectInterface)}
           hideFooterSelectedRowCount
-          loading={isLoading}
+          loading={isLoadingProjects}
+          disableColumnMenu
+          disableRowSelectionOnClick
           slots={{
             pagination: () => (
               <Box
                 width="100%"
-                paddingX={1}
+                paddingX={2}
                 display="flex"
                 justifyContent="space-between"
+                sx={{ bgColor: "red" }}
                 alignItems="center"
                 marginTop="0.75rem"
+                minHeight="64px"
               >
                 <PaginationSectionTableCustom
                   page={page}
                   pageSize={pageSize}
-                  recordsFiltered={totalRecords}
+                  recordsFiltered={dataProjects?.meta.total || 0}
                   handleLimitChange={handleLimitChange}
                   handlePageChange={handlePageChange}
                 />

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const axiosInterceptor = axios.create();
+export const axiosClient = axios.create();
 
-axiosInterceptor.interceptors.request.use(async config => {
+axiosClient.interceptors.request.use(async config => {
   const session = localStorage.getItem("token");
 
   if (session) {

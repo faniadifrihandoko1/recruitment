@@ -1,6 +1,18 @@
+import {
+  createProjectAction,
+  deleteProjectAction,
+  updateProjectAction,
+} from "@/app/(actions)/project";
 import { queryClient } from "@/component/layout/theme-wraper";
 import { getApi } from "@/lib/api/endpoint";
-import { axiosInterceptor } from "@/lib/axios-interceptor";
+import { API_TAGS } from "@/lib/api/tags";
+import { axiosClient } from "@/lib/axios-interceptor/axios-client";
+import {
+  PayloadCreateProject,
+  PayloadUpdateProject,
+  ProjectInterface,
+  ResponseMutateProject,
+} from "@/types/project";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
@@ -8,25 +20,7 @@ export type ResponseCreateProject = {
   status: boolean;
   code: number;
   message: string;
-  data: DataCreateProject;
-};
-
-export type DataCreateProject = {
-  id: number;
-  project_name: string;
-  project_description: string;
-  tenant_id: number;
-  created_date: Date;
-  created_by: null;
-  updated_date: null;
-  updated_by: null;
-  deleted_date: null;
-  deleted_by: null;
-};
-
-export type PayloadCreateProject = {
-  project_name: string;
-  project_description: string;
+  data: ProjectInterface;
 };
 
 export const useCreateProject = () =>
@@ -36,17 +30,89 @@ export const useCreateProject = () =>
     PayloadCreateProject
   >({
     mutationFn: async data => {
-      const res = await axiosInterceptor.post<ResponseCreateProject>(
+      const res = await axiosClient.post<ResponseCreateProject>(
         getApi("project"),
         data
       );
-      if (res.data.status && res.data.code === 201) {
-        queryClient.invalidateQueries({ queryKey: ["GET_PROJECTS"] });
 
-        return res.data;
-      }
-
-      throw new Error(res.data.message);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
     },
     mutationKey: ["CREATE_PROJECT"],
   });
+
+export const useCreateProjectServer = () =>
+  useMutation<
+    ResponseMutateProject,
+    AxiosError<ResponseMutateProject>,
+    PayloadCreateProject
+  >({
+    mutationFn: data => createProjectAction(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+    },
+    mutationKey: ["CREATE_PROJECT_SERVER"],
+  });
+
+export const useUpdateProject = () =>
+  useMutation<
+    ResponseMutateProject,
+    AxiosError<ResponseMutateProject>,
+    PayloadUpdateProject
+  >({
+    mutationFn: async (data: PayloadUpdateProject) => {
+      const res = await axiosClient.patch<ResponseCreateProject>(
+        getApi("project"),
+        data
+      );
+
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+    },
+    mutationKey: ["UPDATE_PROJECT"],
+  });
+
+export const useUpdateProjectServer = () =>
+  useMutation<
+    ResponseMutateProject,
+    AxiosError<ResponseMutateProject>,
+    PayloadUpdateProject
+  >({
+    mutationFn: data => updateProjectAction(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+    },
+    mutationKey: ["UPDATE_PROJECT_SERVER"],
+  });
+
+export const useDeleteProject = () =>
+  useMutation<ResponseMutateProject, AxiosError<ResponseMutateProject>, number>(
+    {
+      mutationFn: async (id: number) => {
+        const res = await axiosClient.delete<ResponseMutateProject>(
+          `${getApi("project")}/${id}`
+        );
+
+        return res.data;
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+      },
+      mutationKey: ["DELETE_DATA_PERIOD"],
+    }
+  );
+
+export const useDeleteProjectServer = () =>
+  useMutation<ResponseMutateProject, AxiosError<ResponseMutateProject>, number>(
+    {
+      mutationFn: id => deleteProjectAction(id),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+      },
+      mutationKey: ["DELETE_PROJECT_SERVER"],
+    }
+  );

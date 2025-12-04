@@ -158,18 +158,22 @@ const baselightTheme = createTheme({
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          // "& .MuiDataGrid-columnHeader": {
-          //   // backgroundColor: "#f3f4f6", // Warna header
-          //   fontWeight: 700,
-          //   fontSize: 12.5,
-          //   borderBottom: "1px solid #e5eaef",
-          // },
+          border: "none",
           "& .MuiDataGrid-columnHeaders": {
-            borderBottom: "1px solid #e5eaef",
-            fontWeight: 700,
+            backgroundColor: "#F8F9FA",
+
+            borderBottom: "2px solid #E5EAEF",
+            minHeight: "56px !important",
+            maxHeight: "56px !important",
             "& .MuiDataGrid-columnHeader": {
               fontWeight: 700,
-              fontSize: 12.5,
+              fontSize: "0.8125rem",
+              color: "#2A3547",
+              letterSpacing: "0.5px",
+              textTransform: "uppercase",
+              "&:focus, &:focus-within": {
+                outline: "none",
+              },
             },
           },
           "& .MuiDataGrid-columnHeader:hover": {
@@ -177,38 +181,64 @@ const baselightTheme = createTheme({
           },
           "& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell": {
             padding: "0px 15px",
+            borderBottom: "1px solid #F2F6FA",
           },
-          "& .MuiDataGrid-cell": {
-            fontSize: 12,
-            fontWeight: 400,
-          },
-          "& .MuiDataGrid-row:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.04)",
+          "& .MuiDataGrid-row": {
+            borderBottom: "1px solid #F2F6FA",
+            // transition: "all 0.2s ease-in-out",
             cursor: "pointer",
-          },
-          MuiTextField: {
-            styleOverrides: {
-              root: {
-                fontWeight: 500,
+            "&:nth-of-type(even)": {
+              backgroundColor: "#FAFBFC",
+            },
+            "&:nth-of-type(odd)": {
+              backgroundColor: "#FFFFFF",
+            },
+            "&:hover": {
+              backgroundColor: "#E6FFFA !important",
+              boxShadow: "0 2px 8px rgba(19, 222, 185, 0.1)",
+            },
+            "&.Mui-selected": {
+              backgroundColor: "#E6FFFA !important",
+              "&:hover": {
+                backgroundColor: "#D4F5ED !important",
               },
             },
-            defaultProps: {
-              fullWidth: true,
+          },
+          "& .MuiDataGrid-cell": {
+            fontSize: "0.875rem",
+            color: "#2A3547",
+            borderBottom: "none",
+            "&:focus, &:focus-within": {
+              outline: "none",
             },
           },
-          // "& .MuiDataGrid-row:nth-of-type(even)": {
-          //   backgroundColor: "#f9fafb",
-          //   "&:hover": {
-          //     backgroundColor: "#e5e7eb",
-          //   },
-          // },
-
-          // "& .MuiDataGrid-row:nth-of-type(odd)": {
-          //   backgroundColor: "#ffffff",
-          //   "&:hover": {
-          //     backgroundColor: "#e5e7eb",
-          //   },
-          // },
+          "& .MuiDataGrid-footerContainer": {
+            // borderTop: "1px solid #E5EAEF",
+            minHeight: "64px !important",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            "&::-webkit-scrollbar": {
+              width: "8px",
+              height: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "#F2F6FA",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#DFE5EF",
+              borderRadius: "4px",
+              "&:hover": {
+                backgroundColor: "#7C8FAC",
+              },
+            },
+          },
+          "& .MuiDataGrid-iconButtonContainer": {
+            visibility: "visible",
+          },
+          "& .MuiDataGrid-sortIcon": {
+            opacity: 1,
+            // color: "#13DEB9",
+          },
         },
       },
     },

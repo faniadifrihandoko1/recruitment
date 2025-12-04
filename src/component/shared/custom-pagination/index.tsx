@@ -36,10 +36,10 @@ const PaginationSectionTableCustom = ({
           sx={{
             width: "100%",
             mt: "5px",
-            bgcolor: "white",
-            pb: 3,
+            // bgcolor: "red",
             borderRadius: 1,
             px: 1,
+            pb: 1,
           }}
         >
           <Box
