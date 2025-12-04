@@ -1,8 +1,8 @@
 "use client";
 import DashboardCard from "@/component/shared/DashboardCard";
+import { ProjectInterface } from "@/types/project";
 import { Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { AssessmentProject } from "../../../table/list";
 
 interface TabOverviewProps {
   stats: {
@@ -11,7 +11,7 @@ interface TabOverviewProps {
     completedTests: number;
     pendingTests: number;
   };
-  project: AssessmentProject;
+  project: ProjectInterface;
 }
 
 export const TabOverview = ({ stats, project }: TabOverviewProps) => {
@@ -141,7 +141,7 @@ export const TabOverview = ({ stats, project }: TabOverviewProps) => {
                   {t("detail.overview.description")}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                  {project.projectDescription}
+                  {project.description}
                 </Typography>
               </Box>
               <Box>
