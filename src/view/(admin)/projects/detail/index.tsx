@@ -62,7 +62,7 @@ export const DetailProjectView = () => {
     <PageContainer
       title={t("detail.title")}
       hideTitle
-      breadcrumbData={{ name: project.project_name }}
+      breadcrumbData={{ name: project.name }}
       showBackButton
       backHref="/projects"
     >
