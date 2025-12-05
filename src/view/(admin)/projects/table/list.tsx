@@ -11,13 +11,13 @@ import { useListColumn } from "./list-column";
 
 export default function ListAssessmentProject() {
   const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(5);
   const router = useRouter();
   const { data: dataProjects, isLoading: isLoadingProjects } = useGetProjects({
     page,
     limit: pageSize,
   });
-  
+
   const columns = useListColumn();
 
   const handleRowClick = (row: ProjectInterface) => {
@@ -40,6 +40,8 @@ export default function ListAssessmentProject() {
           rows={dataProjects?.data || []}
           columns={columns}
           rowHeight={64}
+          rowCount={dataProjects?.meta?.total || 0}
+          paginationMode="server"
           onRowClick={params => handleRowClick(params.row as ProjectInterface)}
           hideFooterSelectedRowCount
           loading={isLoadingProjects}
@@ -60,7 +62,7 @@ export default function ListAssessmentProject() {
                 <PaginationSectionTableCustom
                   page={page}
                   pageSize={pageSize}
-                  recordsFiltered={dataProjects?.meta.total || 0}
+                  recordsFiltered={dataProjects?.meta?.total || 0}
                   handleLimitChange={handleLimitChange}
                   handlePageChange={handlePageChange}
                 />

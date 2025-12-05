@@ -155,89 +155,121 @@ const baselightTheme = createTheme({
       },
     },
 
+    // MuiDataGrid: {
+    //   styleOverrides: {
+    //     root: {
+    //       border: "none",
+    //       "& .MuiDataGrid-columnHeaders": {
+    //         backgroundColor: "#F8F9FA",
+    //         borderBottom: "2px solid #E5EAEF",
+    //         minHeight: "56px !important",
+    //         maxHeight: "56px !important",
+    //         "& .MuiDataGrid-columnHeader": {
+    //           fontWeight: 700,
+    //           fontSize: "0.8125rem",
+    //           color: "#2A3547",
+    //           letterSpacing: "0.5px",
+    //           textTransform: "uppercase",
+    //           "&:focus, &:focus-within": {
+    //             outline: "none",
+    //           },
+    //         },
+    //       },
+    //       "& .MuiDataGrid-columnHeader:hover": {
+    //         backgroundColor: "transparent",
+    //       },
+    //       "& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell": {
+    //         padding: "0px 15px",
+    //         borderBottom: "1px solid #F2F6FA",
+    //       },
+    //       "& .MuiDataGrid-row": {
+    //         borderBottom: "1px solid #F2F6FA",
+    //         // transition: "all 0.2s ease-in-out",
+    //         cursor: "pointer",
+    //         "&:nth-of-type(even)": {
+    //           backgroundColor: "#FAFBFC",
+    //         },
+    //         "&:nth-of-type(odd)": {
+    //           backgroundColor: "#FFFFFF",
+    //         },
+    //         "&:hover": {
+    //           backgroundColor: "#E6FFFA !important",
+    //           boxShadow: "0 2px 8px rgba(19, 222, 185, 0.1)",
+    //         },
+    //         "&.Mui-selected": {
+    //           backgroundColor: "#E6FFFA !important",
+    //           "&:hover": {
+    //             backgroundColor: "#D4F5ED !important",
+    //           },
+    //         },
+    //       },
+    //       "& .MuiDataGrid-cell": {
+    //         fontSize: "0.875rem",
+    //         color: "#2A3547",
+    //         borderBottom: "none",
+    //         "&:focus, &:focus-within": {
+    //           outline: "none",
+    //         },
+    //       },
+    //       "& .MuiDataGrid-footerContainer": {
+    //         // borderTop: "1px solid #E5EAEF",
+    //         minHeight: "64px !important",
+    //       },
+    //       "& .MuiDataGrid-virtualScroller": {
+    //         "&::-webkit-scrollbar": {
+    //           width: "8px",
+    //           height: "8px",
+    //         },
+    //         "&::-webkit-scrollbar-track": {
+    //           backgroundColor: "#F2F6FA",
+    //         },
+    //         "&::-webkit-scrollbar-thumb": {
+    //           backgroundColor: "#DFE5EF",
+    //           borderRadius: "4px",
+    //           "&:hover": {
+    //             backgroundColor: "#7C8FAC",
+    //           },
+    //         },
+    //       },
+    //       "& .MuiDataGrid-iconButtonContainer": {
+    //         visibility: "visible",
+    //       },
+    //       "& .MuiDataGrid-sortIcon": {
+    //         opacity: 1,
+    //         // color: "#13DEB9",
+    //       },
+    //     },
+    //   },
+    // },
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          border: "none",
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#F8F9FA",
-
-            borderBottom: "2px solid #E5EAEF",
-            minHeight: "56px !important",
-            maxHeight: "56px !important",
-            "& .MuiDataGrid-columnHeader": {
-              fontWeight: 700,
-              fontSize: "0.8125rem",
-              color: "#2A3547",
-              letterSpacing: "0.5px",
-              textTransform: "uppercase",
-              "&:focus, &:focus-within": {
-                outline: "none",
-              },
-            },
+            borderBottom: "1px solid #E5EAEF",
           },
-          "& .MuiDataGrid-columnHeader:hover": {
-            backgroundColor: "transparent",
+          "& .MuiDataGrid-columnHeader": {
+            fontWeight: 700,
+            fontSize: 13,
           },
           "& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell": {
             padding: "0px 15px",
-            borderBottom: "1px solid #F2F6FA",
-          },
-          "& .MuiDataGrid-row": {
-            borderBottom: "1px solid #F2F6FA",
-            // transition: "all 0.2s ease-in-out",
-            cursor: "pointer",
-            "&:nth-of-type(even)": {
-              backgroundColor: "#FAFBFC",
-            },
-            "&:nth-of-type(odd)": {
-              backgroundColor: "#FFFFFF",
-            },
-            "&:hover": {
-              backgroundColor: "#E6FFFA !important",
-              boxShadow: "0 2px 8px rgba(19, 222, 185, 0.1)",
-            },
-            "&.Mui-selected": {
-              backgroundColor: "#E6FFFA !important",
-              "&:hover": {
-                backgroundColor: "#D4F5ED !important",
-              },
-            },
           },
           "& .MuiDataGrid-cell": {
-            fontSize: "0.875rem",
-            color: "#2A3547",
-            borderBottom: "none",
-            "&:focus, &:focus-within": {
-              outline: "none",
+            fontSize: 12,
+            fontWeight: 400,
+          },
+          "& .MuiDataGrid-row:nth-of-type(even)": {
+            backgroundColor: "#f9fafb",
+            "&:hover": {
+              backgroundColor: "#e5e7eb",
             },
           },
-          "& .MuiDataGrid-footerContainer": {
-            // borderTop: "1px solid #E5EAEF",
-            minHeight: "64px !important",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            "&::-webkit-scrollbar": {
-              width: "8px",
-              height: "8px",
+
+          "& .MuiDataGrid-row:nth-of-type(odd)": {
+            backgroundColor: "#ffffff",
+            "&:hover": {
+              backgroundColor: "#e5e7eb",
             },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "#F2F6FA",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#DFE5EF",
-              borderRadius: "4px",
-              "&:hover": {
-                backgroundColor: "#7C8FAC",
-              },
-            },
-          },
-          "& .MuiDataGrid-iconButtonContainer": {
-            visibility: "visible",
-          },
-          "& .MuiDataGrid-sortIcon": {
-            opacity: 1,
-            // color: "#13DEB9",
           },
         },
       },

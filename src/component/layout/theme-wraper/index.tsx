@@ -1,4 +1,6 @@
 "use client";
+import ModalUnauthorized from "@/component/shared/modal/modal-unauthorized";
+import { UnauthorizedModalProvider } from "@/context/unauthorized-modal-context";
 import { baselightTheme } from "@/utils/theme/DefaultColors";
 import { ThemeProvider } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -42,7 +44,10 @@ export const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
           autoHideDuration={2000}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          {children}
+          <UnauthorizedModalProvider>
+            {children}
+            <ModalUnauthorized />
+          </UnauthorizedModalProvider>
         </SnackbarProvider>
       </ThemeProvider>
     </QueryClientProvider>

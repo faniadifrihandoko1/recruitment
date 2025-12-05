@@ -43,7 +43,8 @@ export const useGetProjectsServer = (params?: GetProjectsParams) => {
     queryFn: async () => {
       const res = await getProjectAction({ page, limit });
 
-      return res.data;
+      // return res.data;
+      return res;
     },
     queryKey: [API_TAGS.PROJECTS, page, limit],
   });

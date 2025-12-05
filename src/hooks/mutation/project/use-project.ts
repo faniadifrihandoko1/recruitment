@@ -23,7 +23,10 @@ export type ResponseCreateProject = {
   data: ProjectInterface;
 };
 
-export const useCreateProject = () =>
+export const useCreateProject = (options?: {
+  onSuccess?: (data: ResponseMutateProject) => void;
+  onError?: (error: AxiosError<ResponseMutateProject>) => void;
+}) =>
   useMutation<
     ResponseCreateProject,
     AxiosError<ResponseCreateProject>,
@@ -37,21 +40,48 @@ export const useCreateProject = () =>
 
       return res.data;
     },
-    onSuccess: () => {
+    onSuccess: data => {
       queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+      if (options?.onSuccess) {
+        options.onSuccess(data);
+      }
+    },
+    onError: error => {
+      if (options?.onError) {
+        options.onError(error);
+      }
     },
     mutationKey: ["CREATE_PROJECT"],
   });
 
-export const useCreateProjectServer = () =>
+export const useCreateProjectServer = (options?: {
+  onSuccess?: (data: ResponseMutateProject) => void;
+  onError?: (error: AxiosError<ResponseMutateProject>) => void;
+}) =>
   useMutation<
     ResponseMutateProject,
     AxiosError<ResponseMutateProject>,
     PayloadCreateProject
   >({
-    mutationFn: data => createProjectAction(data),
-    onSuccess: () => {
+    mutationFn: async data => {
+      const res = await createProjectAction(data);
+
+      return res;
+    },
+    onSuccess: data => {
+      // Invalidate queries untuk refresh data
       queryClient.invalidateQueries({ queryKey: [API_TAGS.PROJECTS] });
+
+      // Call custom onSuccess callback jika ada
+      if (options?.onSuccess) {
+        options.onSuccess(data);
+      }
+    },
+    onError: error => {
+      // Call custom onError callback jika ada
+      if (options?.onError) {
+        options.onError(error);
+      }
     },
     mutationKey: ["CREATE_PROJECT_SERVER"],
   });

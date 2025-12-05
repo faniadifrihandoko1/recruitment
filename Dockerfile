@@ -11,12 +11,6 @@ RUN npm ci
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Accept build arguments for environment variables
-ARG NEXT_PUBLIC_API_HOST
-
-# Set environment variables for build (Next.js needs NEXT_PUBLIC_ prefix for client-side)
-ENV NEXT_PUBLIC_API_HOST=$NEXT_PUBLIC_API_HOST
-ENV NEXT_TELEMETRY_DISABLED=1
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules

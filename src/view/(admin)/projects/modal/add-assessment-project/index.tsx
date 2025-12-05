@@ -6,7 +6,6 @@ import { CustomTextField } from "@/component/shared/input/custom-textfield";
 import ModalCustom from "@/component/shared/modal/modal-custom";
 import { useCreateProject } from "@/hooks/mutation/project/use-project";
 import { Grid } from "@mui/material";
-import { AxiosError } from "axios";
 import { useTranslations } from "next-intl";
 import { enqueueSnackbar } from "notistack";
 import { useForm } from "react-hook-form";
@@ -26,7 +25,6 @@ export const AddAssessmentProjectModal = ({
 }: AddAssessmentProjectModalProps) => {
   const t = useTranslations("page.project");
   const tValidation = useTranslations("page.project.validation");
-  const { mutateAsync: createProject, isPending } = useCreateProject();
   const form = useForm<ProjectFormSchema>({
     defaultValues: {
       name: "",
@@ -34,29 +32,51 @@ export const AddAssessmentProjectModal = ({
     },
     resolver: zodResolver(createProjectSchema(tValidation)),
   });
+  const { mutate: createProject, isPending } = useCreateProject({
+    onSuccess: res => {
+      const statusValue: unknown = res?.status;
+      const codeValue: unknown = res?.code;
 
-  const { handleSubmit, control } = form;
+      const isStatusTrue =
+        statusValue === true ||
+        String(statusValue).toLowerCase() === "true" ||
+        statusValue === 1;
+      const isCodeSuccess =
+        codeValue === 200 ||
+        codeValue === 201 ||
+        Number(codeValue) === 200 ||
+        Number(codeValue) === 201;
 
-  const onSubmit = async (data: ProjectFormSchema) => {
-    try {
-      const res = await createProject(data);
+      const isSuccess = isStatusTrue || isCodeSuccess;
 
-      if (res.status && res.code === 200) {
-        enqueueSnackbar(t("modal.modal-add.success"), {
+      if (isSuccess) {
+        enqueueSnackbar(res?.message || t("modal.modal-add.success"), {
           variant: "success",
         });
         toggle();
+        // Reset form setelah sukses
+        form.reset();
       } else {
-        throw new Error(res.message);
+        // Handle jika status false atau code bukan 200/201
+        enqueueSnackbar(res?.message || t("modal.modal-add.error"), {
+          variant: "error",
+        });
       }
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message?: string }>;
+    },
+    onError: error => {
+      // Handle error dari server
       const message =
-        axiosError.response?.data?.message ?? t("modal.modal-add.error");
+        error.response?.data?.message ?? t("modal.modal-add.error");
       enqueueSnackbar(message, {
         variant: "error",
       });
-    }
+    },
+  });
+
+  const { handleSubmit, control } = form;
+
+  const onSubmit = (data: ProjectFormSchema) => {
+    createProject(data);
   };
 
   return (
