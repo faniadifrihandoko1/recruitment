@@ -2,12 +2,11 @@
 
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
-import { ProjectInterface } from "@/types/project";
+import { useGetProjectById } from "@/hooks/query/project/use-project";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { RowProjects } from "../table/list-column";
 import { TabJobVacancies } from "./tab/tab-job-vacancies";
 import { TabOverview } from "./tab/tab-overview";
 import { stats } from "./utils/data";
@@ -39,12 +38,11 @@ export const DetailProjectView = () => {
   const projectId = params?.id as string;
   const t = useTranslations("page.project");
   const [activeTab, setActiveTab] = useState(0);
-
-  const project: ProjectInterface | undefined = RowProjects.find(
-    p => p.id === Number(projectId)
+  const { data: projectData, isLoading: isLoadingProject } = useGetProjectById(
+    Number(projectId)
   );
 
-  if (!project) {
+  if (!projectData || isLoadingProject) {
     return (
       <PageContainer title={t("detail.title")} hideTitle>
         <Box>
@@ -62,7 +60,7 @@ export const DetailProjectView = () => {
     <PageContainer
       title={t("detail.title")}
       hideTitle
-      breadcrumbData={{ name: project.name }}
+      breadcrumbData={{ name: projectData.data.name }}
       showBackButton
       backHref="/projects"
     >
@@ -112,7 +110,7 @@ export const DetailProjectView = () => {
           </DashboardCard>
 
           <TabPanel value={activeTab} index={0}>
-            <TabOverview stats={stats} project={project} />
+            <TabOverview stats={stats} project={projectData.data} />
           </TabPanel>
 
           <TabPanel value={activeTab} index={1}>

@@ -60,5 +60,6 @@ export const useUnauthorizedModal = () => {
       "useUnauthorizedModal must be used within UnauthorizedModalProvider"
     );
   }
+
   return context;
 };

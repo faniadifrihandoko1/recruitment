@@ -44,6 +44,13 @@ export default function ListAssessmentProject() {
           paginationMode="server"
           onRowClick={params => handleRowClick(params.row as ProjectInterface)}
           hideFooterSelectedRowCount
+          sx={{
+            "& .MuiDataGrid-cell": {
+              fontSize: "0.875rem",
+              color: "#2A3547",
+              cursor: "pointer",
+            },
+          }}
           loading={isLoadingProjects}
           disableColumnMenu
           disableRowSelectionOnClick

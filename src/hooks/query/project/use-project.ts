@@ -15,6 +15,13 @@ export type ResponseGetProjects = {
   meta: MetaPagination;
 };
 
+export type ResponseGetProjectById = {
+  status: boolean;
+  code: number;
+  message: string;
+  data: ProjectInterface;
+}
+
 export const useGetProjects = (params?: GetProjectsParams) => {
   const { page = 1, limit = 10 } = params || {};
 
@@ -47,5 +54,16 @@ export const useGetProjectsServer = (params?: GetProjectsParams) => {
       return res;
     },
     queryKey: [API_TAGS.PROJECTS, page, limit],
+  });
+};
+
+export const useGetProjectById = (id: number) => { 
+  return useQuery<ResponseGetProjectById, AxiosError<ResponseGetProjectById>>({
+    queryFn: async () => {
+      const res = await axiosClient.get<ResponseGetProjectById>(`${getApi("project")}/${id}`);
+
+      return res.data;
+    },
+    queryKey: [API_TAGS.PROJECTS, id],
   });
 };
