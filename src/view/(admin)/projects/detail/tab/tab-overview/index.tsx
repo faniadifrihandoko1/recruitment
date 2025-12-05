@@ -11,7 +11,7 @@ interface TabOverviewProps {
     completedTests: number;
     pendingTests: number;
   };
-  project: ProjectInterface;
+  project?: ProjectInterface | null;
 }
 
 export const TabOverview = ({ stats, project }: TabOverviewProps) => {
@@ -141,7 +141,7 @@ export const TabOverview = ({ stats, project }: TabOverviewProps) => {
                   {t("detail.overview.description")}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                  {project.description}
+                  {project?.description ?? "No description"}
                 </Typography>
               </Box>
               <Box>

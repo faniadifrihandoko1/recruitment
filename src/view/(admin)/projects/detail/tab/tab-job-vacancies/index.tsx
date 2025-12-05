@@ -2,25 +2,15 @@
 import DashboardCard from "@/component/shared/DashboardCard";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  Box,
-  Button,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { AddJobVacanciesModal } from "../../modal/add-job-vacancies";
 import JobVacanciesList from "../../table/table-detail-job-vacanies/list";
-import { MockJobVacancies } from "../../table/table-detail-job-vacanies/list-column";
 
-export const TabJobVacancies = () => {
+export const TabJobVacancies = ({ projectId }: { projectId: number }) => {
   const t = useTranslations("page.project");
   const [openAdd, setOpenAdd] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleAddModal = () => setOpenAdd(!openAdd);
 
@@ -34,7 +24,7 @@ export const TabJobVacancies = () => {
           alignItems={{ xs: "stretch", sm: "center" }}
           justifyContent={{ xs: "stretch", sm: "flex-end" }}
         >
-          <TextField
+          {/* <TextField
             fullWidth
             placeholder={t("detail.jobVacancies.search")}
             value={searchQuery}
@@ -48,7 +38,7 @@ export const TabJobVacancies = () => {
               ),
             }}
             sx={{ maxWidth: { sm: "400px" } }}
-          />
+          /> */}
           <Button
             variant="outlined"
             color="inherit"
@@ -73,35 +63,9 @@ export const TabJobVacancies = () => {
       </DashboardCard>
 
       {/* Table */}
-      {MockJobVacancies.length > 0 ? (
-        <JobVacanciesList
-          data={MockJobVacancies.filter(
-            vacancy =>
-              vacancy.jobTitle
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase()) ||
-              vacancy.department
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase())
-          )}
-        />
-      ) : (
-        <DashboardCard>
-          <Box
-            sx={{
-              minHeight: 400,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "text.secondary",
-            }}
-          >
-            <Typography variant="body2">
-              {t("detail.jobVacancies.noVacancies")}
-            </Typography>
-          </Box>
-        </DashboardCard>
-      )}
+
+      <JobVacanciesList projectId={projectId} />
+
       {openAdd && (
         <AddJobVacanciesModal openModal={openAdd} toggle={toggleAddModal} />
       )}

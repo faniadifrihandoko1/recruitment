@@ -1,6 +1,7 @@
 "use client";
 import PaginationSectionTableCustom from "@/component/shared/custom-pagination";
 import DashboardCard from "@/component/shared/DashboardCard";
+import { useGetVacancies } from "@/hooks/query/vacancies/use-vacancies";
 import { Box, SelectChangeEvent } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
@@ -17,42 +18,39 @@ export interface JobVacancy {
 }
 
 interface JobVacanciesListProps {
-  data: JobVacancy[];
+  projectId: number;
 }
 
-export default function JobVacanciesList({ data }: JobVacanciesListProps) {
+export default function JobVacanciesList({ projectId }: JobVacanciesListProps) {
   const columns = useJobVacanciesColumn();
   const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [pageSize, setPageSize] = useState<number>(5);
+  const { data: dataVacancies, isLoading: isLoadingVacancies } =
+    useGetVacancies({
+      page,
+      limit: pageSize,
+      project_id: projectId,
+    });
 
-  const totalRecords = data.length;
   const handleLimitChange = (event: SelectChangeEvent) => {
-    setIsLoading(true);
     setPageSize(Number(event.target.value));
     setPage(1);
-
-    setTimeout(() => setIsLoading(false), 500);
   };
 
   const handlePageChange = (_event: unknown, newPage: number) => {
-    setIsLoading(true);
     setPage(newPage);
-
-    setTimeout(() => setIsLoading(false), 500);
   };
-
-  const paginatedRows = data.slice((page - 1) * pageSize, page * pageSize);
 
   return (
     <DashboardCard sx={{ paddingY: 1 }}>
       <Box width="100%">
         <DataGrid
-          rows={paginatedRows}
+          rows={dataVacancies?.data || []}
           columns={columns}
           rowHeight={55}
           hideFooterSelectedRowCount
-          loading={isLoading}
+          loading={isLoadingVacancies}
+          hideFooter={dataVacancies?.data?.length === 0}
           slots={{
             pagination: () => (
               <Box
@@ -66,7 +64,7 @@ export default function JobVacanciesList({ data }: JobVacanciesListProps) {
                 <PaginationSectionTableCustom
                   page={page}
                   pageSize={pageSize}
-                  recordsFiltered={totalRecords}
+                  recordsFiltered={dataVacancies?.meta?.total || 0}
                   handleLimitChange={handleLimitChange}
                   handlePageChange={handlePageChange}
                 />

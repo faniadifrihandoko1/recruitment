@@ -3,7 +3,7 @@
 import DashboardCard from "@/component/shared/DashboardCard";
 import PageContainer from "@/component/shared/page-container";
 import { useGetProjectById } from "@/hooks/query/project/use-project";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -38,19 +38,17 @@ export const DetailProjectView = () => {
   const projectId = params?.id as string;
   const t = useTranslations("page.project");
   const [activeTab, setActiveTab] = useState(0);
-  const { data: projectData, isLoading: isLoadingProject } = useGetProjectById(
-    Number(projectId)
-  );
+  const { data: projectData } = useGetProjectById(Number(projectId));
 
-  if (!projectData || isLoadingProject) {
-    return (
-      <PageContainer title={t("detail.title")} hideTitle>
-        <Box>
-          <Typography>Project not found</Typography>
-        </Box>
-      </PageContainer>
-    );
-  }
+  // if (!projectData || isLoadingProject) {
+  //   return (
+  //     <PageContainer title={t("detail.title")} hideTitle>
+  //       <Box>
+  //         <Typography>Project not found</Typography>
+  //       </Box>
+  //     </PageContainer>
+  //   );
+  // }
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setActiveTab(newValue);
@@ -60,7 +58,7 @@ export const DetailProjectView = () => {
     <PageContainer
       title={t("detail.title")}
       hideTitle
-      breadcrumbData={{ name: projectData.data.name }}
+      breadcrumbData={{ name: projectData?.data?.name ?? "Project not found" }}
       showBackButton
       backHref="/projects"
     >
@@ -110,11 +108,20 @@ export const DetailProjectView = () => {
           </DashboardCard>
 
           <TabPanel value={activeTab} index={0}>
-            <TabOverview stats={stats} project={projectData.data} />
+            <TabOverview
+              stats={stats}
+              project={
+                projectData?.data ?? {
+                  id: 0,
+                  name: "Project not found",
+                  description: "No description",
+                }
+              }
+            />
           </TabPanel>
 
           <TabPanel value={activeTab} index={1}>
-            <TabJobVacancies />
+            <TabJobVacancies projectId={Number(projectId)} />
           </TabPanel>
         </Box>
       </Box>

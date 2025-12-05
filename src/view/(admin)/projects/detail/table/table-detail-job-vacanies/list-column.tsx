@@ -1,4 +1,5 @@
 "use client";
+import { VacanciesInterface, VacancyStatus } from "@/types/vacancies";
 import { Box, Chip, Typography } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import dayjs from "dayjs";
@@ -21,33 +22,33 @@ export function useJobVacanciesColumn() {
         },
       },
       {
-        field: "jobTitle",
+        field: "name",
         headerName: t("table.jobTitle"),
         flex: 1,
         minWidth: 200,
-        renderCell: (params: GridRenderCellParams<JobVacancy>) => (
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <strong>{params.value}</strong>
         ),
       },
       {
-        field: "openDate",
+        field: "start",
         headerName: t("table.openDate"),
         flex: 1,
         minWidth: 150,
         display: "flex",
-        renderCell: (params: GridRenderCellParams<JobVacancy>) => (
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <Typography fontSize={13}>
             {dayjs(params.value).format("DD MMM YYYY")}
           </Typography>
         ),
       },
       {
-        field: "closeDate",
+        field: "end",
         headerName: t("table.closeDate"),
         flex: 1,
         minWidth: 150,
         display: "flex",
-        renderCell: (params: GridRenderCellParams<JobVacancy>) => (
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <Typography fontSize={13}>
             {dayjs(params.value).format("DD MMM YYYY")}
           </Typography>
@@ -57,56 +58,46 @@ export function useJobVacanciesColumn() {
         field: "status",
         headerName: t("table.status"),
         width: 150,
-        renderCell: (params: GridRenderCellParams<JobVacancy>) => {
-          const status = params.value as string;
-          const getStatusLabel = (status: string) => {
-            switch (status.toLowerCase()) {
-              case "cv_screening":
-              case "cvscreening":
-                return t("status.cvScreening");
-              case "online_test":
-              case "onlinetest":
-                return t("status.onlineTest");
-              case "interview":
-                return t("status.interview");
-              case "psikotest":
-                return t("status.psikotest");
-              case "others":
-                return t("status.others");
-              default:
-                return status;
-            }
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => {
+          const status = (params.value as VacancyStatus) || "draft";
+          const normalizedStatus = status.toLowerCase() as VacancyStatus;
+
+          const statusMeta: Record<
+            VacancyStatus,
+            { label: string; bg: string; color: string }
+          > = {
+            draft: {
+              label: t("status.draft"),
+              bg: "#fff3e0",
+              color: "#ef6c00",
+            },
+            open: {
+              label: t("status.open"),
+              bg: "#e8f5e9",
+              color: "#2e7d32",
+            },
+            closed: {
+              label: t("status.closed"),
+              bg: "#fce4ec",
+              color: "#c2185b",
+            },
+            cancelled: {
+              label: t("status.cancelled"),
+              bg: "#eceff1",
+              color: "#546e7a",
+            },
           };
 
-          const getStatusColor = (status: string) => {
-            switch (status.toLowerCase()) {
-              case "cv_screening":
-              case "cvscreening":
-                return { bg: "#e3f2fd", color: "#1976d2" };
-              case "online_test":
-              case "onlinetest":
-                return { bg: "#f3e5f5", color: "#7b1fa2" };
-              case "interview":
-                return { bg: "#fff3e0", color: "#f57c00" };
-              case "psikotest":
-                return { bg: "#e8f5e9", color: "#388e3c" };
-              case "others":
-                return { bg: "#f5f5f5", color: "#616161" };
-              default:
-                return { bg: "#f5f5f5", color: "#757575" };
-            }
-          };
-
-          const colors = getStatusColor(status);
-          const label = getStatusLabel(status);
+          const { label, bg, color } =
+            statusMeta[normalizedStatus] ?? statusMeta.draft;
 
           return (
             <Chip
               label={label}
               size="small"
               sx={{
-                backgroundColor: colors.bg,
-                color: colors.color,
+                backgroundColor: bg,
+                color,
                 fontWeight: 500,
                 fontSize: "0.8125rem",
                 height: "24px",
@@ -124,7 +115,7 @@ export function useJobVacanciesColumn() {
         headerAlign: "center",
         sortable: false,
         filterable: false,
-        renderCell: (params: GridRenderCellParams<JobVacancy>) => (
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <Box
             sx={{
               width: "100%",

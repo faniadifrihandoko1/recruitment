@@ -8,11 +8,11 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import { MouseEvent, useState } from "react";
 
+import { VacanciesInterface } from "@/types/vacancies";
 import { ModalModules } from "../../modal/modal-modules";
-import { JobVacancy } from "./list";
 
 interface JobVacancyOptionsProps {
-  row: JobVacancy;
+  row: VacanciesInterface;
 }
 
 export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {

@@ -150,7 +150,7 @@
           "filter": "Filter",
           "add": "Tambah Lowongan",
           "table": {
-            "no": "No",
+            "no": "ID",
             "jobTitle": "Judul Pekerjaan",
             "openDate": "Tanggal Mulai",
             "closeDate": "Tanggal Selesai",
@@ -158,11 +158,10 @@
             "actions": "Aksi"
           },
           "status": {
-            "cvScreening": "CV Screening",
-            "onlineTest": "Online Test",
-            "interview": "Interview",
-            "psikotest": "Psikotest",
-            "others": "Others"
+            "draft": "Draf",
+            "open": "Terbuka",
+            "closed": "Ditutup",
+            "cancelled": "Dibatalkan"
           },
           "form": {
             "positionTitle": "Judul Posisi",
@@ -218,7 +217,7 @@
         },
         "table": {
           "table-modules": {
-            "no": "No",
+            "no": "ID",
             "moduleName": "Nama Modul",
             "planStartDate": "Tanggal Mulai",
             "planEndDate": "Tanggal Selesai",

@@ -40,8 +40,6 @@ export default function ListAssessmentProject() {
           rows={dataProjects?.data || []}
           columns={columns}
           rowHeight={64}
-          rowCount={dataProjects?.meta?.total || 0}
-          paginationMode="server"
           onRowClick={params => handleRowClick(params.row as ProjectInterface)}
           hideFooterSelectedRowCount
           sx={{

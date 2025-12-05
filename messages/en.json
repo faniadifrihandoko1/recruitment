@@ -151,7 +151,7 @@
           "filter": "Filter",
           "add": "Add Vacancy",
           "table": {
-            "no": "No",
+            "no": "ID",
             "jobTitle": "Job Title",
             "openDate": "Open Date",
             "closeDate": "Close Date",
@@ -159,11 +159,10 @@
             "actions": "Actions"
           },
           "status": {
-            "cvScreening": "CV Screening",
-            "onlineTest": "Online Test",
-            "interview": "Interview",
-            "psikotest": "Psikotest",
-            "others": "Others"
+            "draft": "Draft",
+            "open": "Open",
+            "closed": "Closed",
+            "cancelled": "Cancelled"
           },
           "form": {
             "positionTitle": "Position Title",
@@ -218,7 +217,7 @@
         },
         "table": {
           "table-modules": {
-            "no": "No",
+            "no": "ID",
             "moduleName": "Module Name",
             "planStartDate": "Plan Start Date",
             "planEndDate": "Plan End Date",
