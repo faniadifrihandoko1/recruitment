@@ -19,7 +19,11 @@ import {
 import { useTranslations } from "next-intl";
 import { UseFormReturn, useFieldArray } from "react-hook-form";
 import { JobVacancyFormSchema } from "../../schema/job-vacancies.schema";
-import { employeeTypes } from "../../utils/data";
+import {
+  employeeTypes,
+  jobRequirementTypes,
+  jobStatuses,
+} from "../../utils/data";
 
 interface FormJobVacanciesProps {
   form: UseFormReturn<JobVacancyFormSchema>;
@@ -37,7 +41,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
     remove: removeJobDescription,
   } = useFieldArray({
     control,
-    name: "jobDescriptions",
+    name: "job_description",
   });
 
   const {
@@ -46,7 +50,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
     remove: removeJobRequirement,
   } = useFieldArray({
     control,
-    name: "jobRequirements",
+    name: "job_requirement",
   });
 
   return (
@@ -63,9 +67,21 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
           <Grid size={6}>
             <CustomTextField<JobVacancyFormSchema>
               control={control}
-              name="positionTitle"
+              name="name"
               label={tForm("positionTitle")}
               required
+            />
+          </Grid>
+          <Grid size={6}>
+            <CustomStaticAutoComplete<JobVacancyFormSchema>
+              control={control}
+              name="type"
+              label={tForm("employeeType")}
+              required
+              getOptionLabel={(option: any) => option.label}
+              getOptionKey={(option: any) => option.id}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
+              options={employeeTypes}
             />
           </Grid>
 
@@ -74,27 +90,25 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
               control={control}
               name="location"
               label={tForm("location")}
-              required
-            />
-          </Grid>
-          <Grid size={6}>
-            <CustomTextAreaAutoSize<JobVacancyFormSchema>
-              control={control}
-              name="location"
-              label={tForm("location")}
-              required
             />
           </Grid>
           <Grid size={6}>
             <CustomStaticAutoComplete<JobVacancyFormSchema>
               control={control}
-              name="employeeType"
-              label={tForm("employeeType")}
+              name="status"
+              label={"Status"}
               required
-              getOptionLabel={(option: any) => option.name}
+              getOptionLabel={(option: any) => option.label}
               getOptionKey={(option: any) => option.id}
               isOptionEqualToValue={(option, value) => option.id === value.id}
-              options={employeeTypes as any}
+              options={jobStatuses}
+            />
+          </Grid>
+          <Grid size={12}>
+            <CustomTextAreaAutoSize<JobVacancyFormSchema>
+              control={control}
+              name="description"
+              label="Description"
             />
           </Grid>
         </Grid>
@@ -122,7 +136,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
             variant="outlined"
             size="small"
             startIcon={<AddIcon />}
-            onClick={() => appendJobDescription("")}
+            onClick={() => appendJobDescription({ title: "" })}
             sx={{ textTransform: "none" }}
           >
             {tForm("add")}
@@ -141,7 +155,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
               <Box sx={{ flex: 1 }}>
                 <CustomTextAreaAutoSize<JobVacancyFormSchema>
                   control={control}
-                  name={`jobDescriptions.${index}` as any}
+                  name={`job_description.${index}.title`}
                   label={`${tForm("jobDescriptions")} ${index + 1}`}
                   required
                 />
@@ -190,7 +204,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
             variant="outlined"
             size="small"
             startIcon={<AddIcon />}
-            onClick={() => appendJobRequirement({ text: "", type: null })}
+            onClick={() => appendJobRequirement({ title: "", type: null })}
             sx={{ textTransform: "none" }}
           >
             {tForm("add")}
@@ -210,7 +224,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
                 <Box sx={{ flex: 2 }}>
                   <CustomTextAreaAutoSize<JobVacancyFormSchema>
                     control={control}
-                    name={`jobRequirements.${index}.text` as any}
+                    name={`job_requirement.${index}.title`}
                     label={`${tForm("jobRequirements")} ${index + 1}`}
                     required
                   />
@@ -218,22 +232,11 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
                 <Box sx={{ flex: 1 }}>
                   <CustomStaticAutoComplete<JobVacancyFormSchema>
                     control={control}
-                    name={`jobRequirements.${index}.type` as any}
+                    name={`job_requirement.${index}.type`}
                     label={tForm("requirementType")}
                     required
-                    options={[
-                      {
-                        id: 1,
-                        label: "Must Have",
-                      },
-                      {
-                        id: 2,
-                        label: "Nice to Have",
-                      },
-                    ]}
-                    getOptionLabel={(option: any) =>
-                      option.label || option.name
-                    }
+                    options={jobRequirementTypes}
+                    getOptionLabel={(option: any) => option.label}
                     getOptionKey={(option: any) => option.id}
                     isOptionEqualToValue={(option, value) =>
                       option.id === value.id
@@ -286,7 +289,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
           <Grid size={4}>
             <CustomTextField<JobVacancyFormSchema>
               control={control}
-              name="openDate"
+              name="open_date"
               label={tForm("openDate")}
               type="date"
               required
@@ -296,7 +299,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
           <Grid size={4}>
             <CustomTextField<JobVacancyFormSchema>
               control={control}
-              name="closeDate"
+              name="close_date"
               label={tForm("closeDate")}
               type="date"
               required
@@ -324,8 +327,8 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
                 onChange={e => {
                   form.setValue("showSalary", e.target.checked);
                   if (!e.target.checked) {
-                    form.setValue("minSalary", null);
-                    form.setValue("maxSalary", null);
+                    form.setValue("min_salary", 0);
+                    form.setValue("max_salary", undefined);
                   }
                 }}
               />
@@ -338,7 +341,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
             <Grid size={6}>
               <CustomTextField<JobVacancyFormSchema>
                 control={control}
-                name="minSalary"
+                name="min_salary"
                 label={tForm("minSalary")}
                 type="number"
               />
@@ -346,7 +349,7 @@ export const FormJobVacancies = ({ form }: FormJobVacanciesProps) => {
             <Grid size={6}>
               <CustomTextField<JobVacancyFormSchema>
                 control={control}
-                name="maxSalary"
+                name="max_salary"
                 label={tForm("maxSalary")}
                 type="number"
               />

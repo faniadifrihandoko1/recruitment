@@ -7,15 +7,44 @@ export const stats = {
 
 export const employeeTypes = [
   {
-    id: 12,
-    name: "Full Time",
+    id: 1,
+    label: "Full Time",
+    name: "fulltime",
   },
   {
-    id: 13,
-    name: "Part Time",
+    id: 2,
+    name: "parttime",
+    label: "Part Time",
   },
   {
-    id: 14,
-    name: "Contract",
+    id: 3,
+    name: "contract",
+    label: "Contract",
+  },
+];
+
+export const jobRequirementTypes = [
+  {
+    id: 1,
+    label: "Must Have",
+    name: "MUST_HAVE",
+  },
+  {
+    id: 2,
+    label: "Nice to Have",
+    name: "NICE_TO_HAVE",
+  },
+];
+
+export const jobStatuses = [
+  {
+    id: 1,
+    label: "Open",
+    name: "open",
+  },
+  {
+    id: 2,
+    label: "Closed",
+    name: "closed",
   },
 ];

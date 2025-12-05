@@ -9,36 +9,42 @@ type ValidationTranslator = ReturnType<
 export const createJobVacancySchema = (t: ValidationTranslator) =>
   z
     .object({
-      positionTitle: z.string().min(1, t("positionTitleRequired")),
-
-      jobDescriptions: z
-        .array(z.string().min(3, t("jobDescriptionMinLength")))
-        .min(1, t("jobDescriptionMinItems")),
-
-      jobRequirements: z.array(
-        z
-          .object({
-            text: z.string().min(3, t("jobRequirementMinLength")),
-            type: generalOptionSchema.superRefine((data, ctx) => {
-              if (!data) {
-                ctx.addIssue({
-                  code: z.ZodIssueCode.custom,
-                  message: "Requirement type is required",
-                });
-              }
-            }),
+      name: z.string().min(1, t("positionTitleRequired")),
+      description: z.string().optional().nullable(),
+      job_description: z
+        .array(
+          z.object({
+            title: z.string().min(3, t("jobDescriptionMinLength")),
           })
-          .transform(data => {
-            const newData: any = data;
+        )
+        .optional(),
 
-            if (data.type) newData.type = data.type.id;
+      job_requirement: z
+        .array(
+          z
+            .object({
+              title: z.string().min(3, t("jobRequirementMinLength")),
+              type: generalOptionSchema.superRefine((data, ctx) => {
+                if (!data) {
+                  ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "Requirement type is required",
+                  });
+                }
+              }),
+            })
+            .transform(data => {
+              const newData: any = data;
 
-            return newData;
-          })
-      ),
+              if (data.type) newData.type = data.type.name;
+
+              return newData;
+            })
+        )
+        .optional(),
       // .min(1, t("jobRequirementMinItems")),
 
-      employeeType: generalOptionSchema.superRefine((data, ctx) => {
+      type: generalOptionSchema.superRefine((data, ctx) => {
         if (!data) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -46,6 +52,18 @@ export const createJobVacancySchema = (t: ValidationTranslator) =>
           });
         }
       }),
+      status: generalOptionSchema.superRefine((data, ctx) => {
+        if (!data) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: t("employeeTypeRequired"),
+          });
+        }
+      }),
+
+      location: z.string().nullable().optional(),
+      min_salary: z.string().nullable().optional(),
+      max_salary: z.string().nullable().optional(),
       openings: z.string().superRefine((data, ctx) => {
         if (!data && data !== "0") {
           ctx.addIssue({
@@ -55,52 +73,18 @@ export const createJobVacancySchema = (t: ValidationTranslator) =>
         }
       }),
 
-      location: z.string().superRefine((data, ctx) => {
-        if (!data) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: t("locationRequired"),
-          });
-        }
-      }),
-
-      minSalary: z.string().nullable().optional(),
-      maxSalary: z.string().nullable().optional(),
-
       showSalary: z.boolean(),
 
-      openDate: z.string().superRefine((data, ctx) => {
-        if (!data) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: t("openDateRequired"),
-          });
-        }
-      }),
+      open_date: z.string().nullable().optional(),
 
-      closeDate: z.string().superRefine((data, ctx) => {
-        if (!data) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: t("closeDateRequired"),
-          });
-        }
-      }),
+      close_date: z.string().nullable().optional(),
     })
-    .superRefine((data, ctx) => {
-      // salary validation
-      if (data.maxSalary && data.minSalary && data.maxSalary < data.minSalary) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: t("maxSalaryLessThanMin"),
-          path: ["maxSalary"],
-        });
-      }
-    })
+
     .transform(data => {
       const newData: any = data;
 
-      if (data.employeeType) newData.employeeType = data.employeeType.id;
+      if (data.type) newData.type = data.type.name;
+      if (data.status) newData.status = data.status.name;
 
       return newData;
     });

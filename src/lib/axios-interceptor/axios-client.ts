@@ -18,8 +18,9 @@ axiosClient.interceptors.response.use(
   error => {
     // Check if error is Unauthorized (401 status or message)
     const isUnauthorized =
-      error.response?.status === 401 &&
-      error.response?.data?.message === "Unauthorized";
+      // (error.response?.status === 401 &&
+      //   error.response?.data?.message === "Unauthorized") ||
+      error.response?.data?.error?.details?.type === "Unauthorized";
 
     if (isUnauthorized) {
       // Trigger unauthorized modal
