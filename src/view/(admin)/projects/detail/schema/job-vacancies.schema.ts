@@ -9,6 +9,7 @@ type ValidationTranslator = ReturnType<
 export const createJobVacancySchema = (t: ValidationTranslator) =>
   z
     .object({
+      project_id: z.number().min(1, "Project ID is required"),
       name: z.string().min(1, t("positionTitleRequired")),
       description: z.string().optional().nullable(),
       job_description: z

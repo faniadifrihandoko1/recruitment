@@ -47,6 +47,7 @@ export default function JobVacanciesList({ projectId }: JobVacanciesListProps) {
         <DataGrid
           rows={dataVacancies?.data || []}
           columns={columns}
+          showCellVerticalBorder
           rowHeight={55}
           hideFooterSelectedRowCount
           loading={isLoadingVacancies}

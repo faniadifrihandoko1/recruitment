@@ -253,6 +253,7 @@ const baselightTheme = createTheme({
           },
           "& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell": {
             padding: "0px 15px",
+            // borderRight: "2px solid #E5EAEF",
           },
           "& .MuiDataGrid-cell": {
             fontSize: 12,

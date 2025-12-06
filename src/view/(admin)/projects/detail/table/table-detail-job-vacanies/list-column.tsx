@@ -7,25 +7,26 @@ import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { JobVacancy } from "./list";
 import { JobVacancyOptions } from "./list-options";
+import { ShareButton } from "./share-button";
 
 export function useJobVacanciesColumn() {
   const t = useTranslations("page.project.detail.jobVacancies");
 
   return useMemo(() => {
     const columns: GridColDef[] = [
-      {
-        field: "id",
-        headerName: t("table.no"),
-        width: 70,
-        renderCell: (params: GridRenderCellParams) => {
-          return params.rowNode?.id as number;
-        },
-      },
+      // {
+      //   field: "id",
+      //   headerName: t("table.no"),
+      //   width: 70,
+      //   renderCell: (params: GridRenderCellParams) => {
+      //     return params.rowNode?.id as number;
+      //   },
+      // },
       {
         field: "name",
         headerName: t("table.jobTitle"),
-        flex: 1,
-        minWidth: 200,
+        flex: 0.75,
+        minWidth: 150,
         renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <strong>{params.value}</strong>
         ),
@@ -33,8 +34,10 @@ export function useJobVacanciesColumn() {
       {
         field: "start",
         headerName: t("table.openDate"),
-        flex: 1,
-        minWidth: 150,
+        flex: 0.7,
+        minWidth: 80,
+        align: "center",
+        headerAlign: "center",
         display: "flex",
         renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <Typography fontSize={13}>
@@ -45,8 +48,10 @@ export function useJobVacanciesColumn() {
       {
         field: "end",
         headerName: t("table.closeDate"),
-        flex: 1,
-        minWidth: 150,
+        flex: 0.7,
+        minWidth: 80,
+        align: "center",
+        headerAlign: "center",
         display: "flex",
         renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
           <Typography fontSize={13}>
@@ -57,7 +62,11 @@ export function useJobVacanciesColumn() {
       {
         field: "status",
         headerName: t("table.status"),
-        width: 150,
+        flex: 0.5,
+        minWidth: 50,
+        align: "center",
+        headerAlign: "center",
+
         renderCell: (params: GridRenderCellParams<VacanciesInterface>) => {
           const status = (params.value as VacancyStatus) || "draft";
           const normalizedStatus = status.toLowerCase() as VacancyStatus;
@@ -106,7 +115,30 @@ export function useJobVacanciesColumn() {
           );
         },
       },
-
+      {
+        field: "share",
+        headerName: t("table.share"),
+        flex: 1.5,
+        minWidth: 200,
+        align: "center",
+        headerAlign: "center",
+        sortable: false,
+        filterable: false,
+        renderCell: (params: GridRenderCellParams<VacanciesInterface>) => (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              px: 1,
+            }}
+            onClick={event => event.stopPropagation()}
+          >
+            <ShareButton row={params.row} />
+          </Box>
+        ),
+      },
       {
         field: "actions",
         headerName: t("table.actions"),

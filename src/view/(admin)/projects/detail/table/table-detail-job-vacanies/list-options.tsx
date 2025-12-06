@@ -5,7 +5,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-import { IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { MouseEvent, useState } from "react";
 
 import { VacanciesInterface } from "@/types/vacancies";
@@ -16,6 +17,7 @@ interface JobVacancyOptionsProps {
 }
 
 export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
+  const t = useTranslations("page.project.detail.jobVacancies");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openModules, setOpenModules] = useState(false);
   const open = Boolean(anchorEl);
@@ -32,7 +34,18 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
 
   return (
     <>
-      <IconButton onClick={handleClick} size="small">
+      <IconButton
+        onClick={handleClick}
+        size="small"
+        sx={{
+          color: "#5A6A85",
+          "&:hover": {
+            backgroundColor: "#E6FFFA",
+            color: "#13DEB9",
+          },
+          transition: "all 0.2s ease-in-out",
+        }}
+      >
         <MoreVert fontSize="small" />
       </IconButton>
       <Menu
@@ -42,20 +55,31 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
         PaperProps={{
           sx: {
             backgroundColor: "#FFFFFF",
-            color: "#000000",
-            borderRadius: 2,
-            boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+            borderRadius: "12px",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+            border: "1px solid #E5EAEF",
+            mt: 0.5,
+            overflow: "hidden",
+          },
+        }}
+        MenuListProps={{
+          sx: {
+            py: 0,
+            "& .MuiMenuItem-root": {
+              whiteSpace: "nowrap",
+            },
           },
         }}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: "right",
         }}
       >
+        {/* View */}
         <MenuItem
           divider
           onClick={event => {
@@ -64,15 +88,51 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
             handleClose();
           }}
           sx={{
-            gap: 1.5,
+            gap: 1,
             px: 2,
-            py: 1,
-            "&:hover": { bgcolor: "grey.100" },
+            py: 1.5,
+            "&:hover": {
+              bgcolor: "#F5F7FA",
+              "& .MuiSvgIcon-root": {
+                color: "#2196F3",
+              },
+              "& .MuiTypography-root": {
+                color: "#2196F3",
+              },
+            },
+            transition: "all 0.2s ease-in-out",
           }}
         >
-          <VisibilityIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>View</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 24,
+              height: 24,
+            }}
+          >
+            <VisibilityIcon
+              sx={{
+                fontSize: 18,
+                color: "#5A6A85",
+                transition: "color 0.2s ease-in-out",
+              }}
+            />
+          </Box>
+          <Typography
+            fontSize={14}
+            sx={{
+              color: "#2A3547",
+              fontWeight: 500,
+              transition: "color 0.2s ease-in-out",
+            }}
+          >
+            View
+          </Typography>
         </MenuItem>
+
+        {/* Module */}
         <MenuItem
           divider
           onClick={event => {
@@ -80,11 +140,52 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
             console.log("Module", row);
             toggleModules();
           }}
-          sx={{ gap: 1.5, px: 2, py: 1, "&:hover": { bgcolor: "grey.100" } }}
+          sx={{
+            gap: 1,
+            px: 2,
+            py: 1.5,
+            "&:hover": {
+              bgcolor: "#F5F7FA",
+              "& .MuiSvgIcon-root": {
+                color: "#7B2CBF",
+              },
+              "& .MuiTypography-root": {
+                color: "#7B2CBF",
+              },
+            },
+            transition: "all 0.2s ease-in-out",
+          }}
         >
-          <ViewModuleIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>{"Module"}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 24,
+              height: 24,
+            }}
+          >
+            <ViewModuleIcon
+              sx={{
+                fontSize: 18,
+                color: "#5A6A85",
+                transition: "color 0.2s ease-in-out",
+              }}
+            />
+          </Box>
+          <Typography
+            fontSize={14}
+            sx={{
+              color: "#2A3547",
+              fontWeight: 500,
+              transition: "color 0.2s ease-in-out",
+            }}
+          >
+            Module
+          </Typography>
         </MenuItem>
+
+        {/* Edit */}
         <MenuItem
           divider
           onClick={event => {
@@ -93,25 +194,100 @@ export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
             handleClose();
           }}
           sx={{
-            gap: 1.5,
+            gap: 1,
             px: 2,
-            py: 1,
-            "&:hover": { bgcolor: "grey.100" },
+            py: 1.5,
+            "&:hover": {
+              bgcolor: "#F5F7FA",
+              "& .MuiSvgIcon-root": {
+                color: "#13DEB9",
+              },
+              "& .MuiTypography-root": {
+                color: "#13DEB9",
+              },
+            },
+            transition: "all 0.2s ease-in-out",
           }}
         >
-          <EditIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>Edit</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 24,
+              height: 24,
+            }}
+          >
+            <EditIcon
+              sx={{
+                fontSize: 18,
+                color: "#5A6A85",
+                transition: "color 0.2s ease-in-out",
+              }}
+            />
+          </Box>
+          <Typography
+            fontSize={14}
+            sx={{
+              color: "#2A3547",
+              fontWeight: 500,
+              transition: "color 0.2s ease-in-out",
+            }}
+          >
+            Edit
+          </Typography>
         </MenuItem>
+
+        {/* Delete */}
         <MenuItem
           onClick={event => {
             event.stopPropagation();
             console.log("Delete", row);
             handleClose();
           }}
-          sx={{ gap: 1.5, px: 2, py: 1, "&:hover": { bgcolor: "grey.100" } }}
+          sx={{
+            gap: 1,
+            px: 2,
+            py: 1.5,
+            "&:hover": {
+              bgcolor: "#F5F7FA",
+              "& .MuiSvgIcon-root": {
+                color: "#F44336",
+              },
+              "& .MuiTypography-root": {
+                color: "#F44336",
+              },
+            },
+            transition: "all 0.2s ease-in-out",
+          }}
         >
-          <DeleteIcon sx={{ fontSize: 16 }} />
-          <Typography fontSize={14}>Delete</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 24,
+              height: 24,
+            }}
+          >
+            <DeleteIcon
+              sx={{
+                fontSize: 18,
+                color: "#5A6A85",
+                transition: "color 0.2s ease-in-out",
+              }}
+            />
+          </Box>
+          <Typography
+            fontSize={14}
+            sx={{
+              color: "#2A3547",
+              fontWeight: 500,
+              transition: "color 0.2s ease-in-out",
+            }}
+          >
+            Delete
+          </Typography>
         </MenuItem>
       </Menu>
       {openModules && (

@@ -156,6 +156,7 @@
             "openDate": "Open Date",
             "closeDate": "Close Date",
             "status": "Status",
+            "share": "Share",
             "actions": "Actions"
           },
           "status": {
@@ -163,6 +164,11 @@
             "open": "Open",
             "closed": "Closed",
             "cancelled": "Cancelled"
+          },
+          "share": {
+            "copyLink": "Copy Link",
+            "copySuccess": "Link copied to clipboard!",
+            "copyError": "Failed to copy link"
           },
           "form": {
             "positionTitle": "Position Title",

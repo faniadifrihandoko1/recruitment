@@ -15,11 +15,13 @@ import {
 interface AddJobVacanciesModalProps {
   openModal: boolean;
   toggle: () => void;
+  projectId: number;
 }
 
 export const AddJobVacanciesModal = ({
   openModal,
   toggle,
+  projectId,
 }: AddJobVacanciesModalProps) => {
   const t = useTranslations(
     "page.project.detail.jobVacancies.modal.modal-add-job-vacancies"
@@ -29,7 +31,7 @@ export const AddJobVacanciesModal = ({
   );
   const form = useForm<JobVacancyFormSchema>({
     defaultValues: {
-      project_id: undefined,
+      project_id: projectId,
       name: "",
       description: "",
       job_description: [],
@@ -90,7 +92,7 @@ export const AddJobVacanciesModal = ({
 
   console.log("errors", errors);
   const onSubmit = (data: JobVacancyFormSchema) => {
-    console.log(data);
+    console.log("data", data);
     createVacancies(data);
     // toggle();
   };

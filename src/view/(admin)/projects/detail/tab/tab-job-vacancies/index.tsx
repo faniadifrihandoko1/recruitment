@@ -67,7 +67,11 @@ export const TabJobVacancies = ({ projectId }: { projectId: number }) => {
       <JobVacanciesList projectId={projectId} />
 
       {openAdd && (
-        <AddJobVacanciesModal openModal={openAdd} toggle={toggleAddModal} />
+        <AddJobVacanciesModal
+          openModal={openAdd}
+          toggle={toggleAddModal}
+          projectId={projectId}
+        />
       )}
     </Box>
   );

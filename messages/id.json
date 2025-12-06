@@ -155,13 +155,19 @@
             "openDate": "Tanggal Mulai",
             "closeDate": "Tanggal Selesai",
             "status": "Status",
+            "share": "Bagikan",
             "actions": "Aksi"
           },
           "status": {
             "draft": "Draf",
-            "open": "Terbuka",
-            "closed": "Ditutup",
-            "cancelled": "Dibatalkan"
+            "open": "Open",
+            "closed": "Closed",
+            "cancelled": "Cancelled"
+          },
+          "share": {
+            "copyLink": "Salin Link",
+            "copySuccess": "Link berhasil disalin!",
+            "copyError": "Gagal menyalin link"
           },
           "form": {
             "positionTitle": "Judul Posisi",
