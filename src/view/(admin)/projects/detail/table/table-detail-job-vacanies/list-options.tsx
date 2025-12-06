@@ -1,15 +1,19 @@
 "use client";
-import { MoreVert } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
-import { useTranslations } from "next-intl";
-import { MouseEvent, useState } from "react";
-
+import ModalDelete from "@/component/shared/modal/modal-delete";
+import {
+  TableActionItem,
+  TableOptionsMenu,
+} from "@/component/shared/table/table-options-menu";
+import { useDeleteVacancies } from "@/hooks/mutation/vacancies/use-vacancies";
 import { VacanciesInterface } from "@/types/vacancies";
+import { useTranslations } from "next-intl";
+import { enqueueSnackbar } from "notistack";
+import { useCallback, useMemo, useState } from "react";
 import { ModalModules } from "../../modal/modal-modules";
 
 interface JobVacancyOptionsProps {
@@ -17,281 +21,95 @@ interface JobVacancyOptionsProps {
 }
 
 export function JobVacancyOptions({ row }: JobVacancyOptionsProps) {
-  const t = useTranslations("page.project.detail.jobVacancies");
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const t = useTranslations("page.project.modal.modal-delete");
+  const { mutateAsync: deleteVacancies, isPending: isDeleting } =
+    useDeleteVacancies();
   const [openModules, setOpenModules] = useState(false);
-  const open = Boolean(anchorEl);
+  const [openDelete, setOpenDelete] = useState(false);
 
-  const toggleModules = () => setOpenModules(!openModules);
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    setAnchorEl(event.currentTarget);
+  const toggleModules = useCallback(() => {
+    setOpenModules(prev => !prev);
+  }, []);
+
+  const toggleDelete = useCallback(() => {
+    setOpenDelete(prev => !prev);
+  }, []);
+
+  const handleDelete = async () => {
+    try {
+      const res = await deleteVacancies({ id: row.id });
+      if (res.status && res.code === 200) {
+        enqueueSnackbar(t("success"), {
+          variant: "success",
+        });
+        toggleDelete();
+      } else {
+        throw new Error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(t("error"), {
+        variant: "error",
+      });
+    }
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const actions: TableActionItem[] = useMemo(
+    () => [
+      {
+        id: "view",
+        label: "View",
+        icon: <VisibilityIcon />,
+        onClick: () => {
+          console.log("View", row);
+        },
+        divider: true,
+        hoverColor: "#2196F3",
+      },
+      {
+        id: "module",
+        label: "Module",
+        icon: <ViewModuleIcon />,
+        onClick: toggleModules,
+        divider: true,
+        hoverColor: "#7B2CBF",
+      },
+      {
+        id: "edit",
+        label: "Edit",
+        icon: <EditIcon />,
+        onClick: () => {
+          console.log("Edit", row);
+        },
+        divider: true,
+        hoverColor: "#13DEB9",
+      },
+      {
+        id: "delete",
+        label: "Delete",
+        icon: <DeleteIcon />,
+        onClick: toggleDelete,
+        hoverColor: "#F44336",
+      },
+    ],
+    [row, toggleDelete, toggleModules]
+  );
 
   return (
     <>
-      <IconButton
-        onClick={handleClick}
-        size="small"
-        sx={{
-          color: "#5A6A85",
-          "&:hover": {
-            backgroundColor: "#E6FFFA",
-            color: "#13DEB9",
-          },
-          transition: "all 0.2s ease-in-out",
-        }}
-      >
-        <MoreVert fontSize="small" />
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#FFFFFF",
-            borderRadius: "12px",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-            border: "1px solid #E5EAEF",
-            mt: 0.5,
-            overflow: "hidden",
-          },
-        }}
-        MenuListProps={{
-          sx: {
-            py: 0,
-            "& .MuiMenuItem-root": {
-              whiteSpace: "nowrap",
-            },
-          },
-        }}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-      >
-        {/* View */}
-        <MenuItem
-          divider
-          onClick={event => {
-            event.stopPropagation();
-            console.log("View", row);
-            handleClose();
-          }}
-          sx={{
-            gap: 1,
-            px: 2,
-            py: 1.5,
-            "&:hover": {
-              bgcolor: "#F5F7FA",
-              "& .MuiSvgIcon-root": {
-                color: "#2196F3",
-              },
-              "& .MuiTypography-root": {
-                color: "#2196F3",
-              },
-            },
-            transition: "all 0.2s ease-in-out",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 24,
-              height: 24,
-            }}
-          >
-            <VisibilityIcon
-              sx={{
-                fontSize: 18,
-                color: "#5A6A85",
-                transition: "color 0.2s ease-in-out",
-              }}
-            />
-          </Box>
-          <Typography
-            fontSize={14}
-            sx={{
-              color: "#2A3547",
-              fontWeight: 500,
-              transition: "color 0.2s ease-in-out",
-            }}
-          >
-            View
-          </Typography>
-        </MenuItem>
-
-        {/* Module */}
-        <MenuItem
-          divider
-          onClick={event => {
-            event.stopPropagation();
-            console.log("Module", row);
-            toggleModules();
-          }}
-          sx={{
-            gap: 1,
-            px: 2,
-            py: 1.5,
-            "&:hover": {
-              bgcolor: "#F5F7FA",
-              "& .MuiSvgIcon-root": {
-                color: "#7B2CBF",
-              },
-              "& .MuiTypography-root": {
-                color: "#7B2CBF",
-              },
-            },
-            transition: "all 0.2s ease-in-out",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 24,
-              height: 24,
-            }}
-          >
-            <ViewModuleIcon
-              sx={{
-                fontSize: 18,
-                color: "#5A6A85",
-                transition: "color 0.2s ease-in-out",
-              }}
-            />
-          </Box>
-          <Typography
-            fontSize={14}
-            sx={{
-              color: "#2A3547",
-              fontWeight: 500,
-              transition: "color 0.2s ease-in-out",
-            }}
-          >
-            Module
-          </Typography>
-        </MenuItem>
-
-        {/* Edit */}
-        <MenuItem
-          divider
-          onClick={event => {
-            event.stopPropagation();
-            console.log("Edit", row);
-            handleClose();
-          }}
-          sx={{
-            gap: 1,
-            px: 2,
-            py: 1.5,
-            "&:hover": {
-              bgcolor: "#F5F7FA",
-              "& .MuiSvgIcon-root": {
-                color: "#13DEB9",
-              },
-              "& .MuiTypography-root": {
-                color: "#13DEB9",
-              },
-            },
-            transition: "all 0.2s ease-in-out",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 24,
-              height: 24,
-            }}
-          >
-            <EditIcon
-              sx={{
-                fontSize: 18,
-                color: "#5A6A85",
-                transition: "color 0.2s ease-in-out",
-              }}
-            />
-          </Box>
-          <Typography
-            fontSize={14}
-            sx={{
-              color: "#2A3547",
-              fontWeight: 500,
-              transition: "color 0.2s ease-in-out",
-            }}
-          >
-            Edit
-          </Typography>
-        </MenuItem>
-
-        {/* Delete */}
-        <MenuItem
-          onClick={event => {
-            event.stopPropagation();
-            console.log("Delete", row);
-            handleClose();
-          }}
-          sx={{
-            gap: 1,
-            px: 2,
-            py: 1.5,
-            "&:hover": {
-              bgcolor: "#F5F7FA",
-              "& .MuiSvgIcon-root": {
-                color: "#F44336",
-              },
-              "& .MuiTypography-root": {
-                color: "#F44336",
-              },
-            },
-            transition: "all 0.2s ease-in-out",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 24,
-              height: 24,
-            }}
-          >
-            <DeleteIcon
-              sx={{
-                fontSize: 18,
-                color: "#5A6A85",
-                transition: "color 0.2s ease-in-out",
-              }}
-            />
-          </Box>
-          <Typography
-            fontSize={14}
-            sx={{
-              color: "#2A3547",
-              fontWeight: 500,
-              transition: "color 0.2s ease-in-out",
-            }}
-          >
-            Delete
-          </Typography>
-        </MenuItem>
-      </Menu>
+      <TableOptionsMenu row={row} actions={actions} />
       {openModules && (
         <ModalModules openModal={openModules} toggle={toggleModules} />
+      )}
+      {openDelete && (
+        <ModalDelete
+          maxWidth="xs"
+          name={row.name}
+          open={openDelete}
+          toggle={toggleDelete}
+          handleDelete={handleDelete}
+          isLoading={isDeleting}
+        />
       )}
     </>
   );

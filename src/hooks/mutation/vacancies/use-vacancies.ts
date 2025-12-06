@@ -3,11 +3,14 @@ import { getApi } from "@/lib/api/endpoint";
 import { API_TAGS } from "@/lib/api/tags";
 import { axiosClient } from "@/lib/axios-interceptor/axios-client";
 import { ResponseMutateProject } from "@/types/project";
-import { PayloadCreateVacancies } from "@/types/vacancies";
+import {
+  PayloadCreateVacancies,
+  PayloadDeleteVacancies,
+} from "@/types/vacancies";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-export type ResponseCreateVacancies = {
+export type ResponseMutateVacancies = {
   status: boolean;
   code: number;
   message: string;
@@ -18,12 +21,12 @@ export const useCreateVacancies = (options?: {
   onError?: (error: AxiosError<ResponseMutateProject>) => void;
 }) =>
   useMutation<
-    ResponseCreateVacancies,
-    AxiosError<ResponseCreateVacancies>,
+    ResponseMutateVacancies,
+    AxiosError<ResponseMutateVacancies>,
     PayloadCreateVacancies
   >({
     mutationFn: async data => {
-      const res = await axiosClient.post<ResponseCreateVacancies>(
+      const res = await axiosClient.post<ResponseMutateVacancies>(
         getApi("vacancy"),
         data
       );
@@ -125,6 +128,28 @@ export const useCreateVacancies = (options?: {
 //       mutationKey: ["DELETE_DATA_PERIOD"],
 //     }
 //   );
+
+export const useDeleteVacancies = () =>
+  useMutation<
+    ResponseMutateVacancies,
+    AxiosError<ResponseMutateVacancies>,
+    PayloadDeleteVacancies
+  >({
+    mutationFn: async (data: PayloadDeleteVacancies) => {
+      const res = await axiosClient.delete<ResponseMutateVacancies>(
+        getApi("vacancy"),
+        {
+          data,
+        }
+      );
+
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [API_TAGS.VACANCIES] });
+    },
+    mutationKey: ["DELETE_VACANCIES"],
+  });
 
 //   export const useDeleteVacanciesServer = () =>
 //     useMutation<ResponseMutateProject, AxiosError<ResponseMutateProject>, number>(

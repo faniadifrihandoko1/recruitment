@@ -154,6 +154,7 @@ export function useJobVacanciesColumn() {
               height: "100%",
               display: "flex",
               justifyContent: "center",
+              alignItems: "center",
             }}
             onClick={event => event.stopPropagation()}
           >

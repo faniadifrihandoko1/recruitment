@@ -37,6 +37,10 @@ export interface PayloadCreateVacancies {
   close_date?: string;
 }
 
+export interface PayloadDeleteVacancies {
+  id: number;
+}
+
 export interface PayloadUpdateProject {
   id: number;
   project_id: number;

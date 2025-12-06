@@ -218,6 +218,11 @@
             },
             "modal-edit-modules": {
               "title": "Edit Modul"
+            },
+            "modal-delete-job-vacancies": {
+              "title": "Hapus Lowongan Pekerjaan",
+              "success": "Lowongan pekerjaan berhasil dihapus",
+              "error": "Lowongan pekerjaan gagal dihapus"
             }
           }
         },
